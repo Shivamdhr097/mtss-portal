@@ -1,0 +1,16 @@
+{
+  "workforceProfile": {
+    "name": "Demo Workforce User",
+    "role": "Workforce Member",
+    "email": "demo.workforce@example.com",
+    "mobile": "+91 00000 00000",
+    "address": "Demo Address",
+    "pin": "000000",
+    "bankAccount": "••••••0000",
+    "bankName": "Demo Bank",
+    "ifsc": "DEMO0000001"
+  },
+  "auth": {
+    "note": "Do not store real passwords or GitHub tokens in this public file."
+  }
+}
