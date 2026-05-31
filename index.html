@@ -611,6 +611,51 @@
     display:grid;
     gap:10px;
   }
+  .task-status-grid {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .task-status-card {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:rgba(255,255,255,0.04);
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .task-status-card:hover,
+  .task-status-card.active {
+    border-color:rgba(0,195,122,0.38);
+    background:rgba(0,195,122,0.08);
+    transform:translateY(-1px);
+  }
+  .task-status-icon {
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:15px;
+    font-weight:800;
+  }
+  .task-status-label {
+    font-size:11px;
+    font-weight:800;
+    color:var(--text);
+  }
+  .task-status-count {
+    font-family:var(--font-head);
+    font-size:16px;
+    font-weight:800;
+    margin-top:2px;
+  }
   .export-card-grid {
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -2142,6 +2187,7 @@
           <div id="wf-tasks" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span><span id="wfTaskTitle">My Tasks</span></div>
             <div class="section-sub">58 total from joining • Filter by month</div>
+            <div class="task-status-grid" id="taskStatusCards"></div>
             <div id="wfTaskRows" class="task-card-list"></div>
           </div>
 
@@ -2620,6 +2666,51 @@ function renderWhatToDo(task) {
   `;
 }
 
+const TASK_STATUS_CARDS = [
+  { key: 'active', label: 'Active', icon: '&#9658;', color: 'var(--purple)', bg: 'rgba(124,77,255,0.14)' },
+  { key: 'pending', label: 'Pending', icon: '&#9203;', color: 'var(--orange)', bg: 'rgba(255,122,0,0.14)' },
+  { key: 'allocated', label: 'Allocated', icon: '&#9673;', color: 'var(--blue)', bg: 'rgba(59,111,255,0.14)' },
+  { key: 'submitted', label: 'Submitted', icon: '&#8593;', color: 'var(--teal)', bg: 'rgba(0,216,201,0.14)' },
+  { key: 'completed', label: 'Completed', icon: '&#10003;', color: 'var(--green)', bg: 'rgba(0,195,122,0.14)' },
+  { key: 'rejected', label: 'Rejected', icon: '&#10005;', color: 'var(--red)', bg: 'rgba(255,59,94,0.14)' },
+  { key: 'approved', label: 'Approved', icon: '&#9733;', color: 'var(--yellow)', bg: 'rgba(255,214,0,0.16)' },
+  { key: 'reschedule', label: 'Reschedule', icon: '&#8635;', color: 'var(--pink)', bg: 'rgba(255,45,146,0.14)' },
+  { key: 'expired', label: 'Expired', icon: '&#9888;', color: 'var(--muted)', bg: 'rgba(152,162,179,0.14)' }
+];
+
+let currentTaskFilter = 'all';
+
+function getTaskEntriesForFilter(statusFilter = 'all') {
+  return Object.entries(TASKS).filter(([taskId, task]) => {
+    if (statusFilter === 'all') return true;
+    if (statusFilter === 'active') return task.status === 'inprogress';
+    if (statusFilter === 'pending') return task.status === 'pending' || appliedTaskState[taskId] === 'pending';
+    if (statusFilter === 'allocated') return ['inprogress', 'review', 'approved', 'rejected', 'pending'].includes(task.status);
+    if (statusFilter === 'submitted') return task.status === 'review';
+    if (statusFilter === 'completed') return task.status === 'approved';
+    if (statusFilter === 'approved') return task.status === 'approved';
+    if (statusFilter === 'reschedule') return task.status === 'reschedule';
+    if (statusFilter === 'expired') return task.status === 'expired';
+    return task.status === statusFilter;
+  });
+}
+
+function renderTaskStatusCards(activeFilter = currentTaskFilter) {
+  const wrap = document.getElementById('taskStatusCards');
+  if (!wrap) return;
+  wrap.innerHTML = TASK_STATUS_CARDS.map(card => {
+    const count = getTaskEntriesForFilter(card.key).length;
+    return `
+      <button class="task-status-card ${activeFilter === card.key ? 'active' : ''}" type="button" onclick="showTaskFilter('${card.key}')">
+        <span class="task-status-icon" style="background:${card.bg};color:${card.color}">${card.icon}</span>
+        <span>
+          <span class="task-status-label">${card.label}</span>
+          <span class="task-status-count" style="display:block;color:${card.color}">${count}</span>
+        </span>
+      </button>
+    `;
+  }).join('');
+}
 
 function renderTaskRows(statusFilter = 'all') {
   const rows = document.getElementById('wfTaskRows');
@@ -2631,7 +2722,13 @@ function renderTaskRows(statusFilter = 'all') {
     rejected: 'Rejected Tasks',
     approved: 'Completed Tasks',
     inprogress: 'In Process Tasks',
-    pending: 'Pending Tasks'
+    active: 'Active Tasks',
+    pending: 'Pending Tasks',
+    allocated: 'Allocated Tasks',
+    submitted: 'Submitted Tasks',
+    completed: 'Completed Tasks',
+    reschedule: 'Reschedule Tasks',
+    expired: 'Expired Tasks'
   };
   const statusNotes = {
     all: 'All assigned tasks',
@@ -2639,7 +2736,13 @@ function renderTaskRows(statusFilter = 'all') {
     rejected: 'Tasks needing correction and resubmission',
     approved: 'Completed and approved tasks',
     inprogress: 'Tasks currently assigned or being worked on',
-    pending: 'Audits waiting for admin verification or action'
+    active: 'Tasks currently assigned or being worked on',
+    pending: 'Audits waiting for admin verification or action',
+    allocated: 'Tasks allocated to your workforce account',
+    submitted: 'Tasks submitted and waiting for admin review',
+    completed: 'Tasks marked completed',
+    reschedule: 'Tasks waiting for a new schedule',
+    expired: 'Tasks past their active window'
   };
   const tagClass = {
     'Solar Survey Alpha': 'blue',
@@ -2648,11 +2751,9 @@ function renderTaskRows(statusFilter = 'all') {
     'Gas Infra Check': 'orange'
   };
 
-  const tasks = Object.entries(TASKS).filter(([taskId, task]) => {
-    if (statusFilter === 'all') return true;
-    if (statusFilter === 'pending') return task.status === 'pending' || appliedTaskState[taskId] === 'pending';
-    return task.status === statusFilter;
-  });
+  currentTaskFilter = statusFilter;
+  renderTaskStatusCards(statusFilter);
+  const tasks = getTaskEntriesForFilter(statusFilter);
   document.getElementById('wfTaskTitle').textContent = statusTitles[statusFilter] || statusTitles.all;
   const sub = document.getElementById('wfTaskTitle').closest('.section-title').nextElementSibling;
   if (sub) sub.textContent = `${tasks.length} task${tasks.length === 1 ? '' : 's'} found - ${statusNotes[statusFilter] || statusNotes.all}`;
@@ -3825,7 +3926,8 @@ function submitQuestionnaire(btn, sc) {
     .home-stats,
     .stat-grid,
     .profile-form,
-    .export-card-grid {
+    .export-card-grid,
+    .task-status-grid {
       grid-template-columns:1fr 1fr !important;
       gap:10px;
     }
@@ -3919,7 +4021,8 @@ function submitQuestionnaire(btn, sc) {
     .home-stats,
     .stat-grid,
     .profile-form,
-    .export-card-grid {
+    .export-card-grid,
+    .task-status-grid {
       grid-template-columns:1fr !important;
     }
     .hs-card,
