@@ -645,6 +645,11 @@
     font-size:15px;
     font-weight:800;
   }
+  .task-status-icon .nav-symbol {
+    width:22px;
+    height:22px;
+    color:currentColor;
+  }
   .status-symbol {
     position:relative;
     display:block;
@@ -1558,6 +1563,18 @@
   .nav-workforce::after { width:18px; height:9px; left:2px; bottom:3px; border:2px solid currentColor; border-radius:9px 9px 4px 4px; }
   .nav-import::before { width:16px; height:14px; left:3px; top:6px; border:2px solid currentColor; }
   .nav-import::after { width:8px; height:8px; left:7px; top:2px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); border-radius:0; }
+  .nav-clock::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-radius:50%; }
+  .nav-clock::after { width:6px; height:7px; left:10px; top:5px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; border-radius:0; }
+  .nav-rejected::before,
+  .nav-rejected::after { width:16px; height:2px; left:3px; top:10px; background:currentColor; border:0; border-radius:2px; }
+  .nav-rejected::before { transform:rotate(45deg); }
+  .nav-rejected::after { transform:rotate(-45deg); }
+  .nav-approved::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-radius:50%; }
+  .nav-approved::after { width:9px; height:5px; left:7px; top:9px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(-45deg); border-radius:0; }
+  .nav-reschedule::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-left-color:transparent; border-radius:50%; }
+  .nav-reschedule::after { width:7px; height:7px; right:1px; top:2px; border-top:2px solid currentColor; border-right:2px solid currentColor; transform:rotate(18deg); border-radius:0; }
+  .nav-expired::before { width:16px; height:18px; left:3px; top:2px; border:2px solid currentColor; }
+  .nav-expired::after { width:12px; height:2px; left:5px; top:10px; background:currentColor; border:0; transform:rotate(45deg); border-radius:2px; }
   .sidebar-icon:hover { background:#f2f4f7; color:#344054; }
   .wf .sidebar-icon.active,
   .admin .sidebar-icon.active {
@@ -2795,15 +2812,15 @@ function renderWhatToDo(task) {
 }
 
 const TASK_STATUS_CARDS = [
-  { key: 'active', label: 'Active', icon: '<span class="status-symbol status-active"></span>', color: 'var(--purple)', bg: 'rgba(124,77,255,0.14)' },
-  { key: 'pending', label: 'Pending', icon: '<span class="status-symbol status-pending"></span>', color: 'var(--orange)', bg: 'rgba(255,122,0,0.14)' },
-  { key: 'allocated', label: 'Allocated', icon: '<span class="status-symbol status-allocated"></span>', color: 'var(--blue)', bg: 'rgba(59,111,255,0.14)' },
-  { key: 'submitted', label: 'Submitted', icon: '<span class="status-symbol status-submitted"></span>', color: 'var(--teal)', bg: 'rgba(0,216,201,0.14)' },
-  { key: 'completed', label: 'Completed', icon: '<span class="status-symbol status-completed"></span>', color: 'var(--green)', bg: 'rgba(0,195,122,0.14)' },
-  { key: 'rejected', label: 'Rejected', icon: '<span class="status-symbol status-rejected"></span>', color: 'var(--red)', bg: 'rgba(255,59,94,0.14)' },
-  { key: 'approved', label: 'Approved', icon: '<span class="status-symbol status-approved"></span>', color: 'var(--yellow)', bg: 'rgba(255,214,0,0.16)' },
-  { key: 'reschedule', label: 'Reschedule', icon: '<span class="status-symbol status-reschedule"></span>', color: 'var(--pink)', bg: 'rgba(255,45,146,0.14)' },
-  { key: 'expired', label: 'Expired', icon: '<span class="status-symbol status-expired"></span>', color: 'var(--muted)', bg: 'rgba(152,162,179,0.14)' }
+  { key: 'active', label: 'Active', icon: '<span class="nav-symbol nav-performance"></span>', color: 'var(--purple)', bg: 'rgba(124,77,255,0.14)' },
+  { key: 'pending', label: 'Pending', icon: '<span class="nav-symbol nav-clock"></span>', color: 'var(--orange)', bg: 'rgba(255,122,0,0.14)' },
+  { key: 'allocated', label: 'Allocated', icon: '<span class="nav-symbol nav-workforce"></span>', color: 'var(--blue)', bg: 'rgba(59,111,255,0.14)' },
+  { key: 'submitted', label: 'Submitted', icon: '<span class="nav-symbol nav-export"></span>', color: 'var(--teal)', bg: 'rgba(0,216,201,0.14)' },
+  { key: 'completed', label: 'Completed', icon: '<span class="nav-symbol nav-tasks"></span>', color: 'var(--green)', bg: 'rgba(0,195,122,0.14)' },
+  { key: 'rejected', label: 'Rejected', icon: '<span class="nav-symbol nav-rejected"></span>', color: 'var(--red)', bg: 'rgba(255,59,94,0.14)' },
+  { key: 'approved', label: 'Approved', icon: '<span class="nav-symbol nav-approved"></span>', color: 'var(--yellow)', bg: 'rgba(255,214,0,0.16)' },
+  { key: 'reschedule', label: 'Reschedule', icon: '<span class="nav-symbol nav-reschedule"></span>', color: 'var(--pink)', bg: 'rgba(255,45,146,0.14)' },
+  { key: 'expired', label: 'Expired', icon: '<span class="nav-symbol nav-expired"></span>', color: 'var(--muted)', bg: 'rgba(152,162,179,0.14)' }
 ];
 
 let currentTaskFilter = 'all';
