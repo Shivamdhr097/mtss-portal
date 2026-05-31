@@ -2168,14 +2168,33 @@
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">🔗</div>
                 <div style="font-weight:600;font-size:12px">Google Sheets</div>
-                <div style="font-size:10px;color:var(--muted)">Paste URL or export</div>
-                <button class="apply-btn admin-btn" style="width:100%">Connect Sheet</button>
+                <div style="font-size:10px;color:var(--muted)">Live sync for tasks, payments, questionnaires, projects and workforce</div>
+                <button class="apply-btn admin-btn" style="width:100%" onclick="focusGoogleSheetPanel()">Connect Sheet</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📄</div>
                 <div style="font-weight:600;font-size:12px">PDF Document</div>
                 <div style="font-size:10px;color:var(--muted)">Parsed + manual review</div>
                 <button class="apply-btn admin-btn" style="width:100%">Upload PDF</button>
+              </div>
+            </div>
+            <div class="card" id="googleSheetPanel">
+              <div class="card-header"><div class="card-title">Google Sheet Live Connection</div><span class="badge processing" id="sheetConnectionStatus">Not Connected</span></div>
+              <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-bottom:12px">
+                <div class="profile-field" style="margin:0">
+                  <label>Apps Script Web App URL</label>
+                  <input id="sheetWebAppUrl" placeholder="Paste Google Apps Script Web App URL here">
+                </div>
+                <button class="apply-btn admin-btn" onclick="saveSheetConnection()">Save Link</button>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px">
+                <button class="apply-btn admin-btn" onclick="pushPortalDataToSheet(this)">Push Data to Sheet</button>
+                <button class="apply-btn admin-btn" onclick="pullPortalDataFromSheet(this)">Pull Data from Sheet</button>
+                <button class="apply-btn admin-btn" onclick="downloadAppsScriptTemplate(this)">Download Apps Script</button>
+                <button class="apply-btn admin-btn" onclick="downloadSheetCsvPack(this)">Download CSV Pack</button>
+              </div>
+              <div id="sheetSyncMessage" style="font-size:11px;color:var(--muted);line-height:1.5">
+                Create a Google Sheet, deploy the Apps Script template as a Web App, paste the Web App URL here, then use Push/Pull.
               </div>
             </div>
           </div>
@@ -2490,6 +2509,7 @@ function setAdminTab(tab, sourceIcon) {
   const section = document.getElementById('admin-' + tab);
   if (section) section.style.display = 'block';
   if (tab === 'leads') renderAdminAppliedTasks();
+  if (tab === 'import') updateSheetConnectionUi();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2530,6 +2550,7 @@ let currentTaskId = null;
 let currentMTab = 0;
 let opportunityRenderTimer = 0;
 let firebasePortalLoadStarted = false;
+const SHEET_WEBAPP_KEY = 'mtssGoogleSheetWebAppUrl';
 
 function saveAppliedTaskState() {
   localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
@@ -2556,6 +2577,325 @@ function waitForFirebaseServices(timeoutMs = 5000) {
     };
     check();
   });
+}
+
+function getSheetWebAppUrl() {
+  return localStorage.getItem(SHEET_WEBAPP_KEY) || '';
+}
+
+function updateSheetConnectionUi(message, isConnected = Boolean(getSheetWebAppUrl())) {
+  const input = document.getElementById('sheetWebAppUrl');
+  const badge = document.getElementById('sheetConnectionStatus');
+  const note = document.getElementById('sheetSyncMessage');
+  const url = getSheetWebAppUrl();
+  if (input && !input.value) input.value = url;
+  if (badge) {
+    badge.textContent = isConnected ? 'Connected' : 'Not Connected';
+    badge.className = isConnected ? 'badge approved' : 'badge processing';
+  }
+  if (note && message) note.textContent = message;
+}
+
+function focusGoogleSheetPanel() {
+  setAdminTab('import');
+  const panel = document.getElementById('googleSheetPanel');
+  const input = document.getElementById('sheetWebAppUrl');
+  if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (input) input.focus();
+  updateSheetConnectionUi('Paste your Apps Script Web App URL, then click Save Link.');
+}
+
+function saveSheetConnection() {
+  const input = document.getElementById('sheetWebAppUrl');
+  const url = input ? input.value.trim() : '';
+  if (!url || !/^https:\/\/script\.google\.com\/macros\/s\//.test(url)) {
+    updateSheetConnectionUi('Enter a valid Google Apps Script Web App URL.', false);
+    return;
+  }
+  localStorage.setItem(SHEET_WEBAPP_KEY, url);
+  updateSheetConnectionUi('Google Sheet link saved. You can now push or pull portal data.', true);
+}
+
+function getPortalSheetPayload() {
+  const tasks = Object.entries(TASKS).map(([key, task]) => {
+    const payout = getPayoutBreakdown(task);
+    return {
+      localKey: key,
+      taskId: task.id,
+      title: task.title,
+      project: task.project,
+      status: task.status,
+      statusLabel: task.statusLabel,
+      assignedDate: task.assignedDate,
+      dueDate: task.dueDate,
+      startTime: task.startTime,
+      endTime: task.endTime,
+      duration: task.duration,
+      address: task.address,
+      mapsUrl: task.mapsUrl,
+      assignedBy: task.contactName,
+      contactPhone: task.contactPhone,
+      contactRole: task.contactRole,
+      payout: task.payment.amount,
+      baseExpense: formatAmount(payout.base),
+      specialExpense: formatAmount(payout.special),
+      reimbursement: formatAmount(payout.reimbursement),
+      travelAllowance: formatAmount(payout.travel),
+      description: task.description
+    };
+  });
+
+  const payments = Object.entries(TASKS).map(([key, task]) => ({
+    localKey: key,
+    taskId: task.id,
+    taskTitle: task.title,
+    project: task.project,
+    payout: task.payment.amount,
+    paymentStatus: task.payment.statusLabel,
+    paymentMethod: task.payment.method,
+    transactionId: task.payment.txnId,
+    paymentNote: task.payment.note,
+    workerName: profileState.name,
+    bankAccount: profileState.bank,
+    bankName: profileState.bankName,
+    ifsc: profileState.ifsc
+  }));
+
+  const questionnaires = Object.entries(TASKS).flatMap(([key, task]) =>
+    task.questionnaire.map((item, index) => ({
+      localKey: key,
+      taskId: task.id,
+      taskTitle: task.title,
+      questionNo: index + 1,
+      question: item.q,
+      type: item.type,
+      options: Array.isArray(item.options) ? item.options.join(' | ') : '',
+      answer: item.answer || ''
+    }))
+  );
+
+  const projects = [...new Set(Object.values(TASKS).map(task => task.project))].map(project => {
+    const projectTasks = Object.values(TASKS).filter(task => task.project === project);
+    return {
+      project,
+      taskCount: projectTasks.length,
+      activeTasks: projectTasks.filter(task => task.status === 'inprogress').length,
+      reviewTasks: projectTasks.filter(task => task.status === 'review').length,
+      approvedTasks: projectTasks.filter(task => task.status === 'approved').length,
+      rejectedTasks: projectTasks.filter(task => task.status === 'rejected').length,
+      workforceAssigned: profileState.name
+    };
+  });
+
+  const workforce = [{
+    name: profileState.name,
+    role: profileState.role,
+    email: profileState.email,
+    mobile: profileState.mobile,
+    address: profileState.address,
+    pin: profileState.pin,
+    bankAccount: profileState.bank,
+    bankName: profileState.bankName,
+    ifsc: profileState.ifsc,
+    status: 'Active'
+  }];
+
+  const applications = Object.entries(appliedTaskState).map(([localKey, status]) => ({
+    localKey,
+    taskId: TASKS[localKey]?.id || localKey,
+    taskTitle: TASKS[localKey]?.title || '',
+    workerName: profileState.name,
+    status,
+    updatedAt: new Date().toISOString()
+  }));
+
+  return {
+    updatedAt: new Date().toISOString(),
+    sheets: { Tasks: tasks, Payments: payments, Questionnaires: questionnaires, Projects: projects, Workforce: workforce, Applications: applications }
+  };
+}
+
+function applySheetPayload(payload) {
+  if (!payload || !payload.sheets) return;
+  const sheetTasks = payload.sheets.Tasks || payload.sheets.tasks || [];
+  sheetTasks.forEach(row => {
+    const key = row.localKey || row.key;
+    if (!key || !TASKS[key]) return;
+    TASKS[key].title = row.title || TASKS[key].title;
+    TASKS[key].project = row.project || TASKS[key].project;
+    TASKS[key].status = row.status || TASKS[key].status;
+    TASKS[key].statusLabel = row.statusLabel || TASKS[key].statusLabel;
+    TASKS[key].assignedDate = row.assignedDate || TASKS[key].assignedDate;
+    TASKS[key].dueDate = row.dueDate || TASKS[key].dueDate;
+    TASKS[key].startTime = row.startTime || TASKS[key].startTime;
+    TASKS[key].endTime = row.endTime || TASKS[key].endTime;
+    TASKS[key].duration = row.duration || TASKS[key].duration;
+    TASKS[key].address = row.address || TASKS[key].address;
+    TASKS[key].mapsUrl = row.mapsUrl || TASKS[key].mapsUrl;
+    TASKS[key].contactName = row.assignedBy || TASKS[key].contactName;
+    TASKS[key].contactPhone = row.contactPhone || TASKS[key].contactPhone;
+    TASKS[key].contactRole = row.contactRole || TASKS[key].contactRole;
+    TASKS[key].description = row.description || TASKS[key].description;
+    if (row.payout) TASKS[key].payment.amount = row.payout;
+  });
+
+  const sheetQuestionnaires = payload.sheets.Questionnaires || payload.sheets.questionnaires || [];
+  sheetQuestionnaires.forEach(row => {
+    const key = row.localKey || row.key;
+    const index = Number(row.questionNo || row.questionIndex || 0) - 1;
+    if (!key || !TASKS[key] || !TASKS[key].questionnaire[index]) return;
+    TASKS[key].questionnaire[index].q = row.question || TASKS[key].questionnaire[index].q;
+    TASKS[key].questionnaire[index].type = row.type || TASKS[key].questionnaire[index].type;
+    TASKS[key].questionnaire[index].answer = row.answer || TASKS[key].questionnaire[index].answer;
+    if (row.options) TASKS[key].questionnaire[index].options = String(row.options).split('|').map(option => option.trim()).filter(Boolean);
+  });
+
+  const workforce = (payload.sheets.Workforce || payload.sheets.workforce || [])[0];
+  if (workforce) {
+    profileState.name = workforce.name || profileState.name;
+    profileState.role = workforce.role || profileState.role;
+    profileState.email = workforce.email || profileState.email;
+    profileState.mobile = workforce.mobile || profileState.mobile;
+    profileState.address = workforce.address || profileState.address;
+    profileState.pin = workforce.pin || profileState.pin;
+    profileState.bank = workforce.bankAccount || profileState.bank;
+    profileState.bankName = workforce.bankName || profileState.bankName;
+    profileState.ifsc = workforce.ifsc || profileState.ifsc;
+    renderProfileDetails(false);
+  }
+
+  const applications = payload.sheets.Applications || payload.sheets.applications || [];
+  applications.forEach(row => {
+    const key = row.localKey || row.key;
+    if (key && row.status) appliedTaskState[key] = row.status;
+  });
+  saveAppliedTaskState();
+  renderDashboardTaskSummary();
+  renderOpportunityList();
+  renderTaskRows(currentTaskFilter || 'all');
+  renderAdminAppliedTasks();
+}
+
+async function pushPortalDataToSheet(btn) {
+  const url = getSheetWebAppUrl();
+  if (!url) {
+    updateSheetConnectionUi('Save your Apps Script Web App URL first.', false);
+    return;
+  }
+  setExportButtonState(btn, 'Pushing...');
+  try {
+    await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'savePortalData', payload: getPortalSheetPayload() })
+    });
+    updateSheetConnectionUi('Portal data sent to Google Sheet. Check the Sheet tabs after a few seconds.', true);
+  } catch (error) {
+    updateSheetConnectionUi('Sheet push failed. Check the Apps Script URL and deployment access.', false);
+  }
+}
+
+function pullPortalDataFromSheet(btn) {
+  const url = getSheetWebAppUrl();
+  if (!url) {
+    updateSheetConnectionUi('Save your Apps Script Web App URL first.', false);
+    return;
+  }
+  setExportButtonState(btn, 'Pulling...');
+  const callbackName = 'mtssSheetCallback' + Date.now();
+  window[callbackName] = payload => {
+    try {
+      applySheetPayload(payload);
+      updateSheetConnectionUi('Portal updated from Google Sheet.', true);
+    } catch (error) {
+      updateSheetConnectionUi('Sheet data received but could not be applied.', false);
+    } finally {
+      delete window[callbackName];
+      document.getElementById(callbackName)?.remove();
+    }
+  };
+  const script = document.createElement('script');
+  script.id = callbackName;
+  script.src = `${url}${url.includes('?') ? '&' : '?'}action=getPortalData&callback=${callbackName}&t=${Date.now()}`;
+  script.onerror = () => {
+    updateSheetConnectionUi('Sheet pull failed. Confirm Apps Script is deployed for Anyone access.', false);
+    delete window[callbackName];
+    script.remove();
+  };
+  document.body.appendChild(script);
+}
+
+function getAppsScriptTemplate() {
+  return `const SHEET_NAMES = ['Tasks','Payments','Questionnaires','Projects','Workforce','Applications','Settings'];
+
+function doPost(e) {
+  const body = JSON.parse(e.postData.contents || '{}');
+  if (body.action === 'savePortalData') savePortalData(body.payload || {});
+  return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet(e) {
+  const data = getPortalData();
+  const callback = e.parameter.callback;
+  const output = callback ? callback + '(' + JSON.stringify(data) + ')' : JSON.stringify(data);
+  return ContentService.createTextOutput(output).setMimeType(ContentService.MimeType.JAVASCRIPT);
+}
+
+function savePortalData(payload) {
+  const ss = SpreadsheetApp.getActive();
+  SHEET_NAMES.forEach(name => ensureSheet(ss, name));
+  Object.keys(payload.sheets || {}).forEach(name => writeRows(ss.getSheetByName(name), payload.sheets[name]));
+  writeRows(ss.getSheetByName('Settings'), [{ key: 'updatedAt', value: payload.updatedAt || new Date().toISOString() }]);
+}
+
+function getPortalData() {
+  const ss = SpreadsheetApp.getActive();
+  const sheets = {};
+  SHEET_NAMES.forEach(name => {
+    const sheet = ensureSheet(ss, name);
+    sheets[name] = readRows(sheet);
+  });
+  return { updatedAt: new Date().toISOString(), sheets };
+}
+
+function ensureSheet(ss, name) {
+  return ss.getSheetByName(name) || ss.insertSheet(name);
+}
+
+function writeRows(sheet, rows) {
+  sheet.clearContents();
+  if (!rows || !rows.length) return;
+  const headers = Object.keys(rows[0]);
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  sheet.getRange(2, 1, rows.length, headers.length).setValues(rows.map(row => headers.map(header => row[header] ?? '')));
+  sheet.setFrozenRows(1);
+}
+
+function readRows(sheet) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+  const headers = values[0].map(String);
+  return values.slice(1).filter(row => row.some(value => value !== '')).map(row => {
+    const item = {};
+    headers.forEach((header, index) => item[header] = row[index]);
+    return item;
+  });
+}`;
+}
+
+function downloadAppsScriptTemplate(btn) {
+  downloadFile('mtss-google-sheets-apps-script.txt', getAppsScriptTemplate(), 'text/plain;charset=utf-8');
+  setExportButtonState(btn, 'Downloaded');
+}
+
+function downloadSheetCsvPack(btn) {
+  const payload = getPortalSheetPayload();
+  const stamp = new Date().toISOString().slice(0, 10);
+  Object.entries(payload.sheets).forEach(([name, rows]) => {
+    if (rows.length) downloadFile(`mtss-${name.toLowerCase()}-${stamp}.csv`, buildCsv(rows), 'text/csv;charset=utf-8');
+  });
+  setExportButtonState(btn, 'Downloaded');
 }
 
 async function saveTaskApplicationToFirebase(taskId) {
@@ -3689,6 +4029,7 @@ renderTaskRows('all');
 updatePendingAuditCount();
 renderProfileDetails(false);
 renderAdminAppliedTasks();
+updateSheetConnectionUi();
 loadGithubPortalData();
 scheduleDeferredFirebaseLoad();
 if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
