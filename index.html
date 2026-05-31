@@ -2989,6 +2989,21 @@ function getExportRows() {
   }));
 }
 
+function getPaymentExportRows() {
+  return Object.entries(TASKS).map(([taskId, task]) => ({
+    transactionId: task.payment.txnId,
+    taskId: task.id,
+    task: task.title,
+    project: task.project,
+    dueDate: task.dueDate,
+    payout: task.payment.amount,
+    paymentStatus: task.payment.statusLabel,
+    paymentMethod: task.payment.method,
+    applicationStatus: appliedTaskState[taskId] || 'Not Applied',
+    paymentNote: task.payment.note
+  }));
+}
+
 function csvEscape(value) {
   return `"${String(value ?? '').replace(/"/g, '""')}"`;
 }
@@ -3037,6 +3052,7 @@ function setExportButtonState(btn, label) {
 
 function exportWorkforceData(type, btn) {
   const rows = getExportRows();
+  const paymentRows = getPaymentExportRows();
   const stamp = new Date().toISOString().slice(0, 10);
   const csv = buildCsv(rows);
 
@@ -3053,17 +3069,18 @@ function exportWorkforceData(type, btn) {
   }
 
   if (type === 'excel') {
-    const headers = Object.keys(rows[0] || {});
-    const tableRows = rows.map(row => `<tr>${headers.map(header => `<td>${htmlEscape(row[header])}</td>`).join('')}</tr>`).join('');
+    const headers = Object.keys(paymentRows[0] || {});
+    const tableRows = paymentRows.map(row => `<tr>${headers.map(header => `<td>${htmlEscape(row[header])}</td>`).join('')}</tr>`).join('');
     const table = `
       <html><head><meta charset="utf-8"></head><body>
+      <h2>MTSS Payment Records</h2>
       <table border="1">
         <thead><tr>${headers.map(header => `<th>${htmlEscape(header)}</th>`).join('')}</tr></thead>
         <tbody>${tableRows}</tbody>
       </table>
       </body></html>
     `;
-    downloadFile(`mtss-workforce-export-${stamp}.xls`, table, 'application/vnd.ms-excel;charset=utf-8');
+    downloadFile(`mtss-payment-records-${stamp}.xls`, table, 'application/vnd.ms-excel;charset=utf-8');
     setExportButtonState(btn, 'Downloaded');
     return;
   }
@@ -3081,13 +3098,13 @@ function exportWorkforceData(type, btn) {
   }
 
   if (type === 'pdf') {
-    openPdfStatement(rows);
+    openPdfStatement(paymentRows);
     setExportButtonState(btn, 'PDF Opened');
   }
 }
 
-function openPdfStatement(rows) {
-  const totalPayout = rows.reduce((sum, row) => sum + parseAmount(row.payout), 0);
+function openPdfStatement(paymentRows) {
+  const totalPayout = paymentRows.reduce((sum, row) => sum + parseAmount(row.payout), 0);
   const html = `
     <html>
       <head>
@@ -3115,7 +3132,7 @@ function openPdfStatement(rows) {
         <table>
           <thead><tr><th>Task</th><th>Project</th><th>Status</th><th>Due Date</th><th>Payout</th><th>Payment</th></tr></thead>
           <tbody>
-            ${rows.map(row => `<tr><td>${htmlEscape(row.title)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.status)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
+            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.task)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.applicationStatus)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
           </tbody>
         </table>
         <script>window.onload=function(){window.print();};<\/script>
