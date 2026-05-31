@@ -802,7 +802,8 @@
     background:rgba(255,255,255,0.04);
     margin-bottom:12px;
   }
-  .single-filter-bar input {
+  .single-filter-bar input,
+  .single-filter-bar select {
     flex:1 1 0;
     min-width:92px;
     height:38px;
@@ -815,12 +816,21 @@
     font-weight:700;
     outline:none;
   }
+  .single-filter-bar select {
+    appearance:none;
+    background-image:linear-gradient(45deg, transparent 50%, #344054 50%), linear-gradient(135deg, #344054 50%, transparent 50%);
+    background-position:calc(100% - 14px) 16px, calc(100% - 9px) 16px;
+    background-size:5px 5px, 5px 5px;
+    background-repeat:no-repeat;
+    padding-right:28px;
+  }
   .single-filter-bar input::placeholder {
     color:#667085;
     font-weight:700;
     opacity:1;
   }
-  .single-filter-bar input:focus {
+  .single-filter-bar input:focus,
+  .single-filter-bar select:focus {
     border-color:rgba(21,112,239,0.6);
     box-shadow:0 0 0 3px rgba(21,112,239,0.12);
   }
@@ -2317,8 +2327,8 @@
               <input id="oppShopFilter" type="search" placeholder="Shop or task" aria-label="Shop name" oninput="renderOpportunityList()">
               <input id="oppLocationFilter" type="search" placeholder="Location" aria-label="Location" oninput="renderOpportunityList()">
               <input id="oppProjectFilter" type="search" placeholder="Project ID" aria-label="Project ID" oninput="renderOpportunityList()">
-              <input id="oppCityFilter" type="search" placeholder="City" aria-label="City" oninput="renderOpportunityList()">
-              <input id="oppStateFilter" type="search" placeholder="State" aria-label="State" oninput="renderOpportunityList()">
+              <select id="oppCityFilter" aria-label="City" onchange="renderOpportunityList()"></select>
+              <select id="oppStateFilter" aria-label="State" onchange="renderOpportunityList()"></select>
               <input id="oppDateFilter" type="date" aria-label="Date" onchange="renderOpportunityList()">
               <button class="search-filter-btn" type="button" onclick="renderOpportunityList()">Search</button>
               <button class="clear-filter-btn" type="button" onclick="clearOpportunityFilters()">Clear Filter</button>
@@ -3459,6 +3469,7 @@ function renderOpportunityCard(taskId, task, distanceLabel) {
 function renderOpportunityList() {
   const list = document.getElementById('wfOpportunityList');
   if (!list) return;
+  populateOpportunityDropdowns();
   const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away', t4: '4.1km away' };
   const filters = getOpportunityFilters();
   const entries = Object.entries(TASKS).filter(([, task]) => matchesOpportunityFilters(task, filters));
@@ -3466,6 +3477,50 @@ function renderOpportunityList() {
   list.innerHTML = entries.length ? entries
     .map(([taskId, task]) => renderOpportunityCard(taskId, task, distanceByTask[taskId] || 'Nearby'))
     .join('') : `<div class="empty-task-card">No opportunities match these filters.</div>`;
+}
+
+const INDIA_STATES = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
+  'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
+  'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+  'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'
+];
+
+const INDIA_CITIES = [
+  'Agartala', 'Agra', 'Ahmedabad', 'Ahmednagar', 'Aizawl', 'Ajmer', 'Akola', 'Alappuzha', 'Aligarh', 'Alipurduar', 'Allahabad', 'Alwar', 'Ambala', 'Amravati', 'Amritsar', 'Anand', 'Anantapur', 'Arrah', 'Asansol', 'Aurangabad',
+  'Bareilly', 'Bathinda', 'Belagavi', 'Bengaluru', 'Berhampur', 'Bhagalpur', 'Bharatpur', 'Bharuch', 'Bhavnagar', 'Bhilai', 'Bhilwara', 'Bhopal', 'Bhubaneswar', 'Bidar', 'Bikaner', 'Bilaspur', 'Bokaro', 'Bongaigaon', 'Bulandshahr', 'Burdwan',
+  'Chandigarh', 'Chandrapur', 'Chennai', 'Chhapra', 'Chittoor', 'Coimbatore', 'Cuttack',
+  'Daman', 'Darbhanga', 'Darjeeling', 'Dehradun', 'Delhi', 'Dhanbad', 'Dharamshala', 'Dibrugarh', 'Dimapur', 'Dindigul', 'Durg', 'Durgapur', 'Dwarka',
+  'Erode', 'Etawah',
+  'Faridabad', 'Firozabad',
+  'Gandhinagar', 'Gangtok', 'Gaya', 'Ghaziabad', 'Gorakhpur', 'Greater Noida', 'Guntur', 'Gurugram', 'Guwahati', 'Gwalior',
+  'Haldia', 'Haldwani', 'Hisar', 'Howrah', 'Hubballi', 'Hyderabad',
+  'Imphal', 'Indore', 'Itanagar',
+  'Jabalpur', 'Jaipur', 'Jalandhar', 'Jalgaon', 'Jammu', 'Jamnagar', 'Jamshedpur', 'Jhansi', 'Jodhpur', 'Jorhat', 'Junagadh',
+  'Kadapa', 'Kakinada', 'Kalaburagi', 'Kalyan', 'Kannur', 'Kanpur', 'Karimnagar', 'Karnal', 'Kochi', 'Kolhapur', 'Kolkata', 'Kollam', 'Korba', 'Kota', 'Kottayam', 'Kozhikode', 'Kurnool',
+  'Leh', 'Lucknow', 'Ludhiana',
+  'Madurai', 'Malappuram', 'Mangaluru', 'Mathura', 'Meerut', 'Moradabad', 'Mumbai', 'Muzaffarpur', 'Mysuru',
+  'Nagpur', 'Nanded', 'Nashik', 'Navi Mumbai', 'Nellore', 'Noida',
+  'Panaji', 'Panipat', 'Patiala', 'Patna', 'Pimpri-Chinchwad', 'Pondicherry', 'Prayagraj', 'Pune', 'Puri',
+  'Raipur', 'Rajahmundry', 'Rajkot', 'Ranchi', 'Ratlam', 'Rewa', 'Rohtak', 'Rourkela',
+  'Sagar', 'Salem', 'Sambalpur', 'Satara', 'Shillong', 'Shimla', 'Siliguri', 'Solapur', 'Sonipat', 'Srinagar', 'Surat',
+  'Thane', 'Thanjavur', 'Thiruvananthapuram', 'Thrissur', 'Tiruchirappalli', 'Tirunelveli', 'Tirupati', 'Tumakuru',
+  'Udaipur', 'Ujjain',
+  'Vadodara', 'Varanasi', 'Vasai-Virar', 'Vellore', 'Vijayawada', 'Visakhapatnam',
+  'Warangal'
+];
+
+function populateOpportunityDropdowns() {
+  const citySelect = document.getElementById('oppCityFilter');
+  const stateSelect = document.getElementById('oppStateFilter');
+  if (citySelect && !citySelect.dataset.ready) {
+    citySelect.innerHTML = `<option value="">City</option>${INDIA_CITIES.map(city => `<option value="${city}">${city}</option>`).join('')}`;
+    citySelect.dataset.ready = 'true';
+  }
+  if (stateSelect && !stateSelect.dataset.ready) {
+    stateSelect.innerHTML = `<option value="">State</option>${INDIA_STATES.map(state => `<option value="${state}">${state}</option>`).join('')}`;
+    stateSelect.dataset.ready = 'true';
+  }
 }
 
 function getOpportunityFilters() {
@@ -3971,7 +4026,8 @@ function submitQuestionnaire(btn, sc) {
     .opportunity-filters {
       flex-wrap:wrap;
     }
-    .single-filter-bar input {
+    .single-filter-bar input,
+    .single-filter-bar select {
       flex-basis:calc(50% - 5px);
     }
     .area-task {
@@ -4094,7 +4150,8 @@ function submitQuestionnaire(btn, sc) {
       gap:9px;
       padding:10px;
     }
-    .single-filter-bar input {
+    .single-filter-bar input,
+    .single-filter-bar select {
       flex-basis:calc(50% - 5px);
     }
     .clear-filter-btn {
@@ -4186,7 +4243,8 @@ function submitQuestionnaire(btn, sc) {
     .opportunity-filters {
       display:block;
     }
-    .single-filter-bar input {
+    .single-filter-bar input,
+    .single-filter-bar select {
       width:100%;
       margin-bottom:8px;
     }
