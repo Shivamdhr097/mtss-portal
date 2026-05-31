@@ -2044,11 +2044,6 @@
 
             <!-- Stat cards -->
             <div class="home-stats">
-              <div class="hs-card" onclick="showTaskFilter('pending')" style="border-top:2px solid var(--orange)">
-                <div class="hs-icon">⏳</div>
-                <div class="hs-val" id="pendingAuditCount" style="color:var(--orange)">0</div>
-                <div class="hs-lbl">Pending Audits</div>
-              </div>
               <div class="hs-card" onclick="showTaskFilter('review')" style="border-top:2px solid var(--blue)">
                 <div class="hs-icon">🔍</div>
                 <div class="hs-val" style="color:var(--blue)">8</div>
@@ -2636,7 +2631,7 @@ function renderTaskRows(statusFilter = 'all') {
     rejected: 'Rejected Tasks',
     approved: 'Completed Tasks',
     inprogress: 'In Process Tasks',
-    pending: 'Pending Audits'
+    pending: 'Pending Tasks'
   };
   const statusNotes = {
     all: 'All assigned tasks',
