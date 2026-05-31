@@ -611,6 +611,11 @@
     display:grid;
     gap:10px;
   }
+  .export-card-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
   .opportunity-filters {
     display:flex;
     gap:10px;
@@ -2185,30 +2190,36 @@
           <div id="wf-export" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Backup & Export</div>
             <div class="section-sub">Export your personal records</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="export-card-grid">
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📊</div>
                 <div style="font-weight:600;font-size:12px">Excel Export</div>
                 <div style="font-size:10px;color:var(--muted)">Tasks, leads, payments</div>
-                <button class="apply-btn wf-btn" style="width:100%">Download .xlsx</button>
+                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('excel', this)">Download .xls</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📄</div>
                 <div style="font-weight:600;font-size:12px">PDF Statement</div>
                 <div style="font-size:10px;color:var(--muted)">Payment records</div>
-                <button class="apply-btn wf-btn" style="width:100%">Download PDF</button>
+                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('pdf', this)">Download PDF</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">🔗</div>
                 <div style="font-weight:600;font-size:12px">Google Sheets</div>
                 <div style="font-size:10px;color:var(--muted)">Push to Sheets</div>
-                <button class="apply-btn wf-btn" style="width:100%">Export to Sheets</button>
+                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('sheets', this)">Export to Sheets</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📋</div>
                 <div style="font-weight:600;font-size:12px">CSV Export</div>
                 <div style="font-size:10px;color:var(--muted)">Raw data export</div>
-                <button class="apply-btn wf-btn" style="width:100%">Download .csv</button>
+                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('csv', this)">Download .csv</button>
+              </div>
+              <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
+                <div style="font-size:20px">💾</div>
+                <div style="font-weight:600;font-size:12px">Backup Data</div>
+                <div style="font-size:10px;color:var(--muted)">Profile, tasks, applications</div>
+                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('backup', this)">Create Backup</button>
               </div>
             </div>
           </div>
@@ -2958,6 +2969,169 @@ function renderAdminWorkforceProfile() {
   `;
 }
 
+function getExportRows() {
+  return Object.entries(TASKS).map(([taskId, task]) => ({
+    taskId: task.id,
+    title: task.title,
+    project: task.project,
+    status: task.statusLabel,
+    dueDate: task.dueDate,
+    address: task.address,
+    payout: task.payment.amount,
+    paymentStatus: task.payment.statusLabel,
+    appliedStatus: appliedTaskState[taskId] || 'Not Applied',
+    workforceName: profileState.name,
+    workforceEmail: profileState.email,
+    workforceMobile: profileState.mobile,
+    bankAccount: profileState.bank,
+    ifsc: profileState.ifsc,
+    bankName: profileState.bankName
+  }));
+}
+
+function csvEscape(value) {
+  return `"${String(value ?? '').replace(/"/g, '""')}"`;
+}
+
+function buildCsv(rows) {
+  if (!rows.length) return '';
+  const headers = Object.keys(rows[0]);
+  return [
+    headers.map(csvEscape).join(','),
+    ...rows.map(row => headers.map(header => csvEscape(row[header])).join(','))
+  ].join('\n');
+}
+
+function htmlEscape(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function downloadFile(filename, content, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function setExportButtonState(btn, label) {
+  if (!btn) return;
+  const original = btn.dataset.originalLabel || btn.textContent;
+  btn.dataset.originalLabel = original;
+  btn.textContent = label;
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.disabled = false;
+  }, 1400);
+}
+
+function exportWorkforceData(type, btn) {
+  const rows = getExportRows();
+  const stamp = new Date().toISOString().slice(0, 10);
+  const csv = buildCsv(rows);
+
+  if (type === 'csv') {
+    downloadFile(`mtss-workforce-export-${stamp}.csv`, csv, 'text/csv;charset=utf-8');
+    setExportButtonState(btn, 'Downloaded');
+    return;
+  }
+
+  if (type === 'sheets') {
+    downloadFile(`mtss-google-sheets-import-${stamp}.csv`, csv, 'text/csv;charset=utf-8');
+    setExportButtonState(btn, 'Sheets CSV Ready');
+    return;
+  }
+
+  if (type === 'excel') {
+    const headers = Object.keys(rows[0] || {});
+    const tableRows = rows.map(row => `<tr>${headers.map(header => `<td>${htmlEscape(row[header])}</td>`).join('')}</tr>`).join('');
+    const table = `
+      <html><head><meta charset="utf-8"></head><body>
+      <table border="1">
+        <thead><tr>${headers.map(header => `<th>${htmlEscape(header)}</th>`).join('')}</tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+      </body></html>
+    `;
+    downloadFile(`mtss-workforce-export-${stamp}.xls`, table, 'application/vnd.ms-excel;charset=utf-8');
+    setExportButtonState(btn, 'Downloaded');
+    return;
+  }
+
+  if (type === 'backup') {
+    const backup = {
+      exportedAt: new Date().toISOString(),
+      profile: getProfilePayload(),
+      applications: appliedTaskState,
+      tasks: TASKS
+    };
+    downloadFile(`mtss-workforce-backup-${stamp}.json`, JSON.stringify(backup, null, 2), 'application/json;charset=utf-8');
+    setExportButtonState(btn, 'Backup Ready');
+    return;
+  }
+
+  if (type === 'pdf') {
+    openPdfStatement(rows);
+    setExportButtonState(btn, 'PDF Opened');
+  }
+}
+
+function openPdfStatement(rows) {
+  const totalPayout = rows.reduce((sum, row) => sum + parseAmount(row.payout), 0);
+  const html = `
+    <html>
+      <head>
+        <title>MTSS Workforce Statement</title>
+        <style>
+          body{font-family:Arial,sans-serif;color:#101828;padding:24px}
+          h1{font-size:20px;margin:0 0 8px}
+          .muted{color:#667085;font-size:12px;margin-bottom:16px}
+          .box{border:1px solid #eaecf0;border-radius:8px;padding:12px;margin-bottom:14px}
+          table{width:100%;border-collapse:collapse;font-size:11px}
+          th,td{border:1px solid #eaecf0;padding:7px;text-align:left}
+          th{background:#f9fafb}
+        </style>
+      </head>
+      <body>
+        <h1>MTSS Workforce Statement</h1>
+        <div class="muted">Generated on ${new Date().toLocaleString()}</div>
+        <div class="box">
+          <strong>${htmlEscape(profileState.name)}</strong><br>
+          ${htmlEscape(profileState.email)} | ${htmlEscape(profileState.mobile)}<br>
+          ${htmlEscape(profileState.address)}<br>
+          Bank: ${htmlEscape(profileState.bankName)} | ${htmlEscape(profileState.bank)} | IFSC: ${htmlEscape(profileState.ifsc)}<br>
+          Total Assigned Payout: ₹${totalPayout.toLocaleString('en-IN')}
+        </div>
+        <table>
+          <thead><tr><th>Task</th><th>Project</th><th>Status</th><th>Due Date</th><th>Payout</th><th>Payment</th></tr></thead>
+          <tbody>
+            ${rows.map(row => `<tr><td>${htmlEscape(row.title)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.status)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        <script>window.onload=function(){window.print();};<\/script>
+      </body>
+    </html>
+  `;
+  const printWindow = window.open('', '_blank');
+  if (!printWindow) {
+    downloadFile(`mtss-workforce-statement-${new Date().toISOString().slice(0, 10)}.html`, html, 'text/html;charset=utf-8');
+    return;
+  }
+  printWindow.document.open();
+  printWindow.document.write(html);
+  printWindow.document.close();
+}
+
 function renderOpportunityCard(taskId, task, distanceLabel) {
   const assignor = task.contactName.split('(')[0].trim();
   const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
@@ -3602,7 +3776,8 @@ function submitQuestionnaire(btn, sc) {
     }
     .home-stats,
     .stat-grid,
-    .profile-form {
+    .profile-form,
+    .export-card-grid {
       grid-template-columns:1fr 1fr !important;
       gap:10px;
     }
@@ -3692,7 +3867,8 @@ function submitQuestionnaire(btn, sc) {
     }
     .home-stats,
     .stat-grid,
-    .profile-form {
+    .profile-form,
+    .export-card-grid {
       grid-template-columns:1fr !important;
     }
     .hs-card,
