@@ -1810,6 +1810,22 @@
     cursor:pointer;
     white-space:nowrap;
   }
+  .admin-action-toast {
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:300;
+    max-width:min(360px,calc(100vw - 32px));
+    padding:12px 14px;
+    border-radius:8px;
+    border:1px solid #b2ddff;
+    background:#eff8ff;
+    color:#175cd3;
+    box-shadow:0 12px 28px rgba(16,24,40,0.14);
+    font-size:12px;
+    font-weight:800;
+    line-height:1.35;
+  }
   .module-grid {
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -2173,12 +2189,12 @@
             <div class="section-sub">Central command center for MTSS Services operations, workforce, approvals, payments, and client activity.</div>
 
             <div class="admin-filter-bar">
-              <input type="search" placeholder="Search workers, clients, projects, tasks, audits, payments">
+              <input id="adminGlobalSearch" type="search" placeholder="Search workers, clients, projects, tasks, audits, payments" onkeydown="if(event.key === 'Enter') adminSearchDashboard()">
               <select><option>Date Range: This Month</option><option>Today</option><option>This Week</option><option>Quarter</option></select>
               <select><option>All Clients</option><option>OYO</option><option>Urban Infra</option><option>Solar Alpha</option></select>
               <select><option>All Projects</option><option>Solar Survey Alpha</option><option>Water Meter Drive</option><option>Fiber Connect</option></select>
               <select><option>All States</option><option>Haryana</option><option>Delhi</option><option>Rajasthan</option></select>
-              <button class="apply-btn admin-btn">Search</button>
+              <button class="apply-btn admin-btn" onclick="adminSearchDashboard()">Search</button>
             </div>
 
             <div class="kpi-group-title">Project KPIs</div>
@@ -2838,6 +2854,75 @@ function setAdminTab(tab, sourceIcon) {
   if (tab === 'leads') renderAdminAppliedTasks();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function showAdminToast(message) {
+  let toast = document.getElementById('adminActionToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'adminActionToast';
+    toast.className = 'admin-action-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.display = 'block';
+  clearTimeout(window.adminActionToastTimer);
+  window.adminActionToastTimer = setTimeout(() => {
+    toast.style.display = 'none';
+  }, 2600);
+}
+
+function getAdminActionTarget(label) {
+  const text = (label || '').toLowerCase();
+  if (text.includes('worker') || text.includes('kyc') || text.includes('document')) return 'workforce';
+  if (text.includes('payment') || text.includes('salary') || text.includes('incentive') || text.includes('beneficiary') || text.includes('receipt')) return 'payments';
+  if (text.includes('invoice') || text.includes('collection') || text.includes('gst') || text.includes('revenue')) return 'revenue';
+  if (text.includes('project') || text.includes('client') || text.includes('milestone') || text.includes('gantt') || text.includes('profile')) return 'projects';
+  if (text.includes('task') || text.includes('submission') || text.includes('survey') || text.includes('audit') || text.includes('template') || text.includes('review')) return 'leads';
+  if (text.includes('report') || text.includes('performance')) return 'performance';
+  return 'dashboard';
+}
+
+function adminAction(label, targetTab) {
+  const target = targetTab || getAdminActionTarget(label);
+  if (target) setAdminTab(target);
+  const cleanLabel = (label || 'Action').trim();
+  showAdminToast(cleanLabel + ' opened successfully.');
+}
+
+function adminSearchDashboard() {
+  const input = document.getElementById('adminGlobalSearch');
+  const term = input ? input.value.trim() : '';
+  const target = term ? getAdminActionTarget(term) : 'dashboard';
+  adminAction(term ? 'Search result for "' + term + '"' : 'Global search', target);
+}
+
+function adminExportReport(label) {
+  const stamp = new Date().toISOString().slice(0, 10);
+  const rows = [
+    ['Section', 'Metric', 'Value'],
+    ['Projects', 'Active Projects', '18'],
+    ['Workforce', 'Registered Workers', '1842'],
+    ['Tasks', 'Pending Reviews', '57'],
+    ['Revenue', 'Monthly Revenue', '420000'],
+    ['Payments', 'Pending Payments', '32000']
+  ];
+  const csv = rows.map(row => row.map(value => '"' + String(value).replace(/"/g, '""') + '"').join(',')).join('\n');
+  downloadFile('mtss-admin-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + stamp + '.csv', csv, 'text/csv;charset=utf-8');
+  showAdminToast(label + ' downloaded successfully.');
+}
+
+document.addEventListener('click', function(event) {
+  const button = event.target.closest('button');
+  if (!button || !button.closest('#adminPanel')) return;
+  if (!button.closest('.approval-row') && !button.closest('.activity-row') && !button.closest('.quick-actions') && !button.closest('.module-toolbar')) return;
+  if (button.hasAttribute('data-admin-handled')) return;
+  const label = button.textContent.trim() || 'Dashboard action';
+  if (/export|report/i.test(label)) {
+    adminExportReport(label);
+  } else {
+    adminAction(label);
+  }
+});
 
 // â”€â”€ Workforce tab switching â”€â”€
 function wfTab(el, tab) {
