@@ -1163,8 +1163,52 @@
     height:44px;
     border-radius:8px;
     color:#667085;
-    font-size:17px;
+    font-size:13px;
   }
+  .nav-symbol {
+    width:22px;
+    height:22px;
+    border-radius:7px;
+    display:grid;
+    place-items:center;
+    position:relative;
+    color:currentColor;
+    font-weight:900;
+    letter-spacing:-0.4px;
+    font-size:11px;
+  }
+  .nav-symbol::before,
+  .nav-symbol::after {
+    content:'';
+    position:absolute;
+    border-radius:999px;
+    background:currentColor;
+    opacity:0.88;
+  }
+  .nav-home::before { width:18px; height:2px; transform:rotate(-38deg); top:6px; left:2px; }
+  .nav-home::after { width:18px; height:2px; transform:rotate(38deg); top:6px; right:2px; }
+  .nav-tasks { border:2px solid currentColor; }
+  .nav-tasks::before { width:9px; height:2px; transform:rotate(-45deg); left:8px; top:12px; }
+  .nav-tasks::after { width:5px; height:2px; transform:rotate(45deg); left:5px; top:13px; }
+  .nav-leads::before { width:18px; height:18px; border:2px solid currentColor; background:transparent; opacity:1; inset:2px; }
+  .nav-leads::after { width:7px; height:7px; inset:7px; }
+  .nav-projects { border:2px solid currentColor; border-radius:5px; }
+  .nav-projects::before { width:10px; height:2px; top:5px; left:2px; }
+  .nav-projects::after { display:none; }
+  .nav-payments::before { width:18px; height:12px; border:2px solid currentColor; background:transparent; opacity:1; inset:4px 2px auto; }
+  .nav-payments::after { width:5px; height:5px; right:4px; top:8px; }
+  .nav-performance::before { width:3px; height:16px; left:4px; bottom:2px; }
+  .nav-performance::after { width:14px; height:3px; left:6px; top:7px; transform:rotate(-35deg); }
+  .nav-profile::before { width:8px; height:8px; top:2px; left:7px; }
+  .nav-profile::after { width:18px; height:9px; bottom:2px; left:2px; border-radius:9px 9px 4px 4px; }
+  .nav-export::before { width:14px; height:2px; left:4px; bottom:4px; }
+  .nav-export::after { width:2px; height:15px; left:10px; top:3px; box-shadow:-4px 5px 0 -1px currentColor, 4px 5px 0 -1px currentColor; }
+  .nav-dashboard::before { width:5px; height:16px; left:3px; bottom:2px; }
+  .nav-dashboard::after { width:5px; height:11px; left:10px; bottom:2px; box-shadow:7px -5px 0 0 currentColor; }
+  .nav-workforce::before { width:7px; height:7px; left:2px; top:4px; box-shadow:11px 0 0 0 currentColor; }
+  .nav-workforce::after { width:20px; height:9px; left:1px; bottom:3px; border-radius:8px 8px 4px 4px; }
+  .nav-import::before { width:2px; height:15px; left:10px; top:2px; }
+  .nav-import::after { width:14px; height:2px; left:4px; bottom:4px; box-shadow:-4px -5px 0 -1px currentColor, 4px -5px 0 -1px currentColor; }
   .sidebar-icon:hover { background:#f2f4f7; color:#344054; }
   .wf .sidebar-icon.active,
   .admin .sidebar-icon.active {
@@ -1458,16 +1502,16 @@
 
         <!-- Sidebar -->
         <div class="sidebar admin">
-          <div class="sidebar-icon active" title="Dashboard" onclick="adminTab(this,'dashboard')">📊</div>
-          <div class="sidebar-icon notif" title="Leads" onclick="adminTab(this,'leads')">🎯</div>
-          <div class="sidebar-icon" title="Workforce" onclick="adminTab(this,'workforce')">👥</div>
-          <div class="sidebar-icon" title="Projects" onclick="adminTab(this,'projects')">📁</div>
+          <div class="sidebar-icon active" title="Dashboard" onclick="adminTab(this,'dashboard')"><span class="nav-symbol nav-dashboard"></span></div>
+          <div class="sidebar-icon notif" title="Leads" onclick="adminTab(this,'leads')"><span class="nav-symbol nav-leads"></span></div>
+          <div class="sidebar-icon" title="Workforce" onclick="adminTab(this,'workforce')"><span class="nav-symbol nav-workforce"></span></div>
+          <div class="sidebar-icon" title="Projects" onclick="adminTab(this,'projects')"><span class="nav-symbol nav-projects"></span></div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Revenue" onclick="adminTab(this,'revenue')">💰</div>
-          <div class="sidebar-icon" title="Payments" onclick="adminTab(this,'payments')">💳</div>
+          <div class="sidebar-icon" title="Revenue" onclick="adminTab(this,'revenue')"><span class="nav-symbol nav-payments"></span></div>
+          <div class="sidebar-icon" title="Payments" onclick="adminTab(this,'payments')"><span class="nav-symbol nav-payments"></span></div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Import" onclick="adminTab(this,'import')">📥</div>
-          <div class="sidebar-icon" title="Performance" onclick="adminTab(this,'performance')">🏆</div>
+          <div class="sidebar-icon" title="Import" onclick="adminTab(this,'import')"><span class="nav-symbol nav-import"></span></div>
+          <div class="sidebar-icon" title="Performance" onclick="adminTab(this,'performance')"><span class="nav-symbol nav-performance"></span></div>
         </div>
 
         <!-- Content -->
@@ -1770,16 +1814,16 @@
 
         <!-- Sidebar -->
         <div class="sidebar wf">
-          <div class="sidebar-icon active" title="Home" onclick="wfTab(this,'home')">🏠</div>
-          <div class="sidebar-icon" title="My Tasks" onclick="wfTab(this,'tasks')">✅</div>
-          <div class="sidebar-icon" title="My Leads" onclick="wfTab(this,'leads')">🎯</div>
-          <div class="sidebar-icon" title="Projects" onclick="wfTab(this,'projects')">📁</div>
+          <div class="sidebar-icon active" title="Home" onclick="wfTab(this,'home')"><span class="nav-symbol nav-home"></span></div>
+          <div class="sidebar-icon" title="My Tasks" onclick="wfTab(this,'tasks')"><span class="nav-symbol nav-tasks"></span></div>
+          <div class="sidebar-icon" title="My Leads" onclick="wfTab(this,'leads')"><span class="nav-symbol nav-leads"></span></div>
+          <div class="sidebar-icon" title="Projects" onclick="wfTab(this,'projects')"><span class="nav-symbol nav-projects"></span></div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Payments" onclick="wfTab(this,'payments')">💰</div>
-          <div class="sidebar-icon" title="Performance" onclick="wfTab(this,'performance')">📈</div>
+          <div class="sidebar-icon" title="Payments" onclick="wfTab(this,'payments')"><span class="nav-symbol nav-payments"></span></div>
+          <div class="sidebar-icon" title="Performance" onclick="wfTab(this,'performance')"><span class="nav-symbol nav-performance"></span></div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Profile" onclick="wfTab(this,'profile')">👤</div>
-          <div class="sidebar-icon" title="Export" onclick="wfTab(this,'export')">💾</div>
+          <div class="sidebar-icon" title="Profile" onclick="wfTab(this,'profile')"><span class="nav-symbol nav-profile"></span></div>
+          <div class="sidebar-icon" title="Export" onclick="wfTab(this,'export')"><span class="nav-symbol nav-export"></span></div>
         </div>
 
         <!-- Content -->
