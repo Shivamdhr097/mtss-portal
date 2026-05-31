@@ -631,6 +631,35 @@
     color:white;
   }
   .apply-btn.wf-btn:hover { box-shadow:0 4px 12px rgba(0,195,122,0.4); }
+  .task-action-stack {
+    flex-shrink:0;
+    min-width:132px;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:8px;
+  }
+  .task-apply-btn {
+    width:100%;
+    border-radius:8px;
+    white-space:normal;
+    line-height:1.25;
+  }
+  .task-apply-btn.pending {
+    background:#fffaeb;
+    color:#b54708;
+    border:1px solid #fedf89;
+  }
+  .task-apply-btn.verified {
+    background:#ecfdf3;
+    color:#067647;
+    border:1px solid #abefc6;
+  }
+  .task-apply-btn.rejected {
+    background:#fef3f2;
+    color:#b42318;
+    border:1px solid #fecdca;
+  }
 
   /* â”€â”€ PAYMENT ROW â”€â”€ */
   .pay-row {
@@ -878,6 +907,10 @@
     .task-payout {
       width:100%;
       text-align:left;
+      padding-left:42px;
+    }
+    .task-action-stack {
+      width:100%;
       padding-left:42px;
     }
     .data-table {
@@ -1456,6 +1489,7 @@
             </div>
 
             <div class="sec-div"><span>Self-Assign Requests</span></div>
+            <div id="adminAppliedTasks"></div>
             <div class="lead-card">
               <div class="lead-left">
                 <div class="lead-id">LEAD #2847 • PIN: 125001</div>
@@ -1742,7 +1776,7 @@
             <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span><span id="wfTaskTitle">My Tasks</span></div>
             <div class="section-sub">58 total from joining • Filter by month</div>
             <table class="data-table">
-              <thead><tr><th>Task</th><th>Project</th><th>Due</th><th>Status</th></tr></thead>
+              <thead><tr><th>Task</th><th>Project</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
               <tbody id="wfTaskRows">
                 <tr class="task-clickable" onclick="openTask('t1')"><td><div style="font-weight:600;font-size:12px">Solar Inspection #3 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">8 questions • Click to open</div></td><td><span class="tag blue">Solar Alpha</span></td><td style="font-size:11px;color:var(--muted)">May 28</td><td><span class="badge inprogress">In Process</span></td></tr>
                 <tr class="task-clickable" onclick="openTask('t2')"><td><div style="font-weight:600;font-size:12px">Meter Reading R-4 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">5 questions • Click to open</div></td><td><span class="tag green">Water Drive</span></td><td style="font-size:11px;color:var(--muted)">May 26</td><td><span class="badge review">Under Review</span></td></tr>
@@ -1931,6 +1965,7 @@ function adminTab(el, tab) {
   el.classList.add('active');
   document.querySelectorAll('[id^="admin-"]').forEach(s => s.style.display = 'none');
   document.getElementById('admin-' + tab).style.display = 'block';
+  if (tab === 'leads') renderAdminAppliedTasks();
 }
 
 // â”€â”€ Workforce tab switching â”€â”€
@@ -1968,18 +2003,92 @@ function approveLead(btn) {
   card.style.opacity = '0.6';
 }
 
-// â”€â”€ Apply button â”€â”€
-document.querySelectorAll('.apply-btn.wf-btn').forEach(btn => {
-  if (btn.textContent === 'Apply') {
-    btn.addEventListener('click', function() {
-      this.textContent = 'â³ Pending';
-      this.style.background = 'rgba(255,122,0,0.3)';
-      this.style.color = 'var(--orange)';
-      this.style.border = '1px solid rgba(255,122,0,0.4)';
-      this.style.cursor = 'default';
-    });
+const appliedTaskState = JSON.parse(localStorage.getItem('mtssAppliedTasks') || '{}');
+
+function saveAppliedTaskState() {
+  localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
+}
+
+function renderTaskApplyButton(taskId) {
+  const state = appliedTaskState[taskId];
+  const cfg = state === 'pending'
+    ? { label: 'Pending admin verification', cls: 'pending', disabled: true }
+    : state === 'verified'
+      ? { label: 'Verified by Admin', cls: 'verified', disabled: true }
+      : state === 'rejected'
+        ? { label: 'Reapply Task', cls: 'rejected', disabled: false }
+        : { label: 'Apply Task', cls: '', disabled: false };
+
+  return `<button class="apply-btn wf-btn task-apply-btn ${cfg.cls}" onclick="applyForTask(event,'${taskId}')" ${cfg.disabled ? 'disabled' : ''}>${cfg.label}</button>`;
+}
+
+function applyForTask(event, taskId) {
+  if (event) event.stopPropagation();
+  if (!TASKS[taskId]) return;
+  appliedTaskState[taskId] = 'pending';
+  saveAppliedTaskState();
+  renderDashboardTaskSummary();
+  renderTaskRows('all');
+  renderAdminAppliedTasks();
+}
+
+function verifyAppliedTask(taskId, approved) {
+  if (!TASKS[taskId]) return;
+  appliedTaskState[taskId] = approved ? 'verified' : 'rejected';
+  saveAppliedTaskState();
+  renderDashboardTaskSummary();
+  renderTaskRows('all');
+  renderAdminAppliedTasks();
+}
+
+function renderAdminAppliedTasks() {
+  const wrap = document.getElementById('adminAppliedTasks');
+  if (!wrap) return;
+
+  const entries = Object.entries(appliedTaskState)
+    .filter(([, state]) => state === 'pending' || state === 'verified' || state === 'rejected')
+    .filter(([taskId]) => TASKS[taskId]);
+
+  if (!entries.length) {
+    wrap.innerHTML = `
+      <div class="lead-card">
+        <div class="lead-left">
+          <div class="lead-id">No WF task applications yet</div>
+          <div class="lead-title">Applied tasks will appear here for admin verification.</div>
+          <div class="lead-meta">WF applies from dashboard or task list.</div>
+        </div>
+        <span class="badge pending">Waiting</span>
+      </div>
+    `;
+    return;
   }
-});
+
+  wrap.innerHTML = entries.map(([taskId, state]) => {
+    const task = TASKS[taskId];
+    const statusBadge = state === 'pending'
+      ? '<span class="badge pending">Pending Verify</span>'
+      : state === 'verified'
+        ? '<span class="badge approved">Verified</span>'
+        : '<span class="badge rejected">Rejected</span>';
+    const actions = state === 'pending'
+      ? `<div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="apply-btn admin-btn" onclick="verifyAppliedTask('${taskId}', true)">Verify</button>
+          <button onclick="verifyAppliedTask('${taskId}', false)" style="padding:8px 12px;border-radius:8px;font-size:10px;font-weight:700;border:1px solid var(--red);background:transparent;color:var(--red);cursor:pointer">Reject</button>
+        </div>`
+      : statusBadge;
+
+    return `
+      <div class="lead-card">
+        <div class="lead-left">
+          <div class="lead-id">${task.id} &bull; ${task.project}</div>
+          <div class="lead-title">${task.title}</div>
+          <div class="lead-meta">Applied by: ${profileState.name} &bull; ${task.address}</div>
+        </div>
+        ${actions}
+      </div>
+    `;
+  }).join('');
+}
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TASK DATA
@@ -2191,11 +2300,12 @@ function renderTaskRows(statusFilter = 'all') {
         <td><span class="tag ${tagClass[task.project] || 'blue'}">${task.project}</span></td>
         <td style="font-size:11px;color:var(--muted)">${task.dueDate}</td>
         <td><span class="badge ${task.status}">${task.statusLabel}</span></td>
+        <td>${renderTaskApplyButton(taskId)}</td>
       </tr>
     `;
   }).join('') : `
     <tr>
-      <td colspan="4" style="padding:18px;text-align:center;color:var(--muted)">No tasks in this status.</td>
+      <td colspan="5" style="padding:18px;text-align:center;color:var(--muted)">No tasks in this status.</td>
     </tr>
   `;
 }
@@ -2248,6 +2358,8 @@ function showPortal(role) {
     document.querySelector('.sidebar.wf').style.display = '';
     document.getElementById('wfContent').style.display = '';
     setWfTab('home');
+  } else {
+    renderAdminAppliedTasks();
   }
   document.getElementById('wfLoggedOut').style.display = 'none';
 }
@@ -2466,7 +2578,10 @@ function renderDashboardTaskSummary() {
           <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)}</div></div>
         </div>
       </div>
-      <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Payout</div></div>
+      <div class="task-action-stack">
+        <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Payout</div></div>
+        ${renderTaskApplyButton(taskId)}
+      </div>
     `;
   });
 
@@ -2489,7 +2604,10 @@ function renderDashboardTaskSummary() {
             <div class="task-detail"><div class="task-detail-label">Task ID</div><div class="task-detail-value">${task.id}</div></div>
           </div>
         </div>
-        <a href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="padding:6px 12px;border-radius:8px;background:rgba(0,195,122,0.15);color:var(--green);font-size:10px;font-weight:600;text-decoration:none;border:1px solid rgba(0,195,122,0.25)">Maps</a>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:132px">
+          <a href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="padding:8px 12px;border-radius:8px;background:rgba(0,195,122,0.15);color:var(--green);font-size:10px;font-weight:600;text-decoration:none;border:1px solid rgba(0,195,122,0.25);text-align:center">Maps</a>
+          ${renderTaskApplyButton('t1')}
+        </div>
       </div>
     `;
   }
@@ -2498,6 +2616,7 @@ function renderDashboardTaskSummary() {
 renderDashboardTaskSummary();
 renderTaskRows('all');
 renderProfileDetails(false);
+renderAdminAppliedTasks();
 loadGithubPortalData();
 if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
   showPortal(sessionStorage.getItem('mtssRole') || 'wf');
