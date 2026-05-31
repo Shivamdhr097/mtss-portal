@@ -2524,6 +2524,8 @@ let firebasePortalLoadStarted = false;
 
 function saveAppliedTaskState() {
   localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
+  taskRenderVersion += 1;
+  lastTaskRenderKey = '';
   updatePendingAuditCount();
 }
 
@@ -2754,7 +2756,7 @@ const TASKS = {
   }
 };
 
-function setWfTab(tab, sourceIcon) {
+function setWfTab(tab, sourceIcon, resetTaskFilter = true) {
   closeTask();
   document.querySelectorAll('#wfPanel .sidebar-icon').forEach(i => i.classList.remove('active'));
   const icon = sourceIcon || document.querySelector(`#wfPanel .sidebar-icon[onclick*="'${tab}'"]`);
@@ -2762,7 +2764,8 @@ function setWfTab(tab, sourceIcon) {
   document.querySelectorAll('#wfContent > [id^="wf-"]').forEach(s => s.style.display = 'none');
   const section = document.getElementById('wf-' + tab);
   if (section) section.style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (tab === 'tasks' && resetTaskFilter) renderTaskRows('all');
+  window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
 function parseAmount(amount) {
@@ -2838,6 +2841,8 @@ const TASK_STATUS_CARDS = [
 ];
 
 let currentTaskFilter = 'all';
+let taskRenderVersion = 0;
+let lastTaskRenderKey = '';
 
 function getTaskEntriesForFilter(statusFilter = 'all') {
   return Object.entries(TASKS).filter(([taskId, task]) => {
@@ -2907,6 +2912,9 @@ function renderTaskRows(statusFilter = 'all') {
     'Gas Infra Check': 'orange'
   };
 
+  const renderKey = `${statusFilter}:${taskRenderVersion}`;
+  if (renderKey === lastTaskRenderKey && rows.children.length) return;
+  lastTaskRenderKey = renderKey;
   currentTaskFilter = statusFilter;
   renderTaskStatusCards(statusFilter);
   const tasks = getTaskEntriesForFilter(statusFilter);
@@ -2955,7 +2963,7 @@ function renderMyTaskCard(taskId, task, tagClassName) {
 }
 
 function showTaskFilter(statusFilter) {
-  setWfTab('tasks');
+  setWfTab('tasks', null, false);
   renderTaskRows(statusFilter);
 }
 
