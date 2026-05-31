@@ -2991,10 +2991,7 @@ function getExportRows() {
 
 function getPaymentExportRows() {
   return Object.entries(TASKS).map(([taskId, task]) => ({
-    workforceName: profileState.name,
-    workforceEmail: profileState.email,
-    workforceMobile: profileState.mobile,
-    workforceAddress: profileState.address,
+    workforceDetails: `${profileState.name} | ${profileState.email} | ${profileState.mobile} | ${profileState.address}`,
     bankAccount: profileState.bank,
     bankName: profileState.bankName,
     ifscCode: profileState.ifsc,
@@ -3008,9 +3005,7 @@ function getPaymentExportRows() {
     taskAddress: task.address,
     payout: task.payment.amount,
     paymentStatus: task.payment.statusLabel,
-    paymentMethod: task.payment.method,
-    applicationStatus: appliedTaskState[taskId] || 'Not Applied',
-    paymentNote: task.payment.note
+    paymentMethod: task.payment.method
   }));
 }
 
@@ -3142,7 +3137,7 @@ function openPdfStatement(paymentRows) {
         <table>
           <thead><tr><th>Task</th><th>Project</th><th>Status</th><th>Due Date</th><th>Payout</th><th>Payment</th></tr></thead>
           <tbody>
-            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.taskTitle)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.applicationStatus)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
+            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.taskTitle)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.taskStatus)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
           </tbody>
         </table>
         <script>window.onload=function(){window.print();};<\/script>
