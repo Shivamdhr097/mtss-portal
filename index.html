@@ -182,9 +182,16 @@
   .brand-logo {
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:9px;
     color:var(--text);
     text-decoration:none;
+  }
+  .brand-image {
+    width:146px;
+    height:54px;
+    object-fit:contain;
+    object-position:left center;
+    display:block;
   }
   .brand-mark {
     width:38px;
@@ -1463,11 +1470,7 @@
   <!-- TOP NAV -->
   <nav class="topnav">
     <div class="logo brand-logo" id="portalLogo">
-      <div class="brand-mark"><span>MT</span></div>
-      <div class="brand-copy">
-        <div class="brand-name">MTSS</div>
-        <div class="brand-role">Workforce</div>
-      </div>
+      <img class="brand-image" src="assets/mtss-services-logo.png" alt="MTSS Services">
     </div>
 
     <div class="topnav-right">
@@ -2489,11 +2492,7 @@ function showPortal(role) {
   document.getElementById('wfPanel').style.display = isAdmin ? 'none' : '';
   document.getElementById('portals').style.gridTemplateColumns = '1fr';
   document.getElementById('portalLogo').innerHTML = `
-    <div class="brand-mark"><span>MT</span></div>
-    <div class="brand-copy">
-      <div class="brand-name">MTSS</div>
-      <div class="brand-role">${isAdmin ? 'Admin' : 'Workforce'}</div>
-    </div>
+    <img class="brand-image" src="assets/mtss-services-logo.png" alt="MTSS Services ${isAdmin ? 'Admin' : 'Workforce'}">
   `;
   document.getElementById('portalRoleLabel').textContent = isAdmin ? 'Admin' : 'Workforce';
   document.getElementById('portalAvatar').textContent = isAdmin ? 'A' : 'R';
