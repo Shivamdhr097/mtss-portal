@@ -1884,7 +1884,6 @@
         <div class="sidebar wf">
           <div class="sidebar-icon active" title="Home" onclick="wfTab(this,'home')"><span class="nav-symbol nav-home"></span></div>
           <div class="sidebar-icon" title="My Tasks" onclick="wfTab(this,'tasks')"><span class="nav-symbol nav-tasks"></span></div>
-          <div class="sidebar-icon" title="Projects" onclick="wfTab(this,'projects')"><span class="nav-symbol nav-projects"></span></div>
           <div class="sidebar-divider"></div>
           <div class="sidebar-icon" title="Payments" onclick="wfTab(this,'payments')"><span class="nav-symbol nav-payments"></span></div>
           <div class="sidebar-icon" title="Performance" onclick="wfTab(this,'performance')"><span class="nav-symbol nav-performance"></span></div>
@@ -1990,25 +1989,6 @@
                 <tr class="task-clickable" onclick="openTask('t4')"><td><div style="font-weight:600;font-size:12px">Gas Leak Survey <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">6 questions • Click to open</div></td><td><span class="tag orange">Gas Infra</span></td><td style="font-size:11px;color:var(--muted)">May 22</td><td><span class="badge rejected">Rejected</span></td></tr>
               </tbody>
             </table>
-          </div>
-
-          <!-- PROJECTS TAB (WF) -->
-          <div id="wf-projects" style="display:none">
-            <div class="section-title"><span class="dot" style="background:var(--green)"></span>My Projects</div>
-            <div class="stat-grid">
-              <div class="stat-card teal tab-link" onclick="showTaskFilter('inprogress')"><div class="stat-label">Active</div><div class="stat-value teal">3</div></div>
-              <div class="stat-card green tab-link" onclick="showTaskFilter('approved')"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
-            </div>
-            <div class="card tab-link" onclick="showTaskFilter('inprogress')">
-              <div class="card-header"><div class="card-title">Solar Survey Alpha</div><span class="badge approved">Active</span></div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:8px">18 tasks assigned • 14 completed</div>
-              <div class="progress-bar"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div>
-            </div>
-            <div class="card tab-link" onclick="showTaskFilter('inprogress')">
-              <div class="card-header"><div class="card-title">Fiber Connect</div><span class="badge approved">Active</span></div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:8px">12 tasks assigned • 8 completed</div>
-              <div class="progress-bar"><div class="progress-fill" style="width:67%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div>
-            </div>
           </div>
 
           <!-- PAYMENTS TAB (WF) -->
