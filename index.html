@@ -1428,6 +1428,14 @@
   }
   .data-table tr:hover td { background:#f9fafb; }
   .badge { border-radius:999px; }
+  .tab-link {
+    cursor:pointer;
+    transition:border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  }
+  .tab-link:hover {
+    border-color:#b2ddff;
+    box-shadow:0 2px 8px rgba(21,112,239,0.12);
+  }
   .progress-bar { background:#eaecf0; }
   .logout-btn {
     border-radius:8px;
@@ -1583,29 +1591,29 @@
             <div class="section-sub">Today, May 26 2025 — All Projects</div>
 
             <div class="stat-grid">
-              <div class="stat-card blue">
+              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')">
                 <div class="stat-label">Total Leads</div>
                 <div class="stat-value blue">1,284</div>
                 <div class="stat-change up">▲ 12% this month</div>
               </div>
-              <div class="stat-card orange">
+              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')">
                 <div class="stat-label">Pending</div>
                 <div class="stat-value orange">47</div>
                 <div class="stat-change down">▼ 3 today</div>
               </div>
-              <div class="stat-card green">
+              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')">
                 <div class="stat-label">Monthly Revenue</div>
                 <div class="stat-value green">₹4.2L</div>
                 <div class="stat-change up">▲ 18% vs last</div>
               </div>
-              <div class="stat-card purple">
+              <div class="stat-card purple tab-link" onclick="setAdminTab('workforce')">
                 <div class="stat-label">Active Workforce</div>
                 <div class="stat-value purple">138</div>
                 <div class="stat-change up">▲ 6 new</div>
               </div>
             </div>
 
-            <div class="card">
+            <div class="card tab-link" onclick="setAdminTab('revenue')">
               <div class="card-header">
                 <div class="card-title">Revenue — Last 8 Months</div>
                 <span class="tag blue">₹28.4L YTD</span>
@@ -1632,7 +1640,7 @@
               </div>
             </div>
 
-            <div class="card">
+            <div class="card tab-link" onclick="setAdminTab('projects')">
               <div class="card-header">
                 <div class="card-title">Active Projects</div>
                 <span class="tag green">8 Running</span>
@@ -1655,7 +1663,7 @@
               </div>
             </div>
 
-            <div class="card">
+            <div class="card tab-link" onclick="setAdminTab('payments')">
               <div class="card-header">
                 <div class="card-title">Recent Payments</div>
                 <span class="tag orange">View All</span>
@@ -1681,10 +1689,10 @@
             <div class="section-sub">47 pending approval • 3 self-assign requests</div>
 
             <div class="stat-grid">
-              <div class="stat-card blue"><div class="stat-label">Total Leads</div><div class="stat-value blue">1,284</div></div>
-              <div class="stat-card orange"><div class="stat-label">Pending</div><div class="stat-value orange">47</div></div>
-              <div class="stat-card green"><div class="stat-label">Approved</div><div class="stat-value green">1,109</div></div>
-              <div class="stat-card red"><div class="stat-label">Rejected</div><div class="stat-value red">128</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Total Leads</div><div class="stat-value blue">1,284</div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Pending</div><div class="stat-value orange">47</div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Approved</div><div class="stat-value green">1,109</div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Rejected</div><div class="stat-value red">128</div></div>
             </div>
 
             <div class="sec-div"><span>Self-Assign Requests</span></div>
@@ -1742,10 +1750,10 @@
             <div class="section-title"><span class="dot"></span>Project Management</div>
             <div class="section-sub">8 total projects</div>
             <div class="stat-grid">
-              <div class="stat-card blue"><div class="stat-label">Active</div><div class="stat-value blue">5</div></div>
-              <div class="stat-card green"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
-              <div class="stat-card orange"><div class="stat-label">On Hold</div><div class="stat-value orange">1</div></div>
-              <div class="stat-card purple"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active</div><div class="stat-value blue">5</div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('projects')"><div class="stat-label">On Hold</div><div class="stat-value orange">1</div></div>
+              <div class="stat-card purple tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">Project Revenue</div></div>
@@ -1761,10 +1769,10 @@
           <div id="admin-revenue" style="display:none">
             <div class="section-title"><span class="dot"></span>Revenue Dashboard</div>
             <div class="stat-grid">
-              <div class="stat-card green"><div class="stat-label">This Month</div><div class="stat-value green">₹4.2L</div><div class="stat-change up">▲ 18%</div></div>
-              <div class="stat-card blue"><div class="stat-label">YTD Total</div><div class="stat-value blue">₹28.4L</div></div>
-              <div class="stat-card teal"><div class="stat-label">Top Project</div><div class="stat-value teal">₹8.4L</div></div>
-              <div class="stat-card orange"><div class="stat-label">Avg/Month</div><div class="stat-value orange">₹3.5L</div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">This Month</div><div class="stat-value green">₹4.2L</div><div class="stat-change up">▲ 18%</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">YTD Total</div><div class="stat-value blue">₹28.4L</div></div>
+              <div class="stat-card teal tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Top Project</div><div class="stat-value teal">₹8.4L</div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Avg/Month</div><div class="stat-value orange">₹3.5L</div></div>
             </div>
           </div>
 
@@ -1772,10 +1780,10 @@
           <div id="admin-payments" style="display:none">
             <div class="section-title"><span class="dot"></span>Payment Management</div>
             <div class="stat-grid">
-              <div class="stat-card green"><div class="stat-label">Paid This Month</div><div class="stat-value green">₹2.1L</div></div>
-              <div class="stat-card orange"><div class="stat-label">Processing</div><div class="stat-value orange">₹48K</div></div>
-              <div class="stat-card red"><div class="stat-label">Pending</div><div class="stat-value red">₹32K</div></div>
-              <div class="stat-card blue"><div class="stat-label">Total Processed</div><div class="stat-value blue">₹18.6L</div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Paid This Month</div><div class="stat-value green">₹2.1L</div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Processing</div><div class="stat-value orange">₹48K</div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending</div><div class="stat-value red">₹32K</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Total Processed</div><div class="stat-value blue">₹18.6L</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">Transactions</div><span class="tag blue">Filter by Month</span></div>
@@ -2019,15 +2027,15 @@
           <div id="wf-projects" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>My Projects</div>
             <div class="stat-grid">
-              <div class="stat-card teal"><div class="stat-label">Active</div><div class="stat-value teal">3</div></div>
-              <div class="stat-card green"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
+              <div class="stat-card teal tab-link" onclick="showTaskFilter('inprogress')"><div class="stat-label">Active</div><div class="stat-value teal">3</div></div>
+              <div class="stat-card green tab-link" onclick="showTaskFilter('approved')"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
             </div>
-            <div class="card">
+            <div class="card tab-link" onclick="showTaskFilter('inprogress')">
               <div class="card-header"><div class="card-title">Solar Survey Alpha</div><span class="badge approved">Active</span></div>
               <div style="font-size:11px;color:var(--muted);margin-bottom:8px">18 tasks assigned • 14 completed</div>
               <div class="progress-bar"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div>
             </div>
-            <div class="card">
+            <div class="card tab-link" onclick="showTaskFilter('inprogress')">
               <div class="card-header"><div class="card-title">Fiber Connect</div><span class="badge approved">Active</span></div>
               <div style="font-size:11px;color:var(--muted);margin-bottom:8px">12 tasks assigned • 8 completed</div>
               <div class="progress-bar"><div class="progress-fill" style="width:67%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div>
@@ -2038,12 +2046,12 @@
           <div id="wf-payments" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Payments & Earnings</div>
             <div class="home-stats" style="grid-template-columns:repeat(2,1fr)">
-              <div class="hs-card" style="border-top:2px solid var(--yellow)">
+              <div class="hs-card tab-link" onclick="showPaymentFilter('paid')" style="border-top:2px solid var(--yellow)">
                 <div class="hs-icon">💰</div>
                 <div class="hs-val" style="color:var(--yellow)">₹84,200</div>
                 <div class="hs-lbl">Total Earned</div>
               </div>
-              <div class="hs-card" style="border-top:2px solid var(--teal)">
+              <div class="hs-card tab-link" onclick="showPaymentFilter('ready')" style="border-top:2px solid var(--teal)">
                 <div class="hs-icon">🏦</div>
                 <div class="hs-val" style="color:var(--teal)">₹6,200</div>
                 <div class="hs-lbl">Ready to Pay</div>
@@ -2062,10 +2070,10 @@
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>My Performance</div>
             <div class="section-sub">Since joining: Mar 12, 2024</div>
             <div class="stat-grid">
-              <div class="stat-card green"><div class="stat-label">Tasks Completed</div><div class="stat-value green">42</div></div>
-              <div class="stat-card blue"><div class="stat-label">Completion Rate</div><div class="stat-value blue">84%</div></div>
-              <div class="stat-card yellow"><div class="stat-label">Rating</div><div class="stat-value yellow">4.8★</div></div>
-              <div class="stat-card purple"><div class="stat-label">Rank</div><div class="stat-value purple">#1</div></div>
+              <div class="stat-card green tab-link" onclick="showTaskFilter('approved')"><div class="stat-label">Tasks Completed</div><div class="stat-value green">42</div></div>
+              <div class="stat-card blue tab-link" onclick="setWfTab('performance')"><div class="stat-label">Completion Rate</div><div class="stat-value blue">84%</div></div>
+              <div class="stat-card yellow tab-link" onclick="setWfTab('performance')"><div class="stat-label">Rating</div><div class="stat-value yellow">4.8★</div></div>
+              <div class="stat-card purple tab-link" onclick="setWfTab('performance')"><div class="stat-label">Rank</div><div class="stat-value purple">#1</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">KPI Breakdown</div></div>
@@ -2160,19 +2168,23 @@
 <script>
 // â”€â”€ Admin tab switching â”€â”€
 function adminTab(el, tab) {
-  document.querySelectorAll('.admin .sidebar-icon').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('[id^="admin-"]').forEach(s => s.style.display = 'none');
-  document.getElementById('admin-' + tab).style.display = 'block';
+  setAdminTab(tab, el);
+}
+
+function setAdminTab(tab, sourceIcon) {
+  document.querySelectorAll('#adminPanel .sidebar-icon').forEach(i => i.classList.remove('active'));
+  const icon = sourceIcon || document.querySelector(`#adminPanel .sidebar-icon[onclick*="'${tab}'"]`);
+  if (icon) icon.classList.add('active');
+  document.querySelectorAll('#adminContent > [id^="admin-"]').forEach(s => s.style.display = 'none');
+  const section = document.getElementById('admin-' + tab);
+  if (section) section.style.display = 'block';
   if (tab === 'leads') renderAdminAppliedTasks();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // â”€â”€ Workforce tab switching â”€â”€
 function wfTab(el, tab) {
-  document.querySelectorAll('.wf .sidebar-icon').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('[id^="wf-"]').forEach(s => s.style.display = 'none');
-  document.getElementById('wf-' + tab).style.display = 'block';
+  setWfTab(tab, el);
 }
 
 // â”€â”€ Top nav view switching â”€â”€
@@ -2203,6 +2215,8 @@ function approveLead(btn) {
 }
 
 const appliedTaskState = JSON.parse(localStorage.getItem('mtssAppliedTasks') || '{}');
+let currentTaskId = null;
+let currentMTab = 0;
 
 function saveAppliedTaskState() {
   localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
@@ -2389,13 +2403,15 @@ const TASKS = {
   }
 };
 
-function setWfTab(tab) {
-  document.querySelectorAll('.wf .sidebar-icon').forEach(i => i.classList.remove('active'));
-  const icon = document.querySelector(`.wf .sidebar-icon[onclick*="'${tab}'"]`);
+function setWfTab(tab, sourceIcon) {
+  closeTask();
+  document.querySelectorAll('#wfPanel .sidebar-icon').forEach(i => i.classList.remove('active'));
+  const icon = sourceIcon || document.querySelector(`#wfPanel .sidebar-icon[onclick*="'${tab}'"]`);
   if (icon) icon.classList.add('active');
-  document.querySelectorAll('[id^="wf-"]').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('#wfContent > [id^="wf-"]').forEach(s => s.style.display = 'none');
   const section = document.getElementById('wf-' + tab);
   if (section) section.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function parseAmount(amount) {
@@ -2558,6 +2574,7 @@ function showPortal(role) {
     document.getElementById('wfContent').style.display = '';
     setWfTab('home');
   } else {
+    setAdminTab('dashboard');
     renderAdminAppliedTasks();
   }
   document.getElementById('wfLoggedOut').style.display = 'none';
@@ -2828,9 +2845,6 @@ if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
   setAuthMode('wfSignin');
   showAuth();
 }
-
-let currentTaskId = null;
-let currentMTab = 0;
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // OPEN TASK — SLIDE INTO PANEL (no modal)
