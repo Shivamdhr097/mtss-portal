@@ -645,6 +645,134 @@
     font-size:15px;
     font-weight:800;
   }
+  .status-symbol {
+    position:relative;
+    display:block;
+    width:18px;
+    height:18px;
+    color:currentColor;
+  }
+  .status-symbol::before,
+  .status-symbol::after {
+    content:'';
+    position:absolute;
+    box-sizing:border-box;
+  }
+  .status-active::before {
+    inset:2px;
+    border:2px solid currentColor;
+    border-radius:50%;
+  }
+  .status-active::after {
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:currentColor;
+    top:6px;
+    left:6px;
+  }
+  .status-pending::before {
+    inset:2px;
+    border:2px solid currentColor;
+    border-radius:50%;
+  }
+  .status-pending::after {
+    width:6px;
+    height:6px;
+    border-left:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    top:4px;
+    left:8px;
+  }
+  .status-allocated::before {
+    inset:3px;
+    border:2px solid currentColor;
+    border-radius:4px;
+  }
+  .status-allocated::after {
+    width:8px;
+    height:2px;
+    background:currentColor;
+    top:8px;
+    left:5px;
+  }
+  .status-submitted::before {
+    width:2px;
+    height:12px;
+    background:currentColor;
+    left:8px;
+    top:3px;
+  }
+  .status-submitted::after {
+    width:8px;
+    height:8px;
+    border-top:2px solid currentColor;
+    border-right:2px solid currentColor;
+    transform:rotate(-45deg);
+    top:2px;
+    left:4px;
+  }
+  .status-completed::before {
+    width:12px;
+    height:7px;
+    border-left:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    transform:rotate(-45deg);
+    top:4px;
+    left:3px;
+  }
+  .status-rejected::before,
+  .status-rejected::after {
+    width:16px;
+    height:2px;
+    background:currentColor;
+    top:8px;
+    left:1px;
+  }
+  .status-rejected::before { transform:rotate(45deg); }
+  .status-rejected::after { transform:rotate(-45deg); }
+  .status-approved::before {
+    inset:2px;
+    border:2px solid currentColor;
+    border-radius:50%;
+  }
+  .status-approved::after {
+    width:8px;
+    height:5px;
+    border-left:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    transform:rotate(-45deg);
+    top:6px;
+    left:5px;
+  }
+  .status-reschedule::before {
+    inset:3px;
+    border:2px solid currentColor;
+    border-left-color:transparent;
+    border-radius:50%;
+  }
+  .status-reschedule::after {
+    width:6px;
+    height:6px;
+    border-top:2px solid currentColor;
+    border-right:2px solid currentColor;
+    transform:rotate(20deg);
+    top:2px;
+    right:2px;
+  }
+  .status-expired::before {
+    inset:2px;
+    border:2px solid currentColor;
+    border-radius:4px;
+  }
+  .status-expired::after {
+    width:10px;
+    height:2px;
+    background:currentColor;
+    top:8px;
+    left:4px;
+    transform:rotate(45deg);
+  }
   .task-status-label {
     font-size:11px;
     font-weight:800;
@@ -2667,15 +2795,15 @@ function renderWhatToDo(task) {
 }
 
 const TASK_STATUS_CARDS = [
-  { key: 'active', label: 'Active', icon: '&#9658;', color: 'var(--purple)', bg: 'rgba(124,77,255,0.14)' },
-  { key: 'pending', label: 'Pending', icon: '&#9203;', color: 'var(--orange)', bg: 'rgba(255,122,0,0.14)' },
-  { key: 'allocated', label: 'Allocated', icon: '&#9673;', color: 'var(--blue)', bg: 'rgba(59,111,255,0.14)' },
-  { key: 'submitted', label: 'Submitted', icon: '&#8593;', color: 'var(--teal)', bg: 'rgba(0,216,201,0.14)' },
-  { key: 'completed', label: 'Completed', icon: '&#10003;', color: 'var(--green)', bg: 'rgba(0,195,122,0.14)' },
-  { key: 'rejected', label: 'Rejected', icon: '&#10005;', color: 'var(--red)', bg: 'rgba(255,59,94,0.14)' },
-  { key: 'approved', label: 'Approved', icon: '&#9733;', color: 'var(--yellow)', bg: 'rgba(255,214,0,0.16)' },
-  { key: 'reschedule', label: 'Reschedule', icon: '&#8635;', color: 'var(--pink)', bg: 'rgba(255,45,146,0.14)' },
-  { key: 'expired', label: 'Expired', icon: '&#9888;', color: 'var(--muted)', bg: 'rgba(152,162,179,0.14)' }
+  { key: 'active', label: 'Active', icon: '<span class="status-symbol status-active"></span>', color: 'var(--purple)', bg: 'rgba(124,77,255,0.14)' },
+  { key: 'pending', label: 'Pending', icon: '<span class="status-symbol status-pending"></span>', color: 'var(--orange)', bg: 'rgba(255,122,0,0.14)' },
+  { key: 'allocated', label: 'Allocated', icon: '<span class="status-symbol status-allocated"></span>', color: 'var(--blue)', bg: 'rgba(59,111,255,0.14)' },
+  { key: 'submitted', label: 'Submitted', icon: '<span class="status-symbol status-submitted"></span>', color: 'var(--teal)', bg: 'rgba(0,216,201,0.14)' },
+  { key: 'completed', label: 'Completed', icon: '<span class="status-symbol status-completed"></span>', color: 'var(--green)', bg: 'rgba(0,195,122,0.14)' },
+  { key: 'rejected', label: 'Rejected', icon: '<span class="status-symbol status-rejected"></span>', color: 'var(--red)', bg: 'rgba(255,59,94,0.14)' },
+  { key: 'approved', label: 'Approved', icon: '<span class="status-symbol status-approved"></span>', color: 'var(--yellow)', bg: 'rgba(255,214,0,0.16)' },
+  { key: 'reschedule', label: 'Reschedule', icon: '<span class="status-symbol status-reschedule"></span>', color: 'var(--pink)', bg: 'rgba(255,45,146,0.14)' },
+  { key: 'expired', label: 'Expired', icon: '<span class="status-symbol status-expired"></span>', color: 'var(--muted)', bg: 'rgba(152,162,179,0.14)' }
 ];
 
 let currentTaskFilter = 'all';
