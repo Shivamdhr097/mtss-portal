@@ -2991,7 +2991,6 @@ function getExportRows() {
 
 function getPaymentExportRows() {
   return Object.entries(TASKS).map(([taskId, task]) => ({
-    workforceDetails: `${profileState.name} | ${profileState.email} | ${profileState.mobile} | ${profileState.address}`,
     bankAccount: profileState.bank,
     bankName: profileState.bankName,
     ifscCode: profileState.ifsc,
@@ -2999,9 +2998,6 @@ function getPaymentExportRows() {
     taskId: task.id,
     taskTitle: task.title,
     project: task.project,
-    taskStatus: task.statusLabel,
-    assignedDate: task.assignedDate,
-    dueDate: task.dueDate,
     taskAddress: task.address,
     payout: task.payment.amount,
     paymentStatus: task.payment.statusLabel,
@@ -3076,10 +3072,14 @@ function exportWorkforceData(type, btn) {
   if (type === 'excel') {
     const headers = Object.keys(paymentRows[0] || {});
     const tableRows = paymentRows.map(row => `<tr>${headers.map(header => `<td>${htmlEscape(row[header])}</td>`).join('')}</tr>`).join('');
+    const workforceDetails = `Workforce Details: ${profileState.name} | ${profileState.email} | ${profileState.mobile} | ${profileState.address}`;
     const table = `
       <html><head><meta charset="utf-8"></head><body>
-      <h2>MTSS Workforce Payment Report</h2>
       <table border="1">
+        <tbody>
+          <tr><td colspan="${headers.length}"><strong>${htmlEscape(workforceDetails)}</strong></td></tr>
+          <tr><td colspan="${headers.length}"><strong>MTSS Workforce Payment Report</strong></td></tr>
+        </tbody>
         <thead><tr>${headers.map(header => `<th>${htmlEscape(header)}</th>`).join('')}</tr></thead>
         <tbody>${tableRows}</tbody>
       </table>
@@ -3135,9 +3135,9 @@ function openPdfStatement(paymentRows) {
           Total Assigned Payout: ₹${totalPayout.toLocaleString('en-IN')}
         </div>
         <table>
-          <thead><tr><th>Task</th><th>Project</th><th>Status</th><th>Due Date</th><th>Payout</th><th>Payment</th></tr></thead>
+          <thead><tr><th>Task</th><th>Project</th><th>Address</th><th>Payout</th><th>Payment</th><th>Method</th></tr></thead>
           <tbody>
-            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.taskTitle)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.taskStatus)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
+            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.taskTitle)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.taskAddress)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td><td>${htmlEscape(row.paymentMethod)}</td></tr>`).join('')}
           </tbody>
         </table>
         <script>window.onload=function(){window.print();};<\/script>
