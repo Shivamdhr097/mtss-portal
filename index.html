@@ -867,6 +867,29 @@
   .sec-div::before, .sec-div::after {
     content:''; flex:1; height:1px; background:var(--border);
   }
+  .section-line {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin:22px 0 12px;
+  }
+  .section-line-title {
+    color:#101828;
+    font-size:16px;
+    font-weight:800;
+  }
+  .view-all-btn {
+    border:1px solid #b2ddff;
+    background:#eff8ff;
+    color:#1570ef;
+    border-radius:8px;
+    padding:7px 12px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .view-all-btn:hover { background:#d1e9ff; }
 
   /* â”€â”€ ANIMATIONS â”€â”€ */
   @keyframes slideUp {
@@ -1883,6 +1906,7 @@
         <!-- Sidebar -->
         <div class="sidebar wf">
           <div class="sidebar-icon active" title="Home" onclick="wfTab(this,'home')"><span class="nav-symbol nav-home"></span></div>
+          <div class="sidebar-icon" title="Opportunities" onclick="wfTab(this,'opportunities')"><span class="nav-symbol nav-leads"></span></div>
           <div class="sidebar-icon" title="My Tasks" onclick="wfTab(this,'tasks')"><span class="nav-symbol nav-tasks"></span></div>
           <div class="sidebar-divider"></div>
           <div class="sidebar-icon" title="Payments" onclick="wfTab(this,'payments')"><span class="nav-symbol nav-payments"></span></div>
@@ -1935,7 +1959,10 @@
             </div>
 
             <!-- Area tasks -->
-            <div class="sec-div"><span>Opportunities near your location</span></div>
+            <div class="section-line">
+              <div class="section-line-title">Opportunities near your location</div>
+              <button class="view-all-btn" onclick="event.stopPropagation(); setWfTab('opportunities')">View All</button>
+            </div>
             <div class="area-task task-clickable" onclick="openTask('t1')">
               <div class="area-task-icon" style="background:rgba(59,111,255,0.15)">📡</div>
               <div class="area-task-info">
@@ -1974,6 +2001,13 @@
                 <a href="https://maps.google.com" target="_blank" style="padding:6px 12px;border-radius:8px;background:rgba(0,195,122,0.15);color:var(--green);font-size:10px;font-weight:600;text-decoration:none;border:1px solid rgba(0,195,122,0.25)">📍 Maps</a>
               </div>
             </div>
+          </div>
+
+          <!-- OPPORTUNITIES TAB -->
+          <div id="wf-opportunities" style="display:none">
+            <div class="section-title"><span class="dot" style="background:var(--green)"></span>Opportunities</div>
+            <div class="section-sub">Available task opportunities near your location.</div>
+            <div id="wfOpportunityList"></div>
           </div>
 
           <!-- TASKS TAB -->
@@ -2190,6 +2224,7 @@ function applyForTask(event, taskId) {
   appliedTaskState[taskId] = 'pending';
   saveAppliedTaskState();
   renderDashboardTaskSummary();
+  renderOpportunityList();
   renderTaskRows('all');
   renderAdminAppliedTasks();
 }
@@ -2199,6 +2234,7 @@ function verifyAppliedTask(taskId, approved) {
   appliedTaskState[taskId] = approved ? 'verified' : 'rejected';
   saveAppliedTaskState();
   renderDashboardTaskSummary();
+  renderOpportunityList();
   renderTaskRows('all');
   renderAdminAppliedTasks();
 }
@@ -2711,30 +2747,23 @@ function renderAdminWorkforceProfile() {
   `;
 }
 
-function renderDashboardTaskSummary() {
-  const taskIds = ['t1', 't2', 't3'];
-  const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away' };
-  const iconByTask = { t1: '&#128225;', t2: '&#9889;', t3: '&#128268;' };
+function renderOpportunityCard(taskId, task, distanceLabel) {
+  const assignor = task.contactName.split('(')[0].trim();
+  const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
+  const iconByTask = { t1: '&#128225;', t2: '&#9889;', t3: '&#128268;', t4: '&#128736;' };
   const bgByTask = {
     t1: 'rgba(59,111,255,0.15)',
     t2: 'rgba(0,195,122,0.15)',
-    t3: 'rgba(255,214,0,0.15)'
+    t3: 'rgba(255,214,0,0.15)',
+    t4: 'rgba(255,122,0,0.15)'
   };
 
-  document.querySelectorAll('#wf-home .area-task').forEach((card, index) => {
-    const taskId = taskIds[index];
-    const task = TASKS[taskId];
-    if (!task) return;
-
-    const assignor = task.contactName.split('(')[0].trim();
-    const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
-
-    card.setAttribute('onclick', `openTask('${taskId}')`);
-    card.innerHTML = `
-      <div class="area-task-icon" style="background:${bgByTask[taskId]}">${iconByTask[taskId]}</div>
+  return `
+    <div class="area-task task-clickable" onclick="openTask('${taskId}')">
+      <div class="area-task-icon" style="background:${bgByTask[taskId] || 'rgba(21,112,239,0.12)'}">${iconByTask[taskId] || '&#128203;'}</div>
       <div class="area-task-info">
         <div class="area-task-name">${task.title}</div>
-        <div class="area-task-meta">${task.project} &bull; ${distanceByTask[taskId]} &bull; ${task.statusLabel}</div>
+        <div class="area-task-meta">${task.project} &bull; ${distanceLabel} &bull; ${task.statusLabel}</div>
         <div class="task-detail-grid">
           <div class="task-detail"><div class="task-detail-label">Address</div><div class="task-detail-value">${shortAddress}</div></div>
           <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value task-date-value">${task.dueDate}</div></div>
@@ -2750,7 +2779,30 @@ function renderDashboardTaskSummary() {
           ${renderTaskApplyButton(taskId)}
         </div>
       </div>
-    `;
+    </div>
+  `;
+}
+
+function renderOpportunityList() {
+  const list = document.getElementById('wfOpportunityList');
+  if (!list) return;
+  const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away', t4: '4.1km away' };
+  list.innerHTML = Object.entries(TASKS)
+    .map(([taskId, task]) => renderOpportunityCard(taskId, task, distanceByTask[taskId] || 'Nearby'))
+    .join('');
+}
+
+function renderDashboardTaskSummary() {
+  const taskIds = ['t1', 't2', 't3'];
+  const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away' };
+
+  document.querySelectorAll('#wf-home .area-task').forEach((card, index) => {
+    const taskId = taskIds[index];
+    const task = TASKS[taskId];
+    if (!task) return;
+
+    card.setAttribute('onclick', `openTask('${taskId}')`);
+    card.outerHTML = renderOpportunityCard(taskId, task, distanceByTask[taskId]);
   });
 
   const upcoming = document.querySelector('#wf-home .card.task-clickable');
@@ -2784,6 +2836,7 @@ function renderDashboardTaskSummary() {
 }
 
 renderDashboardTaskSummary();
+renderOpportunityList();
 renderTaskRows('all');
 renderProfileDetails(false);
 renderAdminAppliedTasks();
