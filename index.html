@@ -611,6 +611,60 @@
     display:grid;
     gap:10px;
   }
+  .opportunity-filters {
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr)) auto;
+    gap:10px;
+    align-items:end;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:rgba(255,255,255,0.04);
+    margin-bottom:12px;
+  }
+  .filter-field {
+    min-width:0;
+  }
+  .filter-field label {
+    display:block;
+    font-size:9px;
+    font-weight:800;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-bottom:5px;
+  }
+  .filter-field input {
+    width:100%;
+    height:34px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:rgba(255,255,255,0.08);
+    color:var(--text);
+    padding:0 10px;
+    font-size:11px;
+    outline:none;
+  }
+  .filter-field input:focus {
+    border-color:rgba(21,112,239,0.6);
+    box-shadow:0 0 0 3px rgba(21,112,239,0.12);
+  }
+  .clear-filter-btn {
+    height:34px;
+    padding:0 14px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,0.08);
+    color:var(--text);
+    font-size:10px;
+    font-weight:800;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .clear-filter-btn:hover {
+    border-color:rgba(21,112,239,0.45);
+    color:var(--blue);
+  }
   .my-task-card {
     align-items:flex-start;
     margin-bottom:0;
@@ -2054,6 +2108,33 @@
           <div id="wf-opportunities" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Opportunities</div>
             <div class="section-sub">Available task opportunities near your location.</div>
+            <div class="opportunity-filters">
+              <div class="filter-field">
+                <label for="oppShopFilter">Shop Name</label>
+                <input id="oppShopFilter" type="search" placeholder="Search shop or task" oninput="renderOpportunityList()">
+              </div>
+              <div class="filter-field">
+                <label for="oppLocationFilter">Location</label>
+                <input id="oppLocationFilter" type="search" placeholder="Area or address" oninput="renderOpportunityList()">
+              </div>
+              <div class="filter-field">
+                <label for="oppProjectFilter">Project ID</label>
+                <input id="oppProjectFilter" type="search" placeholder="TASK-2024..." oninput="renderOpportunityList()">
+              </div>
+              <div class="filter-field">
+                <label for="oppCityFilter">City</label>
+                <input id="oppCityFilter" type="search" placeholder="City" oninput="renderOpportunityList()">
+              </div>
+              <div class="filter-field">
+                <label for="oppStateFilter">State</label>
+                <input id="oppStateFilter" type="search" placeholder="State" oninput="renderOpportunityList()">
+              </div>
+              <div class="filter-field">
+                <label for="oppDateFilter">Date</label>
+                <input id="oppDateFilter" type="date" onchange="renderOpportunityList()">
+              </div>
+              <button class="clear-filter-btn" type="button" onclick="clearOpportunityFilters()">Clear Filter</button>
+            </div>
             <div id="wfOpportunityList"></div>
           </div>
 
@@ -2940,9 +3021,58 @@ function renderOpportunityList() {
   const list = document.getElementById('wfOpportunityList');
   if (!list) return;
   const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away', t4: '4.1km away' };
-  list.innerHTML = Object.entries(TASKS)
+  const filters = getOpportunityFilters();
+  const entries = Object.entries(TASKS).filter(([, task]) => matchesOpportunityFilters(task, filters));
+
+  list.innerHTML = entries.length ? entries
     .map(([taskId, task]) => renderOpportunityCard(taskId, task, distanceByTask[taskId] || 'Nearby'))
-    .join('');
+    .join('') : `<div class="empty-task-card">No opportunities match these filters.</div>`;
+}
+
+function getOpportunityFilters() {
+  const value = id => (document.getElementById(id)?.value || '').trim().toLowerCase();
+  return {
+    shop: value('oppShopFilter'),
+    location: value('oppLocationFilter'),
+    projectId: value('oppProjectFilter'),
+    city: value('oppCityFilter'),
+    state: value('oppStateFilter'),
+    date: (document.getElementById('oppDateFilter')?.value || '').trim()
+  };
+}
+
+function taskDateToInputValue(dateText) {
+  const date = new Date(dateText);
+  if (Number.isNaN(date.getTime())) return '';
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function matchesOpportunityFilters(task, filters) {
+  const searchableShop = `${task.title} ${task.contactName} ${task.description}`.toLowerCase();
+  const searchableLocation = `${task.address} ${task.mapsUrl}`.toLowerCase();
+  const searchableProject = `${task.id} ${task.project}`.toLowerCase();
+  const addressParts = task.address.split(',').map(part => part.trim().toLowerCase());
+  const cityText = addressParts.join(' ');
+  const stateText = task.address.toLowerCase();
+
+  if (filters.shop && !searchableShop.includes(filters.shop)) return false;
+  if (filters.location && !searchableLocation.includes(filters.location)) return false;
+  if (filters.projectId && !searchableProject.includes(filters.projectId)) return false;
+  if (filters.city && !cityText.includes(filters.city)) return false;
+  if (filters.state && !stateText.includes(filters.state)) return false;
+  if (filters.date && taskDateToInputValue(task.dueDate) !== filters.date) return false;
+  return true;
+}
+
+function clearOpportunityFilters() {
+  ['oppShopFilter', 'oppLocationFilter', 'oppProjectFilter', 'oppCityFilter', 'oppStateFilter', 'oppDateFilter'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) input.value = '';
+  });
+  renderOpportunityList();
 }
 
 function renderDashboardTaskSummary() {
@@ -3367,6 +3497,12 @@ function submitQuestionnaire(btn, sc) {
     .task-detail-grid {
       grid-template-columns:repeat(3,minmax(0,1fr)) !important;
     }
+    .opportunity-filters {
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .clear-filter-btn {
+      grid-column:auto;
+    }
     .area-task {
       gap:12px;
     }
@@ -3394,6 +3530,12 @@ function submitQuestionnaire(btn, sc) {
     }
     .task-detail-grid {
       grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    }
+    .opportunity-filters {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .clear-filter-btn {
+      grid-column:1 / -1;
     }
     .area-task {
       align-items:flex-start;
@@ -3508,6 +3650,15 @@ function submitQuestionnaire(btn, sc) {
     .task-detail-grid {
       grid-template-columns:1fr !important;
     }
+    .opportunity-filters {
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+      padding:10px;
+    }
+    .clear-filter-btn {
+      grid-column:1 / -1;
+      width:100%;
+    }
     .task-action-stack {
       grid-column:1 / -1;
       width:100%;
@@ -3584,6 +3735,9 @@ function submitQuestionnaire(btn, sc) {
       width:100%;
     }
     .area-task {
+      grid-template-columns:1fr;
+    }
+    .opportunity-filters {
       grid-template-columns:1fr;
     }
     .upcoming-task-title {
