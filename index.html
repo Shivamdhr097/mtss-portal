@@ -1478,9 +1478,11 @@
     background:#fff;
     border-bottom:1px solid #eaecf0;
     overflow:visible;
-    position:sticky;
+    position:fixed;
     top:0;
-    z-index:90;
+    left:0;
+    right:0;
+    z-index:120;
     box-shadow:none;
   }
   .panel-header::before { display:none; }
@@ -1506,12 +1508,13 @@
     min-height:calc(100vh - 65px);
     background:#f9fafb;
     overflow:visible;
+    padding-top:65px;
   }
   .sidebar {
     width:80px;
     position:fixed;
     left:0;
-    top:0;
+    top:65px;
     bottom:0;
     z-index:100;
     background:#fff;
@@ -1792,10 +1795,16 @@
       height:auto;
       min-height:58px;
       padding:12px 14px;
-      position:relative;
-      top:auto;
+      position:sticky;
+      top:0;
+      left:auto;
+      right:auto;
+      z-index:120;
     }
-    .panel-body { min-height:auto; }
+    .panel-body {
+      min-height:auto;
+      padding-top:0;
+    }
     .sidebar {
       position:relative;
       left:auto;
