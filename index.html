@@ -612,30 +612,18 @@
     gap:10px;
   }
   .opportunity-filters {
-    display:grid;
-    grid-template-columns:repeat(6,minmax(0,1fr)) auto;
+    display:flex;
     gap:10px;
-    align-items:end;
-    padding:12px;
+    align-items:center;
+    padding:8px;
     border:1px solid var(--border);
     border-radius:10px;
     background:rgba(255,255,255,0.04);
     margin-bottom:12px;
   }
-  .filter-field {
-    min-width:0;
-  }
-  .filter-field label {
-    display:block;
-    font-size:9px;
-    font-weight:800;
-    color:var(--muted);
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    margin-bottom:5px;
-  }
-  .filter-field input {
-    width:100%;
+  .single-filter-bar input {
+    flex:1 1 0;
+    min-width:92px;
     height:34px;
     border:1px solid var(--border);
     border-radius:8px;
@@ -645,7 +633,7 @@
     font-size:11px;
     outline:none;
   }
-  .filter-field input:focus {
+  .single-filter-bar input:focus {
     border-color:rgba(21,112,239,0.6);
     box-shadow:0 0 0 3px rgba(21,112,239,0.12);
   }
@@ -2108,31 +2096,13 @@
           <div id="wf-opportunities" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Opportunities</div>
             <div class="section-sub">Available task opportunities near your location.</div>
-            <div class="opportunity-filters">
-              <div class="filter-field">
-                <label for="oppShopFilter">Shop Name</label>
-                <input id="oppShopFilter" type="search" placeholder="Search shop or task" oninput="renderOpportunityList()">
-              </div>
-              <div class="filter-field">
-                <label for="oppLocationFilter">Location</label>
-                <input id="oppLocationFilter" type="search" placeholder="Area or address" oninput="renderOpportunityList()">
-              </div>
-              <div class="filter-field">
-                <label for="oppProjectFilter">Project ID</label>
-                <input id="oppProjectFilter" type="search" placeholder="TASK-2024..." oninput="renderOpportunityList()">
-              </div>
-              <div class="filter-field">
-                <label for="oppCityFilter">City</label>
-                <input id="oppCityFilter" type="search" placeholder="City" oninput="renderOpportunityList()">
-              </div>
-              <div class="filter-field">
-                <label for="oppStateFilter">State</label>
-                <input id="oppStateFilter" type="search" placeholder="State" oninput="renderOpportunityList()">
-              </div>
-              <div class="filter-field">
-                <label for="oppDateFilter">Date</label>
-                <input id="oppDateFilter" type="date" onchange="renderOpportunityList()">
-              </div>
+            <div class="opportunity-filters single-filter-bar">
+              <input id="oppShopFilter" type="search" placeholder="Shop or task" aria-label="Shop name" oninput="renderOpportunityList()">
+              <input id="oppLocationFilter" type="search" placeholder="Location" aria-label="Location" oninput="renderOpportunityList()">
+              <input id="oppProjectFilter" type="search" placeholder="Project ID" aria-label="Project ID" oninput="renderOpportunityList()">
+              <input id="oppCityFilter" type="search" placeholder="City" aria-label="City" oninput="renderOpportunityList()">
+              <input id="oppStateFilter" type="search" placeholder="State" aria-label="State" oninput="renderOpportunityList()">
+              <input id="oppDateFilter" type="date" aria-label="Date" onchange="renderOpportunityList()">
               <button class="clear-filter-btn" type="button" onclick="clearOpportunityFilters()">Clear Filter</button>
             </div>
             <div id="wfOpportunityList"></div>
@@ -3498,10 +3468,7 @@ function submitQuestionnaire(btn, sc) {
       grid-template-columns:repeat(3,minmax(0,1fr)) !important;
     }
     .opportunity-filters {
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .clear-filter-btn {
-      grid-column:auto;
+      flex-wrap:wrap;
     }
     .area-task {
       gap:12px;
@@ -3532,10 +3499,10 @@ function submitQuestionnaire(btn, sc) {
       grid-template-columns:repeat(2,minmax(0,1fr)) !important;
     }
     .opportunity-filters {
-      grid-template-columns:repeat(2,minmax(0,1fr));
+      flex-wrap:wrap;
     }
-    .clear-filter-btn {
-      grid-column:1 / -1;
+    .single-filter-bar input {
+      flex-basis:calc(50% - 5px);
     }
     .area-task {
       align-items:flex-start;
@@ -3651,12 +3618,14 @@ function submitQuestionnaire(btn, sc) {
       grid-template-columns:1fr !important;
     }
     .opportunity-filters {
-      grid-template-columns:1fr 1fr;
+      flex-wrap:wrap;
       gap:9px;
       padding:10px;
     }
+    .single-filter-bar input {
+      flex-basis:calc(50% - 5px);
+    }
     .clear-filter-btn {
-      grid-column:1 / -1;
       width:100%;
     }
     .task-action-stack {
@@ -3738,7 +3707,11 @@ function submitQuestionnaire(btn, sc) {
       grid-template-columns:1fr;
     }
     .opportunity-filters {
-      grid-template-columns:1fr;
+      display:block;
+    }
+    .single-filter-bar input {
+      width:100%;
+      margin-bottom:8px;
     }
     .upcoming-task-title {
       font-size:14px;
