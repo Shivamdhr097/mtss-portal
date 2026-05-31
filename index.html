@@ -2326,9 +2326,9 @@
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Opportunities</div>
             <div class="section-sub">Available task opportunities near your location.</div>
             <div class="opportunity-filters single-filter-bar">
-              <input id="oppShopFilter" type="search" placeholder="Shop or task" aria-label="Shop name" oninput="renderOpportunityList()">
-              <input id="oppLocationFilter" type="search" placeholder="Location" aria-label="Location" oninput="renderOpportunityList()">
-              <input id="oppProjectFilter" type="search" placeholder="Project ID" aria-label="Project ID" oninput="renderOpportunityList()">
+              <input id="oppShopFilter" type="search" placeholder="Shop or task" aria-label="Shop name" oninput="scheduleOpportunitySearch()">
+              <input id="oppLocationFilter" type="search" placeholder="Location" aria-label="Location" oninput="scheduleOpportunitySearch()">
+              <input id="oppProjectFilter" type="search" placeholder="Project ID" aria-label="Project ID" oninput="scheduleOpportunitySearch()">
               <select id="oppCityFilter" aria-label="City" onchange="renderOpportunityList()"></select>
               <select id="oppStateFilter" aria-label="State" onchange="renderOpportunityList()"></select>
               <input id="oppDateFilter" type="date" aria-label="Date" onchange="renderOpportunityList()">
@@ -2519,6 +2519,8 @@ function approveLead(btn) {
 const appliedTaskState = JSON.parse(localStorage.getItem('mtssAppliedTasks') || '{}');
 let currentTaskId = null;
 let currentMTab = 0;
+let opportunityRenderTimer = 0;
+let firebasePortalLoadStarted = false;
 
 function saveAppliedTaskState() {
   localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
@@ -2805,7 +2807,7 @@ function renderPayoutBreakdown(task) {
       </div>
       <div style="grid-column:1 / -1;padding:12px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);">
         <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">Total Expense</div>
-        <div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--yellow);">${formatAmount(payout.base + payout.special)}</div>
+        <div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--green);">${formatAmount(payout.base + payout.special)}</div>
       </div>
     </div>
   `;
@@ -3116,6 +3118,8 @@ async function saveProfileToFirebase() {
 }
 
 async function loadFirebasePortalData() {
+  if (firebasePortalLoadStarted) return;
+  firebasePortalLoadStarted = true;
   const services = await waitForFirebaseServices(7000);
   if (!services) return;
 
@@ -3147,6 +3151,18 @@ async function loadFirebasePortalData() {
 }
 
 window.mtssLoadFirebasePortalData = loadFirebasePortalData;
+
+function runWhenIdle(callback) {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(callback, { timeout: 2500 });
+  } else {
+    setTimeout(callback, 600);
+  }
+}
+
+function scheduleDeferredFirebaseLoad() {
+  runWhenIdle(() => loadFirebasePortalData());
+}
 
 async function loadGithubPortalData() {
   try {
@@ -3573,6 +3589,11 @@ function clearOpportunityFilters() {
   renderOpportunityList();
 }
 
+function scheduleOpportunitySearch() {
+  clearTimeout(opportunityRenderTimer);
+  opportunityRenderTimer = setTimeout(renderOpportunityList, 180);
+}
+
 function renderDashboardTaskSummary() {
   const taskIds = ['t1', 't2', 't3'];
   const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away' };
@@ -3623,7 +3644,7 @@ updatePendingAuditCount();
 renderProfileDetails(false);
 renderAdminAppliedTasks();
 loadGithubPortalData();
-loadFirebasePortalData();
+scheduleDeferredFirebaseLoad();
 if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
   showPortal(sessionStorage.getItem('mtssRole') || 'wf');
 } else {
