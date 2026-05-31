@@ -1205,7 +1205,7 @@
   .nav-symbol {
     width:22px;
     height:22px;
-    border-radius:7px;
+    border-radius:6px;
     display:grid;
     place-items:center;
     position:relative;
@@ -1218,34 +1218,34 @@
   .nav-symbol::after {
     content:'';
     position:absolute;
-    border-radius:999px;
-    background:currentColor;
-    opacity:0.88;
+    box-sizing:border-box;
+    border-radius:3px;
+    border-color:currentColor;
+    background:transparent;
+    opacity:0.95;
   }
-  .nav-home::before { width:18px; height:2px; transform:rotate(-38deg); top:6px; left:2px; }
-  .nav-home::after { width:18px; height:2px; transform:rotate(38deg); top:6px; right:2px; }
-  .nav-tasks { border:2px solid currentColor; }
-  .nav-tasks::before { width:9px; height:2px; transform:rotate(-45deg); left:8px; top:12px; }
-  .nav-tasks::after { width:5px; height:2px; transform:rotate(45deg); left:5px; top:13px; }
-  .nav-leads::before { width:18px; height:18px; border:2px solid currentColor; background:transparent; opacity:1; inset:2px; }
-  .nav-leads::after { width:7px; height:7px; inset:7px; }
-  .nav-projects { border:2px solid currentColor; border-radius:5px; }
-  .nav-projects::before { width:10px; height:2px; top:5px; left:2px; }
-  .nav-projects::after { display:none; }
-  .nav-payments::before { width:18px; height:12px; border:2px solid currentColor; background:transparent; opacity:1; inset:4px 2px auto; }
-  .nav-payments::after { width:5px; height:5px; right:4px; top:8px; }
-  .nav-performance::before { width:3px; height:16px; left:4px; bottom:2px; }
-  .nav-performance::after { width:14px; height:3px; left:6px; top:7px; transform:rotate(-35deg); }
-  .nav-profile::before { width:8px; height:8px; top:2px; left:7px; }
-  .nav-profile::after { width:18px; height:9px; bottom:2px; left:2px; border-radius:9px 9px 4px 4px; }
-  .nav-export::before { width:14px; height:2px; left:4px; bottom:4px; }
-  .nav-export::after { width:2px; height:15px; left:10px; top:3px; box-shadow:-4px 5px 0 -1px currentColor, 4px 5px 0 -1px currentColor; }
-  .nav-dashboard::before { width:5px; height:16px; left:3px; bottom:2px; }
-  .nav-dashboard::after { width:5px; height:11px; left:10px; bottom:2px; box-shadow:7px -5px 0 0 currentColor; }
-  .nav-workforce::before { width:7px; height:7px; left:2px; top:4px; box-shadow:11px 0 0 0 currentColor; }
-  .nav-workforce::after { width:20px; height:9px; left:1px; bottom:3px; border-radius:8px 8px 4px 4px; }
-  .nav-import::before { width:2px; height:15px; left:10px; top:2px; }
-  .nav-import::after { width:14px; height:2px; left:4px; bottom:4px; box-shadow:-4px -5px 0 -1px currentColor, 4px -5px 0 -1px currentColor; }
+  .nav-home::before { width:18px; height:14px; left:2px; top:6px; border:2px solid currentColor; border-top:0; }
+  .nav-home::after { width:14px; height:14px; left:4px; top:1px; border-left:2px solid currentColor; border-top:2px solid currentColor; transform:rotate(45deg); border-radius:2px; }
+  .nav-tasks::before { width:16px; height:18px; left:3px; top:2px; border:2px solid currentColor; }
+  .nav-tasks::after { width:9px; height:5px; left:7px; top:9px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(-45deg); border-radius:0; }
+  .nav-leads::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-radius:50%; }
+  .nav-leads::after { width:8px; height:8px; left:7px; top:7px; border:2px solid currentColor; border-radius:50%; }
+  .nav-projects::before { width:18px; height:14px; left:2px; top:6px; border:2px solid currentColor; }
+  .nav-projects::after { width:8px; height:5px; left:4px; top:3px; border:2px solid currentColor; border-bottom:0; }
+  .nav-payments::before { width:18px; height:14px; left:2px; top:5px; border:2px solid currentColor; }
+  .nav-payments::after { width:6px; height:6px; right:4px; top:9px; border:2px solid currentColor; border-radius:50%; }
+  .nav-performance::before { width:16px; height:15px; left:3px; top:4px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; border-radius:0; }
+  .nav-performance::after { width:13px; height:8px; left:6px; top:7px; border-left:2px solid currentColor; border-top:2px solid currentColor; transform:skew(-24deg); border-radius:0; }
+  .nav-profile::before { width:8px; height:8px; top:2px; left:7px; border:2px solid currentColor; border-radius:50%; }
+  .nav-profile::after { width:18px; height:9px; bottom:2px; left:2px; border:2px solid currentColor; border-radius:9px 9px 4px 4px; }
+  .nav-export::before { width:16px; height:14px; left:3px; top:6px; border:2px solid currentColor; }
+  .nav-export::after { width:8px; height:8px; left:7px; top:2px; border-left:2px solid currentColor; border-top:2px solid currentColor; transform:rotate(45deg); border-radius:0; }
+  .nav-dashboard::before { width:8px; height:8px; left:2px; top:2px; border:2px solid currentColor; box-shadow:10px 0 0 -2px currentColor, 0 10px 0 -2px currentColor, 10px 10px 0 -2px currentColor; }
+  .nav-dashboard::after { display:none; }
+  .nav-workforce::before { width:7px; height:7px; left:3px; top:3px; border:2px solid currentColor; border-radius:50%; box-shadow:10px 0 0 -1px currentColor; }
+  .nav-workforce::after { width:18px; height:9px; left:2px; bottom:3px; border:2px solid currentColor; border-radius:9px 9px 4px 4px; }
+  .nav-import::before { width:16px; height:14px; left:3px; top:6px; border:2px solid currentColor; }
+  .nav-import::after { width:8px; height:8px; left:7px; top:2px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); border-radius:0; }
   .sidebar-icon:hover { background:#f2f4f7; color:#344054; }
   .wf .sidebar-icon.active,
   .admin .sidebar-icon.active {
@@ -2211,12 +2211,12 @@ function saveAppliedTaskState() {
 function renderTaskApplyButton(taskId) {
   const state = appliedTaskState[taskId];
   const cfg = state === 'pending'
-    ? { label: 'Pending admin verification', cls: 'pending', disabled: true }
+    ? { label: 'Pending', cls: 'pending', disabled: true }
     : state === 'verified'
       ? { label: 'Verified by Admin', cls: 'verified', disabled: true }
       : state === 'rejected'
         ? { label: 'Reapply Task', cls: 'rejected', disabled: false }
-        : { label: 'Apply Task', cls: '', disabled: false };
+        : { label: 'Task', cls: '', disabled: false };
 
   return `<button class="apply-btn wf-btn task-apply-btn ${cfg.cls}" onclick="applyForTask(event,'${taskId}')" ${cfg.disabled ? 'disabled' : ''}>${cfg.label}</button>`;
 }
