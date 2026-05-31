@@ -864,6 +864,338 @@
     .mtab { flex:0 0 auto; }
   }
 
+  /* Mirats-style operations dashboard skin */
+  :root {
+    --red:    #d92d20;
+    --orange: #dc6803;
+    --yellow: #b54708;
+    --green:  #079455;
+    --teal:   #0e9384;
+    --blue:   #1570ef;
+    --purple: #6941c6;
+    --pink:   #c11574;
+    --dark:   #f9fafb;
+    --dark2:  #ffffff;
+    --dark3:  #f2f4f7;
+    --card:   #ffffff;
+    --border: #eaecf0;
+    --text:   #101828;
+    --muted:  #667085;
+    --font-head: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  body {
+    background:#f9fafb;
+    color:var(--text);
+  }
+  body::before,
+  body::after,
+  .orb { display:none; }
+
+  .auth-card,
+  .topnav,
+  .panel,
+  .panel-header,
+  .sidebar,
+  .card,
+  .stat-card,
+  .hs-card,
+  .area-task,
+  .lead-card,
+  .profile-card {
+    box-shadow:0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.1);
+  }
+
+  .auth-screen { background:#f9fafb; }
+  .auth-card {
+    background:#fff;
+    border-color:#eaecf0;
+    border-radius:8px;
+  }
+  .auth-tabs {
+    background:#f2f4f7;
+    border-color:#eaecf0;
+    border-radius:8px;
+  }
+  .auth-tab { border-radius:6px; }
+  .auth-tab.active,
+  .apply-btn.wf-btn {
+    background:#1570ef;
+    color:#fff;
+  }
+  .apply-btn.admin-btn {
+    background:#1570ef;
+    color:#fff;
+  }
+  .auth-field input,
+  .profile-field input,
+  textarea {
+    background:#fff !important;
+    border-color:#d0d5dd !important;
+    color:#101828 !important;
+  }
+
+  .topnav {
+    padding:12px 18px;
+    background:#fff;
+    border-bottom:1px solid #eaecf0;
+    backdrop-filter:none;
+  }
+  .topnav .logo {
+    color:#101828;
+    background:none;
+    -webkit-text-fill-color:#101828;
+    font-size:18px;
+    letter-spacing:0;
+  }
+  .topnav .logo span { -webkit-text-fill-color:#1570ef; color:#1570ef; }
+
+  .portals { background:#f9fafb; }
+  .panel {
+    max-width:100%;
+    background:#f9fafb;
+    border-right:none;
+  }
+  .panel-header {
+    padding:13px 16px;
+    background:#fff;
+    border-bottom:1px solid #eaecf0;
+    overflow:visible;
+  }
+  .panel-header::before { display:none; }
+  .panel-title {
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:0;
+  }
+  .panel-badge {
+    border-radius:6px;
+    font-size:10px;
+    background:#eff8ff !important;
+    color:#1570ef !important;
+    border:1px solid #b2ddff !important;
+  }
+  .avatar.wf,
+  .profile-avatar {
+    background:#1570ef;
+    color:#fff;
+  }
+
+  .panel-body {
+    min-height:calc(100vh - 112px);
+    background:#f9fafb;
+  }
+  .sidebar {
+    width:80px;
+    background:#fff;
+    border-right:1px solid #eaecf0;
+    padding:18px 10px;
+    gap:7px;
+  }
+  .sidebar-icon {
+    width:44px;
+    height:44px;
+    border-radius:8px;
+    color:#667085;
+    font-size:17px;
+  }
+  .sidebar-icon:hover { background:#f2f4f7; color:#344054; }
+  .wf .sidebar-icon.active,
+  .admin .sidebar-icon.active {
+    background:#eaf3ff;
+    color:#1570ef;
+  }
+  .wf .sidebar-icon.active::before,
+  .admin .sidebar-icon.active::before {
+    background:#1570ef;
+    left:-10px;
+  }
+  .sidebar-divider { background:#eaecf0; }
+
+  .content {
+    padding:24px;
+    background:#f9fafb;
+    max-height:calc(100vh - 112px);
+  }
+  .section-title {
+    margin-bottom:6px;
+    font-size:22px;
+    letter-spacing:0;
+  }
+  .section-title .dot { display:none; }
+  .section-sub {
+    margin-bottom:22px;
+    color:#667085;
+    font-size:13px;
+  }
+
+  .home-stats {
+    grid-template-columns:repeat(5,minmax(150px,1fr));
+    gap:14px;
+    margin-bottom:24px;
+  }
+  .hs-card,
+  .stat-card {
+    min-height:96px;
+    padding:16px;
+    border-radius:8px;
+    background:#fff;
+    border:1px solid #eaecf0;
+    text-align:left;
+  }
+  .hs-card:hover,
+  .stat-card:hover,
+  .area-task:hover,
+  .lead-card:hover {
+    transform:none;
+    background:#fff;
+    border-color:#d0d5dd;
+    box-shadow:0 2px 8px rgba(16,24,40,0.08);
+  }
+  .hs-card .hs-icon {
+    display:none;
+  }
+  .hs-card .hs-val,
+  .stat-value {
+    font-size:24px;
+    margin-top:8px;
+  }
+  .hs-card .hs-lbl,
+  .stat-label {
+    color:#667085;
+    font-size:12px;
+    letter-spacing:0;
+    text-transform:none;
+  }
+
+  .sec-div {
+    margin:22px 0 12px;
+  }
+  .sec-div::before,
+  .sec-div::after { display:none; }
+  .sec-div span {
+    color:#101828;
+    font-size:16px;
+    letter-spacing:0;
+    text-transform:none;
+  }
+
+  .area-task {
+    align-items:flex-start;
+    gap:14px;
+    padding:18px;
+    margin-bottom:14px;
+    border-radius:8px;
+    background:#fff;
+    border:1px solid #eaecf0;
+  }
+  .area-task-icon {
+    width:40px;
+    height:40px;
+    border-radius:8px;
+    background:#eff8ff !important;
+    color:#1570ef;
+  }
+  .area-task-name {
+    font-size:15px;
+    font-weight:700;
+    color:#101828;
+    margin-bottom:4px;
+  }
+  .area-task-meta {
+    font-size:12px;
+    color:#667085;
+    margin-bottom:8px;
+  }
+  .task-detail-grid {
+    grid-template-columns:repeat(4,minmax(120px,1fr));
+    gap:8px;
+  }
+  .task-detail {
+    background:#f9fafb;
+    border:1px solid #eaecf0;
+    border-radius:8px;
+  }
+  .task-detail-label {
+    color:#667085;
+    letter-spacing:0;
+  }
+  .task-detail-value { color:#344054; }
+  .task-payout {
+    min-width:112px;
+    padding:10px 12px;
+    border-radius:8px;
+    background:#fffbeb;
+    border:1px solid #fedf89;
+  }
+  .task-payout-value { color:#b54708; }
+  .task-payout-label { color:#667085; }
+  .apply-btn {
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:12px;
+    letter-spacing:0;
+  }
+
+  .card,
+  .lead-card,
+  .profile-card {
+    background:#fff;
+    border:1px solid #eaecf0;
+    border-radius:8px;
+  }
+  .data-table {
+    background:#fff;
+    border:1px solid #eaecf0;
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .data-table th {
+    background:#f9fafb;
+    color:#667085;
+    border-bottom:1px solid #eaecf0;
+  }
+  .data-table td {
+    border-bottom:1px solid #eaecf0;
+    color:#344054;
+  }
+  .data-table tr:hover td { background:#f9fafb; }
+  .badge { border-radius:999px; }
+  .progress-bar { background:#eaecf0; }
+  .logout-btn {
+    border-radius:8px;
+    background:#fff;
+  }
+
+  @media (max-width: 1180px) {
+    .home-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .task-detail-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  }
+
+  @media (max-width: 760px) {
+    .topnav { padding:12px 14px; }
+    .panel-header { padding:12px 14px; }
+    .panel-body { min-height:auto; }
+    .sidebar {
+      width:100%;
+      background:#fff;
+      border-bottom:1px solid #eaecf0;
+      padding:8px 10px;
+    }
+    .content {
+      padding:14px;
+      max-height:none;
+    }
+    .home-stats { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .section-title { font-size:20px; }
+    .area-task { padding:14px; }
+    .task-payout {
+      padding-left:12px;
+      text-align:left;
+    }
+  }
+
   @media (max-width: 420px) {
     .auth-title { font-size:21px; }
     .panel-badge { font-size:9px; }
@@ -1279,45 +1611,45 @@
 
           <!-- HOME TAB -->
           <div id="wf-home">
-            <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>My Dashboard</div>
-            <div class="section-sub">Welcome back, Rahul 👋 — Today, May 26</div>
+            <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>Hello, Rahul</div>
+            <div class="section-sub">A clear overview of your assigned audits, payouts, and nearby opportunities.</div>
 
             <!-- 6 stat cards -->
             <div class="home-stats">
               <div class="hs-card" onclick="showTaskFilter('review')" style="border-top:2px solid var(--blue)">
                 <div class="hs-icon">🔍</div>
                 <div class="hs-val" style="color:var(--blue)">8</div>
-                <div class="hs-lbl">Under Review</div>
+                <div class="hs-lbl">In Review Audits</div>
               </div>
               <div class="hs-card" onclick="showTaskFilter('rejected')" style="border-top:2px solid var(--red)">
                 <div class="hs-icon">❌</div>
                 <div class="hs-val" style="color:var(--red)">3</div>
-                <div class="hs-lbl">Rejected</div>
+                <div class="hs-lbl">Rejected Audits</div>
               </div>
               <div class="hs-card" onclick="showTaskFilter('approved')" style="border-top:2px solid var(--green)">
                 <div class="hs-icon">✅</div>
                 <div class="hs-val" style="color:var(--green)">42</div>
-                <div class="hs-lbl">Completed</div>
+                <div class="hs-lbl">Completed Audits</div>
               </div>
               <div class="hs-card" onclick="showTaskFilter('inprogress')" style="border-top:2px solid var(--purple)">
-                <div class="hs-icon">âš¡</div>
+                <div class="hs-icon">In</div>
                 <div class="hs-val" style="color:var(--purple)">5</div>
-                <div class="hs-lbl">In Process</div>
+                <div class="hs-lbl">Active Audits</div>
               </div>
               <div class="hs-card" onclick="showPaymentFilter('paid')" style="border-top:2px solid var(--yellow)">
                 <div class="hs-icon">💰</div>
                 <div class="hs-val" style="color:var(--yellow)">₹84K</div>
-                <div class="hs-lbl">Total Earned</div>
+                <div class="hs-lbl">Earned Amount</div>
               </div>
               <div class="hs-card" onclick="showPaymentFilter('ready')" style="border-top:2px solid var(--teal)">
                 <div class="hs-icon">🏦</div>
                 <div class="hs-val" style="color:var(--teal)">₹6.2K</div>
-                <div class="hs-lbl">Ready to Pay</div>
+                <div class="hs-lbl">Ready for Processing</div>
               </div>
             </div>
 
             <!-- Area tasks -->
-            <div class="sec-div"><span>Tasks in My Area (PIN: 125001)</span></div>
+            <div class="sec-div"><span>Opportunities near your location</span></div>
             <div class="area-task task-clickable" onclick="openTask('t1')">
               <div class="area-task-icon" style="background:rgba(59,111,255,0.15)">📡</div>
               <div class="area-task-info">
@@ -1334,7 +1666,7 @@
               </div>
               <button class="apply-btn wf-btn">Apply</button>
             </div>
-            <div class="area-task task-clickable" onclick="openTask('t3")">
+            <div class="area-task task-clickable" onclick="openTask('t3')">
               <div class="area-task-icon" style="background:rgba(255,214,0,0.15)">🔋</div>
               <div class="area-task-info">
                 <div class="area-task-name">EV Charging Point Survey</div>
