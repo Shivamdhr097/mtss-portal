@@ -607,6 +607,27 @@
   .area-task-info { flex:1; }
   .area-task-name { font-size:12px; font-weight:600; }
   .area-task-meta { font-size:10px; color:var(--muted); }
+  .task-card-list {
+    display:grid;
+    gap:10px;
+  }
+  .my-task-card {
+    align-items:flex-start;
+    margin-bottom:0;
+  }
+  .my-task-card .area-task-icon {
+    background:rgba(21,112,239,0.12);
+    color:var(--blue);
+  }
+  .empty-task-card {
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:rgba(255,255,255,0.03);
+    color:var(--muted);
+    text-align:center;
+    font-size:12px;
+  }
   .task-detail-grid {
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -2040,15 +2061,7 @@
           <div id="wf-tasks" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span><span id="wfTaskTitle">My Tasks</span></div>
             <div class="section-sub">58 total from joining • Filter by month</div>
-            <table class="data-table">
-              <thead><tr><th>Task</th><th>Project</th><th>Due</th><th>Status</th></tr></thead>
-              <tbody id="wfTaskRows">
-                <tr class="task-clickable" onclick="openTask('t1')"><td><div style="font-weight:600;font-size:12px">Solar Inspection #3 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">8 questions • Click to open</div></td><td><span class="tag blue">Solar Alpha</span></td><td style="font-size:11px;color:var(--muted)">May 28</td><td><span class="badge inprogress">In Process</span></td></tr>
-                <tr class="task-clickable" onclick="openTask('t2')"><td><div style="font-weight:600;font-size:12px">Meter Reading R-4 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">5 questions • Click to open</div></td><td><span class="tag green">Water Drive</span></td><td style="font-size:11px;color:var(--muted)">May 26</td><td><span class="badge review">Under Review</span></td></tr>
-                <tr class="task-clickable" onclick="openTask('t3')"><td><div style="font-weight:600;font-size:12px">Fiber Cable Check <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">3 questions • Click to open</div></td><td><span class="tag purple">Fiber Connect</span></td><td style="font-size:11px;color:var(--muted)">May 25</td><td><span class="badge approved">Completed</span></td></tr>
-                <tr class="task-clickable" onclick="openTask('t4')"><td><div style="font-weight:600;font-size:12px">Gas Leak Survey <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">6 questions • Click to open</div></td><td><span class="tag orange">Gas Infra</span></td><td style="font-size:11px;color:var(--muted)">May 22</td><td><span class="badge rejected">Rejected</span></td></tr>
-              </tbody>
-            </table>
+            <div id="wfTaskRows" class="task-card-list"></div>
           </div>
 
           <!-- PAYMENTS TAB (WF) -->
@@ -2550,24 +2563,43 @@ function renderTaskRows(statusFilter = 'all') {
   const sub = document.getElementById('wfTaskTitle').closest('.section-title').nextElementSibling;
   if (sub) sub.textContent = `${tasks.length} task${tasks.length === 1 ? '' : 's'} found - ${statusNotes[statusFilter] || statusNotes.all}`;
 
-  rows.innerHTML = tasks.length ? tasks.map(([taskId, task]) => {
-    const assignor = task.contactName.split('(')[0].trim();
-    return `
-      <tr class="task-clickable" onclick="openTask('${taskId}')">
-        <td>
-          <div style="font-weight:600;font-size:12px">${task.title} <span style="font-size:9px;color:var(--blue)">Open</span></div>
-          <div style="font-size:10px;color:var(--muted)">Address: ${task.address}</div>
-          <div style="font-size:10px;color:var(--muted)">Assigned by ${assignor} &bull; ${renderPayoutSummary(task)}</div>
-        </td>
-        <td><span class="tag ${tagClass[task.project] || 'blue'}">${task.project}</span></td>
-        <td style="font-size:11px;color:var(--muted)">${task.dueDate}</td>
-        <td><span class="badge ${task.status}">${task.statusLabel}</span></td>
-      </tr>
-    `;
-  }).join('') : `
-    <tr>
-      <td colspan="4" style="padding:18px;text-align:center;color:var(--muted)">No tasks in this status.</td>
-    </tr>
+  rows.innerHTML = tasks.length
+    ? tasks.map(([taskId, task]) => renderMyTaskCard(taskId, task, tagClass[task.project] || 'blue')).join('')
+    : `<div class="empty-task-card">No tasks in this status.</div>`;
+}
+
+function renderMyTaskCard(taskId, task, tagClassName) {
+  const assignor = task.contactName.split('(')[0].trim();
+  const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
+  const iconByStatus = {
+    inprogress: '&#9203;',
+    review: '&#128269;',
+    approved: '&#10003;',
+    rejected: '&#9888;',
+    pending: '&#128203;'
+  };
+
+  return `
+    <div class="area-task my-task-card task-clickable" onclick="openTask('${taskId}')">
+      <div class="area-task-icon">${iconByStatus[task.status] || '&#128203;'}</div>
+      <div class="area-task-info">
+        <div class="area-task-name">${task.title}</div>
+        <div class="area-task-meta"><span class="tag ${tagClassName}">${task.project}</span> &bull; ${task.statusLabel}</div>
+        <div class="task-detail-grid">
+          <div class="task-detail"><div class="task-detail-label">Address</div><div class="task-detail-value">${shortAddress}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value task-date-value">${task.dueDate}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Assigned By</div><div class="task-detail-value">${assignor}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Payout</div><div class="task-detail-value">${renderPayoutSummary(task)}</div></div>
+        </div>
+      </div>
+      <div class="task-action-stack">
+        <a class="task-map-btn" href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()">Maps</a>
+        <div class="task-bottom-actions">
+          <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Assigned Payout</div></div>
+          <span class="badge ${task.status}">${task.statusLabel}</span>
+        </div>
+      </div>
+    </div>
   `;
 }
 
