@@ -3126,7 +3126,184 @@ function submitQuestionnaire(btn, sc) {
     transition:all 0.2s;
   }
   .mtab.active { color:var(--text); border-bottom-color:var(--accent-color,var(--green)); background:#fff; }
+  @media (max-width:1366px) and (min-width:1025px) {
+    .panel-header {
+      padding-left:96px;
+      padding-right:20px;
+    }
+    .content {
+      padding:20px;
+    }
+    .home-stats {
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    }
+    .stat-grid {
+      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    }
+    .task-detail-grid {
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    }
+    .area-task {
+      gap:12px;
+    }
+  }
+  @media (max-width:1024px) and (min-width:761px) {
+    .sidebar {
+      width:68px;
+      padding:14px 8px;
+    }
+    .sidebar-icon {
+      width:42px;
+      height:42px;
+    }
+    .panel-header {
+      padding-left:88px;
+      padding-right:18px;
+    }
+    .content {
+      margin-left:68px;
+      padding:18px;
+    }
+    .home-stats,
+    .stat-grid {
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    }
+    .task-detail-grid {
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    }
+    .area-task {
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .area-task-info {
+      min-width:calc(100% - 58px);
+    }
+    .task-action-stack {
+      width:100%;
+      min-width:0;
+      padding-left:54px;
+      align-items:stretch;
+    }
+    .task-payout {
+      width:100%;
+      text-align:left;
+    }
+    .profile-form {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    #wfSlidePanel {
+      top:65px;
+      left:68px;
+    }
+  }
   @media (max-width:760px) {
+    body {
+      min-width:0;
+    }
+    .portals,
+    .panel,
+    .panel-body,
+    #wfPanel .panel-body {
+      min-height:auto;
+      overflow:visible !important;
+    }
+    .panel {
+      width:100%;
+    }
+    .panel-title {
+      font-size:15px;
+      min-width:0;
+      flex:1;
+    }
+    .panel-badge {
+      display:none;
+    }
+    .panel-logo-image {
+      width:30px;
+      height:30px;
+    }
+    .panel-header {
+      gap:8px;
+      align-items:center;
+    }
+    .panel-header > div:last-child {
+      margin-left:auto;
+    }
+    .sidebar {
+      position:sticky;
+      top:0;
+      z-index:95;
+      width:100%;
+      min-height:58px;
+      height:auto;
+      flex-direction:row;
+      align-items:center;
+      justify-content:flex-start;
+      gap:8px;
+      overflow-x:auto;
+      border-right:none;
+      border-bottom:1px solid var(--border);
+      -webkit-overflow-scrolling:touch;
+    }
+    .sidebar-icon {
+      flex:0 0 42px;
+    }
+    .content {
+      margin-left:0;
+      padding:14px;
+      width:100%;
+      overflow:visible;
+    }
+    .home-stats,
+    .stat-grid,
+    .profile-form {
+      grid-template-columns:1fr 1fr !important;
+      gap:10px;
+    }
+    .card,
+    .profile-card,
+    .area-task,
+    .lead-card {
+      border-radius:8px;
+    }
+    .area-task {
+      display:grid;
+      grid-template-columns:40px minmax(0,1fr);
+      gap:12px;
+      align-items:start;
+    }
+    .area-task-info {
+      min-width:0;
+    }
+    .task-detail-grid {
+      grid-template-columns:1fr !important;
+    }
+    .task-action-stack {
+      grid-column:1 / -1;
+      width:100%;
+      min-width:0;
+      padding-left:0;
+      align-items:stretch;
+    }
+    .task-payout {
+      width:100%;
+      text-align:left;
+      padding-left:12px;
+    }
+    .data-table {
+      display:block;
+      width:100%;
+      overflow-x:auto;
+      white-space:nowrap;
+      -webkit-overflow-scrolling:touch;
+    }
+    .profile-card {
+      flex-wrap:wrap;
+    }
+    .profile-edit {
+      margin-left:0;
+      width:100%;
+    }
     #wfSlidePanel {
       top:0;
       left:0;
@@ -3134,6 +3311,59 @@ function submitQuestionnaire(btn, sc) {
       bottom:0;
       width:auto;
       z-index:260;
+    }
+  }
+  @media (max-width:480px) {
+    .auth-screen {
+      padding:14px;
+    }
+    .panel-header {
+      padding:10px 12px;
+    }
+    .panel-title {
+      font-size:14px;
+    }
+    .content {
+      padding:12px;
+    }
+    .home-stats,
+    .stat-grid,
+    .profile-form {
+      grid-template-columns:1fr !important;
+    }
+    .hs-card,
+    .stat-card,
+    .card {
+      padding:14px;
+    }
+    .section-title {
+      font-size:18px;
+    }
+    .section-line {
+      align-items:flex-start;
+      flex-direction:column;
+    }
+    .view-all-btn {
+      width:100%;
+    }
+    .area-task {
+      grid-template-columns:1fr;
+    }
+    .area-task-icon {
+      width:36px;
+      height:36px;
+    }
+    .slide-header,
+    .slide-body {
+      padding:14px;
+    }
+    .mtab {
+      min-width:110px;
+      flex:0 0 auto;
+    }
+    .mtab-row {
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
     }
   }
 </style>
