@@ -3707,6 +3707,15 @@ function renderPane(t, idx, sc) {
       ${rejHtml}
       <div class="task-overview-text">${t.description}</div>
       ${renderWhatToDo(t)}
+      <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Task Address</div>
+      <div style="padding:12px;border-radius:12px;background:#f9fafb;border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;">
+        <span style="font-size:18px;flex-shrink:0;color:${sc};">Address</span>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12px;font-weight:700;line-height:1.5;color:#101828;">${t.address}</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">Complete field address for this task</div>
+        </div>
+        <a href="${t.mapsUrl}" target="_blank" style="padding:7px 12px;border-radius:20px;background:${sc}22;color:${sc};border:1px solid ${sc}44;font-size:10px;font-weight:700;text-decoration:none;flex-shrink:0;" onclick="event.stopPropagation()">Maps</a>
+      </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
         <div class="task-date-card"><div class="task-detail-label">Assigned</div><div class="task-date-value">${t.assignedDate}</div></div>
         <div class="task-date-card"><div class="task-detail-label">Due Date</div><div class="task-date-value">${t.dueDate}</div></div>
