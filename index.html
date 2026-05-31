@@ -2454,9 +2454,7 @@
           </div>
           <div class="mtab-row" id="slidePanelTabs">
             <button class="mtab active" onclick="switchMTab(0)">Overview</button>
-            <button class="mtab" onclick="switchMTab(1)">Location</button>
-            <button class="mtab" onclick="switchMTab(2)">Payment</button>
-            <button class="mtab" onclick="switchMTab(3)">Questionnaire</button>
+            <button class="mtab" onclick="switchMTab(1)">Questionnaire</button>
           </div>
           <div class="slide-body" id="slidePanelBody">
             <!-- dynamically filled -->
@@ -2804,6 +2802,10 @@ function renderPayoutBreakdown(task) {
         <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">Special Expense</div>
         <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--teal);">${formatAmount(payout.special)}</div>
         <div style="font-size:10px;color:var(--muted);margin-top:5px;line-height:1.45;">Reimbursement ${formatAmount(payout.reimbursement)} &bull; Travel Allowance ${formatAmount(payout.travel)}</div>
+      </div>
+      <div style="grid-column:1 / -1;padding:12px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);">
+        <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">Total Expense</div>
+        <div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:#101828;">${formatAmount(payout.base + payout.special)}</div>
       </div>
     </div>
   `;
@@ -3684,7 +3686,7 @@ function switchMTab(idx) {
   const t = TASKS[currentTaskId];
   const sc = { inprogress:'var(--purple)', review:'var(--blue)', approved:'var(--green)', rejected:'var(--red)', pending:'var(--orange)' }[t.status] || 'var(--muted)';
   document.querySelectorAll('.mtab').forEach((tb,i) => tb.classList.toggle('active', i === idx));
-  renderPane(t, idx, sc);
+  renderPane(t, idx === 1 ? 3 : idx, sc);
 }
 
 function renderPane(t, idx, sc) {
