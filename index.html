@@ -2216,7 +2216,7 @@ function renderTaskApplyButton(taskId) {
       ? { label: 'Verified by Admin', cls: 'verified', disabled: true }
       : state === 'rejected'
         ? { label: 'Reapply Task', cls: 'rejected', disabled: false }
-        : { label: 'Task', cls: '', disabled: false };
+        : { label: 'Apply', cls: '', disabled: false };
 
   return `<button class="apply-btn wf-btn task-apply-btn ${cfg.cls}" onclick="applyForTask(event,'${taskId}')" ${cfg.disabled ? 'disabled' : ''}>${cfg.label}</button>`;
 }
