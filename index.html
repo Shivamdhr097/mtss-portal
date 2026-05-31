@@ -572,6 +572,32 @@
   .task-date-card .task-detail-label {
     letter-spacing:0;
   }
+  .task-overview-text {
+    font-size:13px;
+    line-height:1.65;
+    color:#344054;
+    margin-bottom:14px;
+  }
+  .what-to-do-card {
+    padding:12px;
+    border-radius:8px;
+    background:#eff8ff;
+    border:1px solid #b2ddff;
+    margin-bottom:16px;
+  }
+  .what-to-do-title {
+    color:#1570ef;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:6px;
+  }
+  .what-to-do-list {
+    margin:0;
+    padding-left:18px;
+    color:#344054;
+    font-size:12px;
+    line-height:1.65;
+  }
   .task-payout {
     flex-shrink:0;
     min-width:78px;
@@ -1964,6 +1990,7 @@ const TASKS = {
     project: 'Solar Survey Alpha', projectColor: 'var(--blue)',
     status: 'inprogress', statusLabel: 'In Process',
     description: 'Conduct a detailed inspection of rooftop solar panels in Block B, Sector 5. Document panel condition, wiring status, tilt angle, and shading patterns. Take photographic evidence for each unit.',
+    whatToDo: ['Visit the assigned rooftop location during the task window.', 'Inspect panel condition, wiring, tilt angle, and shading.', 'Upload clear photos and complete all questionnaire answers before submission.'],
     assignedDate: 'May 20, 2025', dueDate: 'May 28, 2025',
     startTime: '10:00 AM', endTime: '1:00 PM', duration: '3 hours',
     address: 'B-12, Sector 5, Hisar, Haryana — 125001',
@@ -1988,6 +2015,7 @@ const TASKS = {
     project: 'Water Meter Drive', projectColor: 'var(--green)',
     status: 'review', statusLabel: 'Under Review',
     description: 'Record water meter readings for all residential units in Row R-4, Block C. Verify meter serial numbers, note any tampering signs, and enter all readings into the field form.',
+    whatToDo: ['Keep this task ready for admin review.', 'Check that readings, serial numbers, and access notes are complete.', 'Wait for approval or correction feedback before payout processing.'],
     assignedDate: 'May 18, 2025', dueDate: 'May 26, 2025',
     startTime: '9:00 AM', endTime: '12:00 PM', duration: '3 hours',
     address: 'Row R-4, Block C, Model Town, Hisar — 125005',
@@ -2009,6 +2037,7 @@ const TASKS = {
     project: 'Fiber Connect', projectColor: 'var(--purple)',
     status: 'approved', statusLabel: 'Completed',
     description: 'Inspect underground fiber optic cable routing from Junction Box JB-7 to JB-14 along NH-9 service road. Check for cable integrity, junction box seals, and signal test points.',
+    whatToDo: ['No further field action is required.', 'Keep proof and task notes available for records.', 'Track the payout section for payment confirmation.'],
     assignedDate: 'May 12, 2025', dueDate: 'May 25, 2025',
     startTime: '8:00 AM', endTime: '11:00 AM', duration: '3 hours',
     address: 'NH-9 Service Road, JB-7 to JB-14, Hisar — 125004',
@@ -2032,6 +2061,7 @@ const TASKS = {
     status: 'rejected', statusLabel: 'Rejected',
     rejectionReason: 'Questionnaire incomplete — Q5 and Q6 not answered. Task evidence photos missing. Please resubmit with all required fields.',
     description: 'Survey gas pipeline route in Sector 11 for potential leaks using portable gas detectors. Mark hotspots, record pressure readings at test valves, and complete the safety checklist.',
+    whatToDo: ['Review the rejection reason carefully.', 'Complete the missing questionnaire answers and attach required photos.', 'Resubmit the corrected task for admin review.'],
     assignedDate: 'May 10, 2025', dueDate: 'May 22, 2025',
     startTime: '7:30 AM', endTime: '11:00 AM', duration: '3.5 hours',
     address: 'Gas Pipeline Route, Sector 11, Hisar — 125011',
@@ -2100,6 +2130,18 @@ function renderPayoutBreakdown(task) {
         <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--teal);">${formatAmount(payout.special)}</div>
         <div style="font-size:10px;color:var(--muted);margin-top:5px;line-height:1.45;">Reimbursement ${formatAmount(payout.reimbursement)} &bull; Travel Allowance ${formatAmount(payout.travel)}</div>
       </div>
+    </div>
+  `;
+}
+
+function renderWhatToDo(task) {
+  const steps = task.whatToDo || ['Review the task details.', 'Visit the assigned location.', 'Complete the questionnaire and submit your work.'];
+  return `
+    <div class="what-to-do-card">
+      <div class="what-to-do-title">What to do</div>
+      <ul class="what-to-do-list">
+        ${steps.map(step => `<li>${step}</li>`).join('')}
+      </ul>
     </div>
   `;
 }
@@ -2541,7 +2583,8 @@ function renderPane(t, idx, sc) {
     // OVERVIEW
     body.innerHTML = `
       ${rejHtml}
-      <div style="font-size:12px;line-height:1.7;color:rgba(240,240,255,0.8);margin-bottom:16px;">${t.description}</div>
+      <div class="task-overview-text">${t.description}</div>
+      ${renderWhatToDo(t)}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
         <div class="task-date-card"><div class="task-detail-label">Assigned</div><div class="task-date-value">${t.assignedDate}</div></div>
         <div class="task-date-card"><div class="task-detail-label">Due Date</div><div class="task-date-value">${t.dueDate}</div></div>
