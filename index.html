@@ -2015,7 +2015,7 @@
             <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span><span id="wfTaskTitle">My Tasks</span></div>
             <div class="section-sub">58 total from joining • Filter by month</div>
             <table class="data-table">
-              <thead><tr><th>Task</th><th>Project</th><th>Due</th><th>Status</th><th>Action</th></tr></thead>
+              <thead><tr><th>Task</th><th>Project</th><th>Due</th><th>Status</th></tr></thead>
               <tbody id="wfTaskRows">
                 <tr class="task-clickable" onclick="openTask('t1')"><td><div style="font-weight:600;font-size:12px">Solar Inspection #3 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">8 questions • Click to open</div></td><td><span class="tag blue">Solar Alpha</span></td><td style="font-size:11px;color:var(--muted)">May 28</td><td><span class="badge inprogress">In Process</span></td></tr>
                 <tr class="task-clickable" onclick="openTask('t2')"><td><div style="font-weight:600;font-size:12px">Meter Reading R-4 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">5 questions • Click to open</div></td><td><span class="tag green">Water Drive</span></td><td style="font-size:11px;color:var(--muted)">May 26</td><td><span class="badge review">Under Review</span></td></tr>
@@ -2500,12 +2500,11 @@ function renderTaskRows(statusFilter = 'all') {
         <td><span class="tag ${tagClass[task.project] || 'blue'}">${task.project}</span></td>
         <td style="font-size:11px;color:var(--muted)">${task.dueDate}</td>
         <td><span class="badge ${task.status}">${task.statusLabel}</span></td>
-        <td>${renderTaskApplyButton(taskId)}</td>
       </tr>
     `;
   }).join('') : `
     <tr>
-      <td colspan="5" style="padding:18px;text-align:center;color:var(--muted)">No tasks in this status.</td>
+      <td colspan="4" style="padding:18px;text-align:center;color:var(--muted)">No tasks in this status.</td>
     </tr>
   `;
 }
