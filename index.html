@@ -555,6 +555,23 @@
     font-weight:600;
     line-height:1.35;
   }
+  .task-date-value {
+    font-size:12px;
+    color:#101828;
+    font-weight:700;
+    line-height:1.35;
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+  .task-date-card {
+    padding:10px;
+    border-radius:8px;
+    background:#f9fafb;
+    border:1px solid #eaecf0;
+  }
+  .task-date-card .task-detail-label {
+    letter-spacing:0;
+  }
   .task-payout {
     flex-shrink:0;
     min-width:78px;
@@ -1122,6 +1139,10 @@
     letter-spacing:0;
   }
   .task-detail-value { color:#344054; }
+  .task-date-value {
+    color:#101828;
+    font-size:12px;
+  }
   .task-payout {
     min-width:112px;
     padding:10px 12px;
@@ -2397,7 +2418,7 @@ function renderDashboardTaskSummary() {
         <div class="area-task-meta">${task.project} &bull; ${distanceByTask[taskId]} &bull; ${task.statusLabel}</div>
         <div class="task-detail-grid">
           <div class="task-detail"><div class="task-detail-label">Address</div><div class="task-detail-value">${shortAddress}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value">${task.dueDate}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value task-date-value">${task.dueDate}</div></div>
           <div class="task-detail"><div class="task-detail-label">Assigned By</div><div class="task-detail-value">${assignor}</div></div>
           <div class="task-detail"><div class="task-detail-label">Base Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).base)}</div></div>
           <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)}</div></div>
@@ -2419,7 +2440,7 @@ function renderDashboardTaskSummary() {
           <div style="font-size:11px;color:var(--muted);margin-top:2px">Submission: ${task.dueDate} &bull; ${task.startTime} - ${task.endTime}</div>
           <div style="font-size:11px;color:var(--muted);margin-top:2px">Assigned by: ${assignor} &bull; ${task.contactPhone}</div>
           <div class="task-detail-grid" style="max-width:520px">
-            <div class="task-detail"><div class="task-detail-label">Assigned Date</div><div class="task-detail-value">${task.assignedDate}</div></div>
+            <div class="task-detail"><div class="task-detail-label">Assigned Date</div><div class="task-detail-value task-date-value">${task.assignedDate}</div></div>
             <div class="task-detail"><div class="task-detail-label">Base Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).base)}</div></div>
             <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)} &bull; ${task.payment.statusLabel}</div></div>
             <div class="task-detail"><div class="task-detail-label">Project</div><div class="task-detail-value">${task.project}</div></div>
@@ -2522,10 +2543,10 @@ function renderPane(t, idx, sc) {
       ${rejHtml}
       <div style="font-size:12px;line-height:1.7;color:rgba(240,240,255,0.8);margin-bottom:16px;">${t.description}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
-        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Assigned</div><div style="font-size:11px;font-weight:600;">ðŸ“… ${t.assignedDate}</div></div>
-        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Due Date</div><div style="font-size:11px;font-weight:600;">⏰ ${t.dueDate}</div></div>
-        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Task Window</div><div style="font-size:11px;font-weight:600;">🕙 ${t.startTime} – ${t.endTime}</div></div>
-        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Duration</div><div style="font-size:11px;font-weight:600;">⌛ ${t.duration}</div></div>
+        <div class="task-date-card"><div class="task-detail-label">Assigned</div><div class="task-date-value">${t.assignedDate}</div></div>
+        <div class="task-date-card"><div class="task-detail-label">Due Date</div><div class="task-date-value">${t.dueDate}</div></div>
+        <div class="task-date-card"><div class="task-detail-label">Task Window</div><div class="task-date-value">${t.startTime} - ${t.endTime}</div></div>
+        <div class="task-date-card"><div class="task-detail-label">Duration</div><div class="task-date-value">${t.duration}</div></div>
       </div>
       <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Contact Person</div>
       <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;align-items:center;gap:10px;margin-bottom:16px;">
