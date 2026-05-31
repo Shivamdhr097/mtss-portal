@@ -624,34 +624,41 @@
   .single-filter-bar input {
     flex:1 1 0;
     min-width:92px;
-    height:34px;
-    border:1px solid var(--border);
+    height:38px;
+    border:1px solid rgba(21,112,239,0.22);
     border-radius:8px;
-    background:rgba(255,255,255,0.08);
-    color:var(--text);
-    padding:0 10px;
-    font-size:11px;
+    background:rgba(255,255,255,0.92);
+    color:#101828;
+    padding:0 11px;
+    font-size:12px;
+    font-weight:700;
     outline:none;
+  }
+  .single-filter-bar input::placeholder {
+    color:#667085;
+    font-weight:700;
+    opacity:1;
   }
   .single-filter-bar input:focus {
     border-color:rgba(21,112,239,0.6);
     box-shadow:0 0 0 3px rgba(21,112,239,0.12);
   }
   .clear-filter-btn {
-    height:34px;
-    padding:0 14px;
+    height:38px;
+    padding:0 16px;
     border-radius:8px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,0.08);
-    color:var(--text);
-    font-size:10px;
+    border:1px solid rgba(21,112,239,0.35);
+    background:#eff8ff;
+    color:#1570ef;
+    font-size:11px;
     font-weight:800;
     cursor:pointer;
     white-space:nowrap;
   }
   .clear-filter-btn:hover {
-    border-color:rgba(21,112,239,0.45);
-    color:var(--blue);
+    border-color:#1570ef;
+    background:#d1e9ff;
+    color:#1849a9;
   }
   .my-task-card {
     align-items:flex-start;
