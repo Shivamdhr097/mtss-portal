@@ -2221,6 +2221,48 @@ function submitQuestionnaire(btn, sc) {
   }
   .mtab.active { color:var(--text); border-bottom-color:var(--accent-color,var(--green)); background:rgba(255,255,255,0.04); }
 </style>
+<style>
+  /* Match Admin theme with Workforce green/teal style */
+  .panel-header.admin::before,
+  .admin .avatar,
+  .avatar.admin,
+  .apply-btn.admin-btn,
+  .nav-tab.active {
+    background:linear-gradient(135deg,var(--green),var(--teal)) !important;
+  }
+
+  .admin .panel-badge {
+    background:rgba(0,195,122,0.2) !important;
+    color:var(--green) !important;
+    border:1px solid rgba(0,195,122,0.3) !important;
+  }
+
+  .admin .sidebar-icon.active {
+    background:rgba(0,195,122,0.15) !important;
+    color:white;
+  }
+
+  .admin .sidebar-icon.active::before,
+  .admin .dot {
+    background:var(--green) !important;
+    box-shadow:0 0 8px var(--green) !important;
+  }
+
+  .apply-btn.admin-btn:hover {
+    box-shadow:0 4px 12px rgba(0,195,122,0.4) !important;
+  }
+
+  .topnav .logo {
+    background:linear-gradient(135deg,var(--green),var(--teal)) !important;
+    -webkit-background-clip:text !important;
+    -webkit-text-fill-color:transparent !important;
+  }
+
+  .topnav .logo span {
+    color:var(--green) !important;
+    -webkit-text-fill-color:var(--green) !important;
+  }
+</style>
 </body>
 </html>
 
