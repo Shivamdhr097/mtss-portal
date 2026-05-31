@@ -2592,7 +2592,11 @@ function applyForTask(event, taskId) {
   saveTaskApplicationToFirebase(taskId);
   renderDashboardTaskSummary();
   renderOpportunityList();
-  renderTaskRows('all');
+  if (document.getElementById('wf-tasks')?.style.display !== 'none') {
+    renderTaskRows(currentTaskFilter || 'all');
+  } else {
+    lastTaskRenderKey = '';
+  }
   renderAdminAppliedTasks();
 }
 
@@ -2603,7 +2607,11 @@ function verifyAppliedTask(taskId, approved) {
   saveTaskApplicationToFirebase(taskId);
   renderDashboardTaskSummary();
   renderOpportunityList();
-  renderTaskRows('all');
+  if (document.getElementById('wf-tasks')?.style.display !== 'none') {
+    renderTaskRows(currentTaskFilter || 'all');
+  } else {
+    lastTaskRenderKey = '';
+  }
   renderAdminAppliedTasks();
 }
 
@@ -2843,27 +2851,40 @@ const TASK_STATUS_CARDS = [
 let currentTaskFilter = 'all';
 let taskRenderVersion = 0;
 let lastTaskRenderKey = '';
+let taskRenderFrame = 0;
 
-function getTaskEntriesForFilter(statusFilter = 'all') {
-  return Object.entries(TASKS).filter(([taskId, task]) => {
-    if (statusFilter === 'all') return true;
-    if (statusFilter === 'active') return task.status === 'inprogress';
-    if (statusFilter === 'pending') return task.status === 'pending' || appliedTaskState[taskId] === 'pending';
-    if (statusFilter === 'allocated') return ['inprogress', 'review', 'approved', 'rejected', 'pending'].includes(task.status);
-    if (statusFilter === 'submitted') return task.status === 'review';
-    if (statusFilter === 'completed') return task.status === 'approved';
-    if (statusFilter === 'approved') return task.status === 'approved';
-    if (statusFilter === 'reschedule') return task.status === 'reschedule';
-    if (statusFilter === 'expired') return task.status === 'expired';
-    return task.status === statusFilter;
-  });
+function taskMatchesFilter(taskId, task, statusFilter = 'all') {
+  if (statusFilter === 'all') return true;
+  if (statusFilter === 'active') return task.status === 'inprogress';
+  if (statusFilter === 'pending') return task.status === 'pending' || appliedTaskState[taskId] === 'pending';
+  if (statusFilter === 'allocated') return ['inprogress', 'review', 'approved', 'rejected', 'pending'].includes(task.status);
+  if (statusFilter === 'submitted') return task.status === 'review';
+  if (statusFilter === 'completed') return task.status === 'approved';
+  if (statusFilter === 'approved') return task.status === 'approved';
+  if (statusFilter === 'reschedule') return task.status === 'reschedule';
+  if (statusFilter === 'expired') return task.status === 'expired';
+  return task.status === statusFilter;
 }
 
-function renderTaskStatusCards(activeFilter = currentTaskFilter) {
+function getTaskSnapshot(statusFilter = 'all') {
+  const counts = Object.fromEntries(TASK_STATUS_CARDS.map(card => [card.key, 0]));
+  const visible = [];
+
+  Object.entries(TASKS).forEach(([taskId, task]) => {
+    TASK_STATUS_CARDS.forEach(card => {
+      if (taskMatchesFilter(taskId, task, card.key)) counts[card.key] += 1;
+    });
+    if (taskMatchesFilter(taskId, task, statusFilter)) visible.push([taskId, task]);
+  });
+
+  return { counts, visible };
+}
+
+function renderTaskStatusCards(activeFilter = currentTaskFilter, counts = {}) {
   const wrap = document.getElementById('taskStatusCards');
   if (!wrap) return;
   wrap.innerHTML = TASK_STATUS_CARDS.map(card => {
-    const count = getTaskEntriesForFilter(card.key).length;
+    const count = counts[card.key] || 0;
     return `
       <button class="task-status-card ${activeFilter === card.key ? 'active' : ''}" style="--status-color:${card.color}" type="button" onclick="showTaskFilter('${card.key}')">
         <span class="task-status-label">${card.label}</span>
@@ -2912,19 +2933,25 @@ function renderTaskRows(statusFilter = 'all') {
     'Gas Infra Check': 'orange'
   };
 
-  const renderKey = `${statusFilter}:${taskRenderVersion}`;
+  currentTaskFilter = statusFilter;
+  const snapshot = getTaskSnapshot(statusFilter);
+  const tasks = snapshot.visible;
+  const title = document.getElementById('wfTaskTitle');
+  if (title) title.textContent = statusTitles[statusFilter] || statusTitles.all;
+  const sub = title?.closest('.section-title')?.nextElementSibling;
+  if (sub) sub.textContent = `${tasks.length} task${tasks.length === 1 ? '' : 's'} found - ${statusNotes[statusFilter] || statusNotes.all}`;
+  renderTaskStatusCards(statusFilter, snapshot.counts);
+
+  const renderKey = `${statusFilter}:${taskRenderVersion}:${tasks.map(([taskId]) => taskId).join('|')}`;
   if (renderKey === lastTaskRenderKey && rows.children.length) return;
   lastTaskRenderKey = renderKey;
-  currentTaskFilter = statusFilter;
-  renderTaskStatusCards(statusFilter);
-  const tasks = getTaskEntriesForFilter(statusFilter);
-  document.getElementById('wfTaskTitle').textContent = statusTitles[statusFilter] || statusTitles.all;
-  const sub = document.getElementById('wfTaskTitle').closest('.section-title').nextElementSibling;
-  if (sub) sub.textContent = `${tasks.length} task${tasks.length === 1 ? '' : 's'} found - ${statusNotes[statusFilter] || statusNotes.all}`;
 
-  rows.innerHTML = tasks.length
-    ? tasks.map(([taskId, task]) => renderMyTaskCard(taskId, task, tagClass[task.project] || 'blue')).join('')
-    : `<div class="empty-task-card">No tasks in this status.</div>`;
+  cancelAnimationFrame(taskRenderFrame);
+  taskRenderFrame = requestAnimationFrame(() => {
+    rows.innerHTML = tasks.length
+      ? tasks.map(([taskId, task]) => renderMyTaskCard(taskId, task, tagClass[task.project] || 'blue')).join('')
+      : `<div class="empty-task-card">No tasks in this status.</div>`;
+  });
 }
 
 function renderMyTaskCard(taskId, task, tagClassName) {
@@ -3150,7 +3177,9 @@ async function loadFirebasePortalData() {
       saveAppliedTaskState();
       renderDashboardTaskSummary();
       renderOpportunityList();
-      renderTaskRows('all');
+      if (document.getElementById('wf-tasks')?.style.display !== 'none') {
+        renderTaskRows(currentTaskFilter || 'all');
+      }
       renderAdminAppliedTasks();
     }
   } catch (error) {
