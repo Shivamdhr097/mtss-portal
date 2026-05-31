@@ -1606,6 +1606,175 @@
     max-height:none;
     overflow:visible;
   }
+  .admin-filter-bar {
+    display:grid;
+    grid-template-columns:2fr repeat(4,minmax(120px,1fr)) auto;
+    gap:10px;
+    margin-bottom:18px;
+    padding:12px;
+    border:1px solid #eaecf0;
+    border-radius:8px;
+    background:#fff;
+  }
+  .admin-filter-bar input,
+  .admin-filter-bar select,
+  .activity-search {
+    height:36px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    background:#fff;
+    color:#101828;
+    padding:0 10px;
+    font-size:11px;
+    font-weight:600;
+    min-width:0;
+  }
+  .kpi-group-title {
+    margin:18px 0 8px;
+    font-size:11px;
+    font-weight:800;
+    color:#344054;
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+  }
+  .admin-kpi-grid {
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .mini-trend {
+    height:20px;
+    margin-top:9px;
+    border-radius:4px;
+    background:linear-gradient(90deg,transparent,currentColor);
+    opacity:0.18;
+  }
+  .mini-trend.blue { color:var(--blue); }
+  .mini-trend.green { color:var(--green); }
+  .mini-trend.orange { color:var(--orange); }
+  .mini-trend.purple { color:var(--purple); }
+  .mini-trend.red { color:var(--red); }
+  .mini-trend.teal { color:var(--teal); }
+  .mini-trend.yellow { color:var(--yellow); }
+  .admin-dashboard-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .ops-grid {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+  }
+  .ops-grid div {
+    padding:10px;
+    border:1px solid #eaecf0;
+    border-radius:8px;
+    background:#f9fafb;
+  }
+  .ops-grid b,
+  .metric-strip b {
+    display:block;
+    font-family:var(--font-head);
+    font-size:18px;
+    color:#1570ef;
+  }
+  .ops-grid span,
+  .project-row span,
+  .activity-row span {
+    display:block;
+    margin-top:3px;
+    font-size:10px;
+    color:#667085;
+    line-height:1.35;
+  }
+  .approval-row,
+  .activity-row {
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:10px;
+    align-items:center;
+    padding:9px 0;
+    border-bottom:1px solid #eaecf0;
+    font-size:12px;
+  }
+  .approval-row button,
+  .activity-row button,
+  .quick-actions button {
+    border:1px solid #b2ddff;
+    background:#eff8ff;
+    color:#1570ef;
+    border-radius:8px;
+    padding:7px 10px;
+    font-size:10px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .admin-filter-mini {
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:10px;
+  }
+  .admin-filter-mini span {
+    padding:4px 8px;
+    border-radius:999px;
+    background:#f2f4f7;
+    color:#667085;
+    font-size:10px;
+    font-weight:700;
+  }
+  .project-row {
+    display:grid;
+    grid-template-columns:1.4fr 1fr auto;
+    gap:12px;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #eaecf0;
+  }
+  .chart-stack {
+    display:grid;
+    gap:14px;
+  }
+  .chart-stack > div > span {
+    display:block;
+    margin-bottom:8px;
+    font-size:11px;
+    font-weight:800;
+    color:#344054;
+  }
+  .bar-chart.compact {
+    height:54px;
+  }
+  .metric-strip {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+  }
+  .metric-strip b {
+    padding:10px;
+    border-radius:8px;
+    background:#f9fafb;
+    text-align:center;
+  }
+  .alert-row {
+    padding:10px 12px;
+    border-radius:8px;
+    margin-bottom:8px;
+    border:1px solid #eaecf0;
+    font-size:12px;
+    font-weight:700;
+  }
+  .alert-row.high { background:#fff1f3; color:#c01048; border-color:#fecdd6; }
+  .alert-row.med { background:#fffaeb; color:#b54708; border-color:#fedf89; }
+  .alert-row.low { background:#eff8ff; color:#175cd3; border-color:#b2ddff; }
+  .quick-actions {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
   .section-title {
     margin-bottom:6px;
     font-size:22px;
@@ -1934,98 +2103,115 @@
 
           <!-- DASHBOARD TAB -->
           <div id="admin-dashboard">
-            <div class="section-title"><span class="dot"></span>Overview</div>
-            <div class="section-sub">Today, May 26 2025 — All Projects</div>
+            <div class="section-title"><span class="dot"></span>Admin Overview</div>
+            <div class="section-sub">Central command center for MTSS Services operations, workforce, approvals, payments, and client activity.</div>
 
-            <div class="stat-grid">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')">
-                <div class="stat-label">Total Leads</div>
-                <div class="stat-value blue">1,284</div>
-                <div class="stat-change up">▲ 12% this month</div>
-              </div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')">
-                <div class="stat-label">Pending</div>
-                <div class="stat-value orange">47</div>
-                <div class="stat-change down">▼ 3 today</div>
-              </div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')">
-                <div class="stat-label">Monthly Revenue</div>
-                <div class="stat-value green">₹4.2L</div>
-                <div class="stat-change up">▲ 18% vs last</div>
-              </div>
-              <div class="stat-card purple tab-link" onclick="setAdminTab('workforce')">
-                <div class="stat-label">Active Workforce</div>
-                <div class="stat-value purple">138</div>
-                <div class="stat-change up">▲ 6 new</div>
-              </div>
+            <div class="admin-filter-bar">
+              <input type="search" placeholder="Search workers, clients, projects, tasks, audits, payments">
+              <select><option>Date Range: This Month</option><option>Today</option><option>This Week</option><option>Quarter</option></select>
+              <select><option>All Clients</option><option>OYO</option><option>Urban Infra</option><option>Solar Alpha</option></select>
+              <select><option>All Projects</option><option>Solar Survey Alpha</option><option>Water Meter Drive</option><option>Fiber Connect</option></select>
+              <select><option>All States</option><option>Haryana</option><option>Delhi</option><option>Rajasthan</option></select>
+              <button class="apply-btn admin-btn">Search</button>
             </div>
 
-            <div class="card tab-link" onclick="setAdminTab('revenue')">
-              <div class="card-header">
-                <div class="card-title">Revenue — Last 8 Months</div>
-                <span class="tag blue">₹28.4L YTD</span>
-              </div>
-              <div class="bar-chart">
-                <div class="bar" style="height:60%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Oct: ₹2.8L"></div>
-                <div class="bar" style="height:50%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Nov: ₹2.3L"></div>
-                <div class="bar" style="height:70%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Dec: ₹3.2L"></div>
-                <div class="bar" style="height:55%;background:linear-gradient(180deg,var(--purple),#3a1a8a);" title="Jan: ₹2.5L"></div>
-                <div class="bar" style="height:80%;background:linear-gradient(180deg,var(--purple),#3a1a8a);" title="Feb: ₹3.7L"></div>
-                <div class="bar" style="height:65%;background:linear-gradient(180deg,var(--teal),#0a5a60);" title="Mar: ₹3.0L"></div>
-                <div class="bar" style="height:75%;background:linear-gradient(180deg,var(--teal),#0a5a60);" title="Apr: ₹3.5L"></div>
-                <div class="bar" style="height:90%;background:linear-gradient(180deg,var(--green),#005a3a);" title="May: ₹4.2L"></div>
-              </div>
-              <div style="display:flex;justify-content:space-between;margin-top:4px;">
-                <span style="font-size:9px;color:var(--muted)">Oct</span>
-                <span style="font-size:9px;color:var(--muted)">Nov</span>
-                <span style="font-size:9px;color:var(--muted)">Dec</span>
-                <span style="font-size:9px;color:var(--muted)">Jan</span>
-                <span style="font-size:9px;color:var(--muted)">Feb</span>
-                <span style="font-size:9px;color:var(--muted)">Mar</span>
-                <span style="font-size:9px;color:var(--muted)">Apr</span>
-                <span style="font-size:9px;color:var(--muted)">May</span>
-              </div>
+            <div class="kpi-group-title">Project KPIs</div>
+            <div class="admin-kpi-grid">
+              <div class="stat-card blue tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Total Projects</div><div class="stat-value blue">48</div><div class="stat-change up">+8% vs last</div><div class="mini-trend blue"></div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active Projects</div><div class="stat-value green">18</div><div class="stat-change up">+3 running</div><div class="mini-trend green"></div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Pending Projects</div><div class="stat-value orange">7</div><div class="stat-change down">-2 cleared</div><div class="mini-trend orange"></div></div>
+              <div class="stat-card purple tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Completed Projects</div><div class="stat-value purple">21</div><div class="stat-change up">+12%</div><div class="mini-trend purple"></div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Overdue Projects</div><div class="stat-value red">2</div><div class="stat-change down">Needs action</div><div class="mini-trend red"></div></div>
             </div>
 
-            <div class="card tab-link" onclick="setAdminTab('projects')">
-              <div class="card-header">
-                <div class="card-title">Active Projects</div>
-                <span class="tag green">8 Running</span>
-              </div>
-              <div class="donut-wrap">
-                <div class="donut">
-                  <svg width="64" height="64" viewBox="0 0 64 64">
-                    <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
-                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--blue)" stroke-width="10" stroke-dasharray="82 81" stroke-linecap="round"/>
-                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--green)" stroke-width="10" stroke-dasharray="40 123" stroke-dashoffset="-82" stroke-linecap="round"/>
-                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--orange)" stroke-width="10" stroke-dasharray="22 141" stroke-dashoffset="-122" stroke-linecap="round"/>
-                  </svg>
-                  <div class="donut-center" style="color:var(--text)"><span>8</span><span style="font-size:8px;color:var(--muted)">total</span></div>
-                </div>
-                <div class="donut-legend">
-                  <div class="donut-item"><div class="donut-dot" style="background:var(--blue)"></div>Active (5)</div>
-                  <div class="donut-item"><div class="donut-dot" style="background:var(--green)"></div>Completed (2)</div>
-                  <div class="donut-item"><div class="donut-dot" style="background:var(--orange)"></div>On Hold (1)</div>
+            <div class="kpi-group-title">Workforce KPIs</div>
+            <div class="admin-kpi-grid">
+              <div class="stat-card blue tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">Registered Workers</div><div class="stat-value blue">1,842</div><div class="stat-change up">+6.5%</div><div class="mini-trend blue"></div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">Active Workers</div><div class="stat-value green">1,216</div><div class="stat-change up">+84 today</div><div class="mini-trend green"></div></div>
+              <div class="stat-card teal tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">Online Workers</div><div class="stat-value teal">312</div><div class="stat-change up">Live</div><div class="mini-trend teal"></div></div>
+              <div class="stat-card purple tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">New Registrations</div><div class="stat-value purple">64</div><div class="stat-change up">This month</div><div class="mini-trend purple"></div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">Suspended Workers</div><div class="stat-value red">19</div><div class="stat-change down">-4 resolved</div><div class="mini-trend red"></div></div>
+            </div>
+
+            <div class="kpi-group-title">Task, Client & Financial KPIs</div>
+            <div class="admin-kpi-grid">
+              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Total Tasks</div><div class="stat-value blue">12,480</div><div class="stat-change up">+14%</div><div class="mini-trend blue"></div></div>
+              <div class="stat-card teal tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Assigned Today</div><div class="stat-value teal">286</div><div class="stat-change up">+31</div><div class="mini-trend teal"></div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Completed Today</div><div class="stat-value green">198</div><div class="stat-change up">91% SLA</div><div class="mini-trend green"></div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Tasks Pending</div><div class="stat-value orange">47</div><div class="stat-change down">-3 today</div><div class="mini-trend orange"></div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Rejected Tasks</div><div class="stat-value red">11</div><div class="stat-change down">2.4% rate</div><div class="mini-trend red"></div></div>
+              <div class="stat-card purple tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Total Clients</div><div class="stat-value purple">86</div><div class="stat-change up">+5 new</div><div class="mini-trend purple"></div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active Clients</div><div class="stat-value green">54</div><div class="stat-change up">+9%</div><div class="mini-trend green"></div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Monthly Revenue</div><div class="stat-value blue">₹4.2L</div><div class="stat-change up">+18%</div><div class="mini-trend blue"></div></div>
+              <div class="stat-card yellow tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Total Revenue</div><div class="stat-value yellow">₹28.4L</div><div class="stat-change up">YTD</div><div class="mini-trend yellow"></div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending Payments</div><div class="stat-value orange">₹32K</div><div class="stat-change down">12 requests</div><div class="mini-trend orange"></div></div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Processed Payments</div><div class="stat-value green">₹3.8L</div><div class="stat-change up">+22%</div><div class="mini-trend green"></div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Incentive Pending</div><div class="stat-value red">₹18K</div><div class="stat-change down">Approval queue</div><div class="mini-trend red"></div></div>
+            </div>
+
+            <div class="admin-dashboard-grid">
+              <div class="card">
+                <div class="card-header"><div class="card-title">Live Operations Monitoring</div><span class="tag green">Auto Refresh</span></div>
+                <div class="ops-grid">
+                  <div><b>312</b><span>Workers Online</span></div><div><b>824</b><span>Logged In Today</span></div><div><b>196</b><span>Logged Out</span></div>
+                  <div><b>94%</b><span>GPS Attendance</span></div><div><b>23</b><span>Late Check-ins</span></div><div><b>41</b><span>No Activity</span></div>
+                  <div><b>286</b><span>Assigned Tasks</span></div><div><b>218</b><span>Submitted</span></div><div><b>172</b><span>Approved</span></div>
+                  <div><b>11</b><span>Rejected</span></div><div><b>9</b><span>Rework</span></div><div><b>57</b><span>Pending Reviews</span></div>
                 </div>
               </div>
+              <div class="card">
+                <div class="card-header"><div class="card-title">Approval Center</div><span class="tag orange">57 Pending</span></div>
+                <div class="approval-row"><span>New Worker Registrations</span><b>18</b><button>View</button></div>
+                <div class="approval-row"><span>KYC Verification Requests</span><b>12</b><button>Approve</button></div>
+                <div class="approval-row"><span>Survey Approvals</span><b>9</b><button>Review</button></div>
+                <div class="approval-row"><span>Audit Approvals</span><b>11</b><button>Review</button></div>
+                <div class="approval-row"><span>Payment Requests</span><b>7</b><button>Process</button></div>
+                <div class="admin-filter-mini"><span>Date</span><span>Project</span><span>Client</span><span>Type</span><span>Status</span></div>
+              </div>
             </div>
 
-            <div class="card tab-link" onclick="setAdminTab('payments')">
-              <div class="card-header">
-                <div class="card-title">Recent Payments</div>
-                <span class="tag orange">View All</span>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Project Status</div><span class="tag blue">Priority View</span></div>
+              <div class="project-row"><div><b>Solar Survey Alpha</b><span>Client: Urban Infra • PM: Ravi Kumar • 42 workers</span></div><div class="progress-bar"><div class="progress-fill" style="width:78%;background:var(--green)"></div></div><span class="badge inprogress">In Progress</span></div>
+              <div class="project-row"><div><b>Water Meter Drive</b><span>Client: Municipal Ops • PM: Deepak Singh • 28 workers</span></div><div class="progress-bar"><div class="progress-fill" style="width:62%;background:var(--blue)"></div></div><span class="badge review">Under Review</span></div>
+              <div class="project-row"><div><b>Fiber Connect</b><span>Client: NetGrid • PM: Anjali Rao • 35 workers</span></div><div class="progress-bar"><div class="progress-fill" style="width:91%;background:var(--green)"></div></div><span class="badge approved">Completed</span></div>
+              <div class="project-row"><div><b>Gas Infra Check</b><span>Client: SafeLine • PM: Manoj Tiwari • Deadline warning</span></div><div class="progress-bar"><div class="progress-fill" style="width:44%;background:var(--orange)"></div></div><span class="badge pending">Delayed</span></div>
+            </div>
+
+            <div class="admin-dashboard-grid">
+              <div class="card">
+                <div class="card-header"><div class="card-title">Analytics & Charts</div><span class="tag green">Executive</span></div>
+                <div class="chart-stack">
+                  <div><span>Revenue Analytics</span><div class="bar-chart compact"><div class="bar" style="height:42%;background:var(--blue)"></div><div class="bar" style="height:56%;background:var(--blue)"></div><div class="bar" style="height:74%;background:var(--green)"></div><div class="bar" style="height:90%;background:var(--green)"></div></div></div>
+                  <div><span>Task Completion / Rejection / Rework</span><div class="metric-strip"><b>86%</b><b>2.4%</b><b>4.1%</b></div></div>
+                  <div><span>Client Revenue Contribution</span><div class="donut-legend"><div class="donut-item"><div class="donut-dot" style="background:var(--blue)"></div>OYO 38%</div><div class="donut-item"><div class="donut-dot" style="background:var(--green)"></div>Infra 27%</div><div class="donut-item"><div class="donut-dot" style="background:var(--orange)"></div>Others 35%</div></div></div>
+                </div>
               </div>
-              <div class="pay-row">
-                <div><div class="pay-name">Rahul Sharma</div><div class="pay-tid">TXN#84729A</div></div>
-                <div style="text-align:right"><div class="pay-amount" style="color:var(--green)">₹8,400</div><span class="badge paid">Paid</span></div>
+              <div class="card">
+                <div class="card-header"><div class="card-title">Alerts & Notifications</div><span class="tag red">Critical</span></div>
+                <div class="alert-row high">Project deadline approaching: Gas Infra Check</div>
+                <div class="alert-row med">23 overdue tasks need reassignment</div>
+                <div class="alert-row med">GPS attendance mismatch in Hisar cluster</div>
+                <div class="alert-row low">8 workers missing documents</div>
+                <div class="alert-row high">Payment pending over SLA: ₹32K</div>
               </div>
-              <div class="pay-row">
-                <div><div class="pay-name">Priya Mehta</div><div class="pay-tid">TXN#84730B</div></div>
-                <div style="text-align:right"><div class="pay-amount" style="color:var(--teal)">₹6,200</div><span class="badge processing">Processing</span></div>
+            </div>
+
+            <div class="admin-dashboard-grid">
+              <div class="card">
+                <div class="card-header"><div class="card-title">Recent Activity Feed</div><input class="activity-search" placeholder="Search activities"></div>
+                <div class="activity-row"><b>Worker Registered</b><span>Rahul Sharma • 4 min ago</span><button>View</button></div>
+                <div class="activity-row"><b>Task Submitted</b><span>Solar Panel Inspection #3 • 12 min ago</span><button>Review</button></div>
+                <div class="activity-row"><b>Audit Approved</b><span>Fiber Cable Check • 28 min ago</span><button>Open</button></div>
+                <div class="activity-row"><b>Payment Processed</b><span>TXN#84729A • 1h ago</span><button>Receipt</button></div>
+                <div class="activity-row"><b>Client Added</b><span>Urban Infra • 2h ago</span><button>Profile</button></div>
               </div>
-              <div class="pay-row">
-                <div><div class="pay-name">Amit Verma</div><div class="pay-tid">TXN#84731C</div></div>
-                <div style="text-align:right"><div class="pay-amount" style="color:var(--orange)">₹5,500</div><span class="badge pending">Pending</span></div>
+              <div class="card">
+                <div class="card-header"><div class="card-title">Quick Action Center</div><span class="tag blue">Shortcuts</span></div>
+                <div class="quick-actions">
+                  <button>Add Worker</button><button>Add Client</button><button>Create Project</button><button>Create Task</button><button>Assign Task</button>
+                  <button>Review Submissions</button><button>Process Payments</button><button>Generate Reports</button><button>Send Notifications</button><button>Create Announcement</button>
+                </div>
               </div>
             </div>
           </div>
@@ -4099,6 +4285,12 @@ function submitQuestionnaire(btn, sc) {
     .stat-grid {
       grid-template-columns:repeat(4,minmax(0,1fr)) !important;
     }
+    .admin-kpi-grid {
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .admin-filter-bar {
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
     .task-detail-grid {
       grid-template-columns:repeat(3,minmax(0,1fr)) !important;
     }
@@ -4129,6 +4321,14 @@ function submitQuestionnaire(btn, sc) {
     .home-stats,
     .stat-grid {
       grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    }
+    .admin-kpi-grid,
+    .admin-dashboard-grid,
+    .admin-filter-bar {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .ops-grid {
+      grid-template-columns:repeat(2,minmax(0,1fr));
     }
     .task-detail-grid {
       grid-template-columns:repeat(2,minmax(0,1fr)) !important;
@@ -4233,9 +4433,16 @@ function submitQuestionnaire(btn, sc) {
     .stat-grid,
     .profile-form,
     .export-card-grid,
-    .task-status-grid {
+    .task-status-grid,
+    .admin-kpi-grid,
+    .admin-dashboard-grid,
+    .admin-filter-bar {
       grid-template-columns:1fr 1fr !important;
       gap:10px;
+    }
+    .ops-grid,
+    .project-row {
+      grid-template-columns:1fr;
     }
     .card,
     .profile-card,
@@ -4329,8 +4536,17 @@ function submitQuestionnaire(btn, sc) {
     .stat-grid,
     .profile-form,
     .export-card-grid,
-    .task-status-grid {
+    .task-status-grid,
+    .admin-kpi-grid,
+    .admin-dashboard-grid,
+    .admin-filter-bar,
+    .quick-actions {
       grid-template-columns:1fr !important;
+    }
+    .ops-grid,
+    .approval-row,
+    .activity-row {
+      grid-template-columns:1fr;
     }
     .hs-card,
     .stat-card,
