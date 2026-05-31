@@ -35,9 +35,6 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-  body.detail-open {
-    overflow:hidden;
-  }
 
   /* â”€â”€ NOISE OVERLAY â”€â”€ */
   body::before {
@@ -182,81 +179,6 @@
     letter-spacing:-0.5px;
   }
   .topnav .logo span { color: var(--orange); -webkit-text-fill-color: var(--orange); }
-  .brand-logo {
-    display:flex;
-    align-items:center;
-    gap:9px;
-    color:var(--text);
-    text-decoration:none;
-  }
-  .brand-image {
-    width:146px;
-    height:54px;
-    object-fit:contain;
-    object-position:left center;
-    display:block;
-  }
-  .panel-logo-image {
-    width:34px;
-    height:34px;
-    object-fit:contain;
-    display:block;
-    border-radius:8px;
-  }
-  .brand-mark {
-    width:38px;
-    height:38px;
-    border-radius:11px;
-    display:grid;
-    place-items:center;
-    position:relative;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 28% 22%, rgba(255,255,255,0.95) 0 8%, transparent 9%),
-      linear-gradient(135deg, #1570ef 0%, #0e9384 58%, #079455 100%);
-    box-shadow:0 8px 18px rgba(21,112,239,0.24);
-  }
-  .brand-mark::before {
-    content:'';
-    position:absolute;
-    width:48px;
-    height:18px;
-    border:2px solid rgba(255,255,255,0.45);
-    border-left-color:transparent;
-    border-right-color:transparent;
-    border-radius:50%;
-    transform:rotate(-32deg);
-  }
-  .brand-mark span {
-    position:relative;
-    z-index:1;
-    color:#fff !important;
-    -webkit-text-fill-color:#fff !important;
-    font-size:14px;
-    font-weight:900;
-    letter-spacing:-0.5px;
-  }
-  .brand-copy {
-    display:flex;
-    flex-direction:column;
-    line-height:1.05;
-  }
-  .brand-name {
-    font-size:17px;
-    font-weight:900;
-    letter-spacing:0.3px;
-    color:#101828;
-    -webkit-text-fill-color:#101828;
-  }
-  .brand-role {
-    margin-top:3px;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.2px;
-    color:#1570ef;
-    -webkit-text-fill-color:#1570ef;
-    text-transform:uppercase;
-  }
 
   .nav-tabs {
     display:flex; gap:6px;
@@ -607,283 +529,6 @@
   .area-task-info { flex:1; }
   .area-task-name { font-size:12px; font-weight:600; }
   .area-task-meta { font-size:10px; color:var(--muted); }
-  .task-card-list {
-    display:grid;
-    gap:10px;
-  }
-  .task-status-grid {
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:10px;
-    margin-bottom:12px;
-  }
-  .task-status-card {
-    display:block;
-    text-align:left;
-    padding:14px 16px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:var(--card);
-    cursor:pointer;
-    transition:all 0.2s;
-    position:relative;
-    overflow:hidden;
-  }
-  .task-status-card::before {
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:2px;
-    background:var(--status-color);
-  }
-  .task-status-card:hover,
-  .task-status-card.active {
-    border-color:rgba(255,255,255,0.16);
-    box-shadow:0 8px 30px rgba(0,0,0,0.24);
-    transform:translateY(-1px);
-  }
-  .status-symbol {
-    position:relative;
-    display:block;
-    width:18px;
-    height:18px;
-    color:currentColor;
-  }
-  .status-symbol::before,
-  .status-symbol::after {
-    content:'';
-    position:absolute;
-    box-sizing:border-box;
-  }
-  .status-active::before {
-    inset:2px;
-    border:2px solid currentColor;
-    border-radius:50%;
-  }
-  .status-active::after {
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:currentColor;
-    top:6px;
-    left:6px;
-  }
-  .status-pending::before {
-    inset:2px;
-    border:2px solid currentColor;
-    border-radius:50%;
-  }
-  .status-pending::after {
-    width:6px;
-    height:6px;
-    border-left:2px solid currentColor;
-    border-bottom:2px solid currentColor;
-    top:4px;
-    left:8px;
-  }
-  .status-allocated::before {
-    inset:3px;
-    border:2px solid currentColor;
-    border-radius:4px;
-  }
-  .status-allocated::after {
-    width:8px;
-    height:2px;
-    background:currentColor;
-    top:8px;
-    left:5px;
-  }
-  .status-submitted::before {
-    width:2px;
-    height:12px;
-    background:currentColor;
-    left:8px;
-    top:3px;
-  }
-  .status-submitted::after {
-    width:8px;
-    height:8px;
-    border-top:2px solid currentColor;
-    border-right:2px solid currentColor;
-    transform:rotate(-45deg);
-    top:2px;
-    left:4px;
-  }
-  .status-completed::before {
-    width:12px;
-    height:7px;
-    border-left:2px solid currentColor;
-    border-bottom:2px solid currentColor;
-    transform:rotate(-45deg);
-    top:4px;
-    left:3px;
-  }
-  .status-rejected::before,
-  .status-rejected::after {
-    width:16px;
-    height:2px;
-    background:currentColor;
-    top:8px;
-    left:1px;
-  }
-  .status-rejected::before { transform:rotate(45deg); }
-  .status-rejected::after { transform:rotate(-45deg); }
-  .status-approved::before {
-    inset:2px;
-    border:2px solid currentColor;
-    border-radius:50%;
-  }
-  .status-approved::after {
-    width:8px;
-    height:5px;
-    border-left:2px solid currentColor;
-    border-bottom:2px solid currentColor;
-    transform:rotate(-45deg);
-    top:6px;
-    left:5px;
-  }
-  .status-reschedule::before {
-    inset:3px;
-    border:2px solid currentColor;
-    border-left-color:transparent;
-    border-radius:50%;
-  }
-  .status-reschedule::after {
-    width:6px;
-    height:6px;
-    border-top:2px solid currentColor;
-    border-right:2px solid currentColor;
-    transform:rotate(20deg);
-    top:2px;
-    right:2px;
-  }
-  .status-expired::before {
-    inset:2px;
-    border:2px solid currentColor;
-    border-radius:4px;
-  }
-  .status-expired::after {
-    width:10px;
-    height:2px;
-    background:currentColor;
-    top:8px;
-    left:4px;
-    transform:rotate(45deg);
-  }
-  .task-status-label {
-    display:block;
-    font-size:10px;
-    font-weight:700;
-    color:var(--muted);
-    text-transform:uppercase;
-    letter-spacing:0.8px;
-  }
-  .task-status-count {
-    font-family:var(--font-head);
-    font-size:22px;
-    font-weight:800;
-    line-height:1;
-    margin-top:7px;
-  }
-  .export-card-grid {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-  }
-  .opportunity-filters {
-    display:flex;
-    gap:10px;
-    align-items:center;
-    padding:8px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:rgba(255,255,255,0.04);
-    margin-bottom:12px;
-  }
-  .single-filter-bar input,
-  .single-filter-bar select {
-    flex:1 1 0;
-    min-width:92px;
-    height:38px;
-    border:1px solid rgba(21,112,239,0.22);
-    border-radius:8px;
-    background:rgba(255,255,255,0.92);
-    color:#101828;
-    padding:0 11px;
-    font-size:12px;
-    font-weight:700;
-    outline:none;
-  }
-  .single-filter-bar select {
-    appearance:none;
-    background-image:linear-gradient(45deg, transparent 50%, #344054 50%), linear-gradient(135deg, #344054 50%, transparent 50%);
-    background-position:calc(100% - 14px) 16px, calc(100% - 9px) 16px;
-    background-size:5px 5px, 5px 5px;
-    background-repeat:no-repeat;
-    padding-right:28px;
-  }
-  .single-filter-bar input::placeholder {
-    color:#667085;
-    font-weight:700;
-    opacity:1;
-  }
-  .single-filter-bar input:focus,
-  .single-filter-bar select:focus {
-    border-color:rgba(21,112,239,0.6);
-    box-shadow:0 0 0 3px rgba(21,112,239,0.12);
-  }
-  .clear-filter-btn {
-    height:38px;
-    padding:0 16px;
-    border-radius:8px;
-    border:1px solid rgba(21,112,239,0.35);
-    background:#eff8ff;
-    color:#1570ef;
-    font-size:11px;
-    font-weight:800;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .search-filter-btn {
-    height:38px;
-    padding:0 18px;
-    border-radius:8px;
-    border:1px solid rgba(0,195,122,0.4);
-    background:linear-gradient(135deg,var(--green),var(--teal));
-    color:white;
-    font-size:11px;
-    font-weight:800;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .search-filter-btn:hover {
-    box-shadow:0 5px 14px rgba(0,195,122,0.22);
-    transform:translateY(-1px);
-  }
-  .clear-filter-btn:hover {
-    border-color:#1570ef;
-    background:#d1e9ff;
-    color:#1849a9;
-  }
-  .my-task-card {
-    align-items:flex-start;
-    margin-bottom:0;
-  }
-  .my-task-card .area-task-icon {
-    background:rgba(21,112,239,0.12);
-    color:var(--blue);
-  }
-  .empty-task-card {
-    padding:18px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:rgba(255,255,255,0.03);
-    color:var(--muted);
-    text-align:center;
-    font-size:12px;
-  }
   .task-detail-grid {
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -910,49 +555,6 @@
     font-weight:600;
     line-height:1.35;
   }
-  .task-date-value {
-    font-size:12px;
-    color:#101828;
-    font-weight:700;
-    line-height:1.35;
-    font-variant-numeric:tabular-nums;
-    white-space:nowrap;
-  }
-  .task-date-card {
-    padding:10px;
-    border-radius:8px;
-    background:#f9fafb;
-    border:1px solid #eaecf0;
-  }
-  .task-date-card .task-detail-label {
-    letter-spacing:0;
-  }
-  .task-overview-text {
-    font-size:13px;
-    line-height:1.65;
-    color:#344054;
-    margin-bottom:14px;
-  }
-  .what-to-do-card {
-    padding:12px;
-    border-radius:8px;
-    background:#eff8ff;
-    border:1px solid #b2ddff;
-    margin-bottom:16px;
-  }
-  .what-to-do-title {
-    color:#1570ef;
-    font-size:12px;
-    font-weight:800;
-    margin-bottom:6px;
-  }
-  .what-to-do-list {
-    margin:0;
-    padding-left:18px;
-    color:#344054;
-    font-size:12px;
-    line-height:1.65;
-  }
   .task-payout {
     flex-shrink:0;
     min-width:78px;
@@ -971,28 +573,6 @@
     text-transform:uppercase;
     letter-spacing:0.5px;
   }
-  .upcoming-task-layout {
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:12px;
-  }
-  .upcoming-task-main {
-    flex:1;
-    min-width:0;
-  }
-  .upcoming-task-title {
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:4px;
-    color:#101828;
-  }
-  .upcoming-task-meta {
-    font-size:11px;
-    color:var(--muted);
-    margin-top:2px;
-    line-height:1.45;
-  }
   .apply-btn {
     padding:4px 12px; border-radius:20px;
     font-size:10px; font-weight:700; letter-spacing:0.5px;
@@ -1008,58 +588,6 @@
     color:white;
   }
   .apply-btn.wf-btn:hover { box-shadow:0 4px 12px rgba(0,195,122,0.4); }
-  .task-action-stack {
-    flex-shrink:0;
-    min-width:132px;
-    align-self:stretch;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:8px;
-  }
-  .task-bottom-actions {
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    gap:8px;
-  }
-  .task-map-btn {
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:8px 12px;
-    border-radius:8px;
-    background:#eff8ff;
-    color:#1570ef;
-    font-size:12px;
-    font-weight:700;
-    text-decoration:none;
-    border:1px solid #b2ddff;
-    line-height:1.2;
-  }
-  .task-apply-btn {
-    width:100%;
-    border-radius:8px;
-    white-space:normal;
-    line-height:1.25;
-  }
-  .task-apply-btn.pending {
-    background:#fffaeb;
-    color:#b54708;
-    border:1px solid #fedf89;
-  }
-  .task-apply-btn.verified {
-    background:#ecfdf3;
-    color:#067647;
-    border:1px solid #abefc6;
-  }
-  .task-apply-btn.rejected {
-    background:#fef3f2;
-    color:#b42318;
-    border:1px solid #fecdca;
-  }
 
   /* â”€â”€ PAYMENT ROW â”€â”€ */
   .pay-row {
@@ -1169,29 +697,6 @@
   .sec-div::before, .sec-div::after {
     content:''; flex:1; height:1px; background:var(--border);
   }
-  .section-line {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin:22px 0 12px;
-  }
-  .section-line-title {
-    color:#101828;
-    font-size:16px;
-    font-weight:800;
-  }
-  .view-all-btn {
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#1570ef;
-    border-radius:8px;
-    padding:7px 12px;
-    font-size:12px;
-    font-weight:800;
-    cursor:pointer;
-  }
-  .view-all-btn:hover { background:#d1e9ff; }
 
   /* â”€â”€ ANIMATIONS â”€â”€ */
   @keyframes slideUp {
@@ -1235,872 +740,6 @@
   .col-split {
     width:1px; background:var(--border);
     position:sticky; top:0; z-index:10;
-  }
-
-  @media (max-width: 1100px) {
-    .topnav { padding:16px 22px; }
-    .panel-header { padding:16px 18px 14px; }
-    .home-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .task-detail-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-    .content { padding:16px; }
-  }
-
-  @media (max-width: 760px) {
-    body { overflow-x:hidden; }
-    .auth-screen { padding:16px; align-items:flex-start; padding-top:34px; }
-    .auth-card { padding:18px; }
-    .auth-tabs { grid-template-columns:1fr; }
-    .topnav {
-      position:relative;
-      flex-wrap:wrap;
-      gap:12px;
-      padding:14px 16px;
-    }
-    .topnav .logo { font-size:19px; }
-    .topnav-right { width:100%; justify-content:space-between; gap:8px; }
-    .portals {
-      display:block;
-      min-height:auto;
-    }
-    .panel {
-      min-height:calc(100vh - 96px);
-      border-right:none;
-    }
-    .panel-header {
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .panel-title {
-      flex-wrap:wrap;
-      font-size:14px;
-    }
-    .panel-body {
-      flex-direction:column;
-      overflow:visible;
-    }
-    .sidebar {
-      width:100%;
-      min-height:58px;
-      height:auto;
-      border-right:none;
-      border-bottom:1px solid var(--border);
-      flex-direction:row;
-      justify-content:flex-start;
-      overflow-x:auto;
-      padding:9px 10px;
-      gap:8px;
-    }
-    .sidebar-divider { display:none; }
-    .sidebar-icon {
-      flex:0 0 40px;
-      width:40px;
-      height:40px;
-    }
-    .sidebar-icon.active::before {
-      left:50%;
-      top:auto;
-      bottom:-9px;
-      transform:translateX(-50%);
-      width:24px;
-      height:3px;
-      border-radius:3px 3px 0 0;
-    }
-    .content {
-      max-height:none;
-      min-height:auto;
-      padding:14px;
-      overflow:visible;
-    }
-    .section-title { font-size:16px; margin-bottom:10px; }
-    .section-sub { font-size:11px; margin-bottom:14px; }
-    .home-stats,
-    .stat-grid,
-    .profile-form,
-    .task-detail-grid {
-      grid-template-columns:1fr !important;
-    }
-    .area-task,
-    .lead-card,
-    .profile-card {
-      align-items:flex-start;
-      flex-wrap:wrap;
-    }
-    .task-payout {
-      width:100%;
-      text-align:left;
-      padding-left:42px;
-    }
-    .task-action-stack {
-      width:100%;
-      padding-left:42px;
-      align-items:stretch;
-    }
-    .data-table {
-      display:block;
-      overflow-x:auto;
-      white-space:nowrap;
-      -webkit-overflow-scrolling:touch;
-    }
-    .profile-actions {
-      justify-content:stretch;
-      flex-direction:column;
-    }
-    .profile-actions button { width:100%; }
-    #wfSlidePanel {
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      bottom:0;
-      width:100%;
-    }
-    #wfContent.pushed { transform:none; }
-    .mtab-row {
-      overflow-x:auto;
-      white-space:nowrap;
-    }
-    .mtab { flex:0 0 auto; }
-  }
-
-  /* Mirats-style operations dashboard skin */
-  :root {
-    --red:    #d92d20;
-    --orange: #dc6803;
-    --yellow: #b54708;
-    --green:  #079455;
-    --teal:   #0e9384;
-    --blue:   #1570ef;
-    --purple: #6941c6;
-    --pink:   #c11574;
-    --dark:   #f9fafb;
-    --dark2:  #ffffff;
-    --dark3:  #f2f4f7;
-    --card:   #ffffff;
-    --border: #eaecf0;
-    --text:   #101828;
-    --muted:  #667085;
-    --font-head: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-
-  body {
-    background:#f9fafb;
-    color:var(--text);
-  }
-  body::before,
-  body::after,
-  .orb { display:none; }
-
-  .auth-card,
-  .topnav,
-  .panel,
-  .panel-header,
-  .sidebar,
-  .card,
-  .stat-card,
-  .hs-card,
-  .area-task,
-  .lead-card,
-  .profile-card {
-    box-shadow:0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.1);
-  }
-
-  .auth-screen { background:#f9fafb; }
-  .auth-card {
-    background:#fff;
-    border-color:#eaecf0;
-    border-radius:8px;
-  }
-  .auth-tabs {
-    background:#f2f4f7;
-    border-color:#eaecf0;
-    border-radius:8px;
-  }
-  .auth-tab { border-radius:6px; }
-  .auth-tab.active,
-  .apply-btn.wf-btn {
-    background:#1570ef;
-    color:#fff;
-  }
-  .apply-btn.admin-btn {
-    background:#1570ef;
-    color:#fff;
-  }
-  .auth-field input,
-  .profile-field input,
-  textarea {
-    background:#fff !important;
-    border-color:#d0d5dd !important;
-    color:#101828 !important;
-  }
-
-  .topnav {
-    padding:12px 18px;
-    background:#fff;
-    border-bottom:1px solid #eaecf0;
-    backdrop-filter:none;
-  }
-  .topnav .logo {
-    color:#101828;
-    background:none;
-    -webkit-text-fill-color:#101828;
-    font-size:18px;
-    letter-spacing:0;
-  }
-  .topnav .logo span { -webkit-text-fill-color:#1570ef; color:#1570ef; }
-  .topnav .logo.brand-logo {
-    background:none;
-    -webkit-text-fill-color:initial;
-  }
-
-  .wrapper {
-    min-height:100vh;
-    background:#f9fafb;
-  }
-  .wrapper > .topnav {
-    display:none;
-  }
-  .portals {
-    background:#f9fafb;
-    min-height:100vh;
-  }
-  .panel {
-    max-width:100%;
-    background:#f9fafb;
-    border-right:none;
-    min-height:100vh;
-  }
-  .panel-header {
-    height:65px;
-    padding:12px 24px 12px 104px;
-    background:#fff;
-    border-bottom:1px solid #eaecf0;
-    overflow:visible;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:120;
-    box-shadow:none;
-  }
-  .panel-header::before { display:none; }
-  .panel-title {
-    font-size:18px;
-    font-weight:700;
-    letter-spacing:0;
-  }
-  .panel-badge {
-    border-radius:6px;
-    font-size:10px;
-    background:#eff8ff !important;
-    color:#1570ef !important;
-    border:1px solid #b2ddff !important;
-  }
-  .avatar.wf,
-  .profile-avatar {
-    background:#1570ef;
-    color:#fff;
-  }
-
-  .panel-body {
-    min-height:calc(100vh - 65px);
-    background:#f9fafb;
-    overflow:visible;
-    padding-top:65px;
-  }
-  .sidebar {
-    width:80px;
-    position:fixed;
-    left:0;
-    top:65px;
-    bottom:0;
-    z-index:100;
-    background:#fff;
-    border-right:1px solid #eaecf0;
-    padding:18px 10px;
-    gap:7px;
-    box-shadow:none;
-  }
-  .sidebar-icon {
-    width:44px;
-    height:44px;
-    border-radius:8px;
-    color:#667085;
-    font-size:13px;
-  }
-  .nav-symbol {
-    width:22px;
-    height:22px;
-    border-radius:6px;
-    display:grid;
-    place-items:center;
-    position:relative;
-    color:currentColor;
-    font-weight:900;
-    letter-spacing:-0.4px;
-    font-size:11px;
-  }
-  .nav-symbol::before,
-  .nav-symbol::after {
-    content:'';
-    position:absolute;
-    box-sizing:border-box;
-    border-radius:3px;
-    border-color:currentColor;
-    background:transparent;
-    opacity:0.95;
-  }
-  .nav-home::before { width:18px; height:14px; left:2px; top:6px; border:2px solid currentColor; border-top:0; }
-  .nav-home::after { width:14px; height:14px; left:4px; top:1px; border-left:2px solid currentColor; border-top:2px solid currentColor; transform:rotate(45deg); border-radius:2px; }
-  .nav-tasks::before { width:16px; height:18px; left:3px; top:2px; border:2px solid currentColor; }
-  .nav-tasks::after { width:9px; height:5px; left:7px; top:9px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(-45deg); border-radius:0; }
-  .nav-leads::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-radius:50%; }
-  .nav-leads::after { width:8px; height:8px; left:7px; top:7px; border:2px solid currentColor; border-radius:50%; }
-  .nav-projects::before { width:18px; height:14px; left:2px; top:6px; border:2px solid currentColor; }
-  .nav-projects::after { width:8px; height:5px; left:4px; top:3px; border:2px solid currentColor; border-bottom:0; }
-  .nav-payments::before { width:18px; height:14px; left:2px; top:5px; border:2px solid currentColor; }
-  .nav-payments::after { width:6px; height:6px; right:4px; top:9px; border:2px solid currentColor; border-radius:50%; }
-  .nav-performance::before { width:16px; height:15px; left:3px; top:4px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; border-radius:0; }
-  .nav-performance::after { width:13px; height:8px; left:6px; top:7px; border-left:2px solid currentColor; border-top:2px solid currentColor; transform:skew(-24deg); border-radius:0; }
-  .nav-profile::before { width:8px; height:8px; top:2px; left:7px; border:2px solid currentColor; border-radius:50%; }
-  .nav-profile::after { width:18px; height:9px; bottom:2px; left:2px; border:2px solid currentColor; border-radius:9px 9px 4px 4px; }
-  .nav-export::before { width:16px; height:14px; left:3px; top:6px; border:2px solid currentColor; }
-  .nav-export::after { width:8px; height:8px; left:7px; top:2px; border-left:2px solid currentColor; border-top:2px solid currentColor; transform:rotate(45deg); border-radius:0; }
-  .nav-dashboard::before { width:8px; height:8px; left:2px; top:2px; border:2px solid currentColor; box-shadow:10px 0 0 -2px currentColor, 0 10px 0 -2px currentColor, 10px 10px 0 -2px currentColor; }
-  .nav-dashboard::after { display:none; }
-  .nav-workforce::before { width:7px; height:7px; left:3px; top:3px; border:2px solid currentColor; border-radius:50%; box-shadow:10px 0 0 -1px currentColor; }
-  .nav-workforce::after { width:18px; height:9px; left:2px; bottom:3px; border:2px solid currentColor; border-radius:9px 9px 4px 4px; }
-  .nav-import::before { width:16px; height:14px; left:3px; top:6px; border:2px solid currentColor; }
-  .nav-import::after { width:8px; height:8px; left:7px; top:2px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); border-radius:0; }
-  .nav-clock::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-radius:50%; }
-  .nav-clock::after { width:6px; height:7px; left:10px; top:5px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; border-radius:0; }
-  .nav-rejected::before,
-  .nav-rejected::after { width:16px; height:2px; left:3px; top:10px; background:currentColor; border:0; border-radius:2px; }
-  .nav-rejected::before { transform:rotate(45deg); }
-  .nav-rejected::after { transform:rotate(-45deg); }
-  .nav-approved::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-radius:50%; }
-  .nav-approved::after { width:9px; height:5px; left:7px; top:9px; border-left:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(-45deg); border-radius:0; }
-  .nav-reschedule::before { width:18px; height:18px; left:2px; top:2px; border:2px solid currentColor; border-left-color:transparent; border-radius:50%; }
-  .nav-reschedule::after { width:7px; height:7px; right:1px; top:2px; border-top:2px solid currentColor; border-right:2px solid currentColor; transform:rotate(18deg); border-radius:0; }
-  .nav-expired::before { width:16px; height:18px; left:3px; top:2px; border:2px solid currentColor; }
-  .nav-expired::after { width:12px; height:2px; left:5px; top:10px; background:currentColor; border:0; transform:rotate(45deg); border-radius:2px; }
-  .sidebar-icon:hover { background:#f2f4f7; color:#344054; }
-  .wf .sidebar-icon.active,
-  .admin .sidebar-icon.active {
-    background:#eaf3ff;
-    color:#1570ef;
-  }
-  .wf .sidebar-icon.active::before,
-  .admin .sidebar-icon.active::before {
-    background:#1570ef;
-    left:-10px;
-  }
-  .sidebar-divider { background:#eaecf0; }
-
-  .content {
-    margin-left:80px;
-    padding:24px;
-    background:#f9fafb;
-    max-height:none;
-    overflow:visible;
-  }
-  .admin-filter-bar {
-    display:grid;
-    grid-template-columns:2fr repeat(4,minmax(120px,1fr)) auto;
-    gap:10px;
-    margin-bottom:18px;
-    padding:12px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#fff;
-  }
-  .admin-filter-bar input,
-  .admin-filter-bar select,
-  .activity-search {
-    height:36px;
-    border:1px solid #d0d5dd;
-    border-radius:8px;
-    background:#fff;
-    color:#101828;
-    padding:0 10px;
-    font-size:11px;
-    font-weight:600;
-    min-width:0;
-  }
-  .kpi-group-title {
-    margin:18px 0 8px;
-    font-size:11px;
-    font-weight:800;
-    color:#344054;
-    letter-spacing:0.8px;
-    text-transform:uppercase;
-  }
-  .admin-kpi-grid {
-    display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    gap:10px;
-    margin-bottom:12px;
-  }
-  #admin-dashboard .admin-filter-bar {
-    grid-template-columns:minmax(0,1fr) auto;
-  }
-  .simple-admin-kpis {
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-  .simple-ops-grid {
-    grid-template-columns:repeat(6,minmax(0,1fr));
-  }
-  .mini-trend {
-    height:20px;
-    margin-top:9px;
-    border-radius:4px;
-    background:linear-gradient(90deg,transparent,currentColor);
-    opacity:0.18;
-  }
-  .mini-trend.blue { color:var(--blue); }
-  .mini-trend.green { color:var(--green); }
-  .mini-trend.orange { color:var(--orange); }
-  .mini-trend.purple { color:var(--purple); }
-  .mini-trend.red { color:var(--red); }
-  .mini-trend.teal { color:var(--teal); }
-  .mini-trend.yellow { color:var(--yellow); }
-  .admin-dashboard-grid {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:14px;
-  }
-  .ops-grid {
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:8px;
-  }
-  .ops-grid div {
-    padding:10px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#f9fafb;
-  }
-  .ops-grid b,
-  .metric-strip b {
-    display:block;
-    font-family:var(--font-head);
-    font-size:18px;
-    color:#1570ef;
-  }
-  .ops-grid span,
-  .project-row span,
-  .activity-row span {
-    display:block;
-    margin-top:3px;
-    font-size:10px;
-    color:#667085;
-    line-height:1.35;
-  }
-  .approval-row,
-  .activity-row {
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    gap:10px;
-    align-items:center;
-    padding:9px 0;
-    border-bottom:1px solid #eaecf0;
-    font-size:12px;
-  }
-  .approval-row button,
-  .activity-row button,
-  .quick-actions button {
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#1570ef;
-    border-radius:8px;
-    padding:7px 10px;
-    font-size:10px;
-    font-weight:800;
-    cursor:pointer;
-  }
-  .admin-filter-mini {
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:10px;
-  }
-  .admin-filter-mini span {
-    padding:4px 8px;
-    border-radius:999px;
-    background:#f2f4f7;
-    color:#667085;
-    font-size:10px;
-    font-weight:700;
-  }
-  .project-row {
-    display:grid;
-    grid-template-columns:1.4fr 1fr auto;
-    gap:12px;
-    align-items:center;
-    padding:12px 0;
-    border-bottom:1px solid #eaecf0;
-  }
-  .chart-stack {
-    display:grid;
-    gap:14px;
-  }
-  .chart-stack > div > span {
-    display:block;
-    margin-bottom:8px;
-    font-size:11px;
-    font-weight:800;
-    color:#344054;
-  }
-  .bar-chart.compact {
-    height:54px;
-  }
-  .metric-strip {
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-  }
-  .metric-strip b {
-    padding:10px;
-    border-radius:8px;
-    background:#f9fafb;
-    text-align:center;
-  }
-  .alert-row {
-    padding:10px 12px;
-    border-radius:8px;
-    margin-bottom:8px;
-    border:1px solid #eaecf0;
-    font-size:12px;
-    font-weight:700;
-  }
-  .alert-row.high { background:#fff1f3; color:#c01048; border-color:#fecdd6; }
-  .alert-row.med { background:#fffaeb; color:#b54708; border-color:#fedf89; }
-  .alert-row.low { background:#eff8ff; color:#175cd3; border-color:#b2ddff; }
-  .quick-actions {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-  }
-  .module-toolbar {
-    display:grid;
-    grid-template-columns:2fr repeat(2,minmax(120px,1fr)) repeat(4,auto);
-    gap:8px;
-    align-items:center;
-    padding:12px;
-    margin-bottom:14px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#fff;
-  }
-  .module-toolbar input,
-  .module-toolbar select {
-    min-width:0;
-    height:34px;
-    border:1px solid #d0d5dd;
-    border-radius:8px;
-    background:#fff;
-    color:#101828;
-    padding:0 10px;
-    font-size:11px;
-    font-weight:600;
-  }
-  .module-toolbar button {
-    height:34px;
-    padding:0 10px;
-    border-radius:8px;
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#1570ef;
-    font-size:10px;
-    font-weight:800;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .admin-action-toast {
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    z-index:300;
-    max-width:min(360px,calc(100vw - 32px));
-    padding:12px 14px;
-    border-radius:8px;
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#175cd3;
-    box-shadow:0 12px 28px rgba(16,24,40,0.14);
-    font-size:12px;
-    font-weight:800;
-    line-height:1.35;
-  }
-  .module-grid {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-    margin-bottom:14px;
-  }
-  .module-card {
-    padding:14px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#fff;
-  }
-  .module-title {
-    margin-bottom:10px;
-    font-size:12px;
-    font-weight:800;
-    color:#101828;
-  }
-  .chip-row {
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-  }
-  .chip-row span {
-    padding:5px 8px;
-    border-radius:999px;
-    background:#f2f4f7;
-    color:#344054;
-    font-size:10px;
-    font-weight:700;
-  }
-  .section-title {
-    margin-bottom:6px;
-    font-size:22px;
-    letter-spacing:0;
-  }
-  .section-title .dot { display:none; }
-  .section-sub {
-    margin-bottom:22px;
-    color:#667085;
-    font-size:13px;
-  }
-
-  .home-stats {
-    grid-template-columns:repeat(5,minmax(150px,1fr));
-    gap:14px;
-    margin-bottom:24px;
-  }
-  .stat-grid {
-    grid-template-columns:repeat(4,minmax(150px,1fr));
-    gap:14px;
-  }
-  .hs-card,
-  .stat-card {
-    min-height:96px;
-    padding:16px;
-    border-radius:8px;
-    background:#fff;
-    border:1px solid #eaecf0;
-    text-align:left;
-  }
-  .hs-card:hover,
-  .stat-card:hover,
-  .area-task:hover,
-  .lead-card:hover {
-    transform:none;
-    background:#fff;
-    border-color:#d0d5dd;
-    box-shadow:0 2px 8px rgba(16,24,40,0.08);
-  }
-  .hs-card .hs-icon {
-    display:none;
-  }
-  .hs-card .hs-val,
-  .stat-value {
-    font-size:24px;
-    margin-top:8px;
-  }
-  .hs-card .hs-lbl,
-  .stat-label {
-    color:#667085;
-    font-size:12px;
-    letter-spacing:0;
-    text-transform:none;
-  }
-
-  .sec-div {
-    margin:22px 0 12px;
-  }
-  .sec-div::before,
-  .sec-div::after { display:none; }
-  .sec-div span {
-    color:#101828;
-    font-size:16px;
-    letter-spacing:0;
-    text-transform:none;
-  }
-
-  .area-task {
-    align-items:flex-start;
-    gap:14px;
-    padding:18px;
-    margin-bottom:14px;
-    border-radius:8px;
-    background:#fff;
-    border:1px solid #eaecf0;
-  }
-  .area-task-icon {
-    width:40px;
-    height:40px;
-    border-radius:8px;
-    background:#eff8ff !important;
-    color:#1570ef;
-  }
-  .area-task-name {
-    font-size:15px;
-    font-weight:700;
-    color:#101828;
-    margin-bottom:4px;
-  }
-  .area-task-meta {
-    font-size:12px;
-    color:#667085;
-    margin-bottom:8px;
-  }
-  .task-detail-grid {
-    grid-template-columns:repeat(4,minmax(120px,1fr));
-    gap:8px;
-  }
-  .task-detail {
-    background:#f9fafb;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-  }
-  .task-detail-label {
-    color:#667085;
-    letter-spacing:0;
-  }
-  .task-detail-value { color:#344054; }
-  .task-date-value {
-    color:#101828;
-    font-size:12px;
-  }
-  .task-payout {
-    min-width:112px;
-    padding:10px 12px;
-    border-radius:8px;
-    background:#fffbeb;
-    border:1px solid #fedf89;
-  }
-  .task-payout-value { color:#b54708; }
-  .task-payout-label { color:#667085; }
-  .apply-btn {
-    border-radius:8px;
-    padding:8px 14px;
-    font-size:12px;
-    letter-spacing:0;
-  }
-
-  .card,
-  .lead-card,
-  .profile-card {
-    background:#fff;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    box-shadow:0 1px 2px rgba(16,24,40,0.04);
-  }
-  .card {
-    padding:18px;
-    margin-bottom:16px;
-  }
-  .card-title {
-    font-size:14px;
-    color:#101828;
-  }
-  .data-table {
-    background:#fff;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    overflow:hidden;
-  }
-  .data-table th {
-    background:#f9fafb;
-    color:#667085;
-    border-bottom:1px solid #eaecf0;
-  }
-  .data-table td {
-    border-bottom:1px solid #eaecf0;
-    color:#344054;
-    background:#fff;
-  }
-  .data-table tr:hover td { background:#f9fafb; }
-  .badge { border-radius:999px; }
-  .tab-link {
-    cursor:pointer;
-    transition:border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-  }
-  .tab-link:hover {
-    border-color:#b2ddff;
-    box-shadow:0 2px 8px rgba(21,112,239,0.12);
-  }
-  .progress-bar { background:#eaecf0; }
-  .logout-btn {
-    border-radius:8px;
-    background:#fff;
-  }
-
-  @media (max-width: 1180px) {
-    .home-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .task-detail-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  }
-
-  @media (max-width: 760px) {
-    .topnav { padding:12px 14px; }
-    .wrapper > .topnav { display:none; }
-    .panel-header {
-      height:auto;
-      min-height:58px;
-      padding:12px 14px;
-      position:sticky;
-      top:0;
-      left:auto;
-      right:auto;
-      z-index:120;
-    }
-    .panel-body {
-      min-height:auto;
-      padding-top:0;
-    }
-    .sidebar {
-      position:relative;
-      left:auto;
-      top:auto;
-      bottom:auto;
-      width:100%;
-      background:#fff;
-      border-bottom:1px solid #eaecf0;
-      padding:8px 10px;
-    }
-    .content {
-      margin-left:0;
-      padding:14px;
-      max-height:none;
-    }
-    .home-stats { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-    .section-title { font-size:20px; }
-    .area-task { padding:14px; }
-    .task-payout {
-      padding-left:12px;
-      text-align:left;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .auth-title { font-size:21px; }
-    .panel-badge { font-size:9px; }
-    .logout-btn { padding:6px 9px; }
-    .avatar { width:32px; height:32px; }
-    .card,
-    .area-task,
-    .lead-card,
-    .hs-card,
-    .stat-card {
-      border-radius:10px;
-    }
   }
 </style>
 </head>
@@ -2162,14 +801,13 @@
       <!-- Panel header -->
       <div class="panel-header admin">
         <div class="panel-title">
-          <img class="panel-logo-image" src="assets/mtss-services-logo.png" alt="MTSS Services">
+          <span>🏢</span>
           Admin Portal
           <span class="panel-badge">MANAGEMENT</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <span style="font-size:10px;color:var(--muted)">Super Admin</span>
           <div class="avatar admin" style="width:28px;height:28px;font-size:11px">SA</div>
-          <button class="logout-btn" onclick="logoutUser()">Logout</button>
         </div>
       </div>
 
@@ -2177,16 +815,16 @@
 
         <!-- Sidebar -->
         <div class="sidebar admin">
-          <div class="sidebar-icon active" title="Dashboard" onclick="adminTab(this,'dashboard')"><span class="nav-symbol nav-dashboard"></span></div>
-          <div class="sidebar-icon notif" title="Leads" onclick="adminTab(this,'leads')"><span class="nav-symbol nav-leads"></span></div>
-          <div class="sidebar-icon" title="Workforce" onclick="adminTab(this,'workforce')"><span class="nav-symbol nav-workforce"></span></div>
-          <div class="sidebar-icon" title="Projects" onclick="adminTab(this,'projects')"><span class="nav-symbol nav-projects"></span></div>
+          <div class="sidebar-icon active" title="Dashboard" onclick="adminTab(this,'dashboard')">📊</div>
+          <div class="sidebar-icon notif" title="Leads" onclick="adminTab(this,'leads')">🎯</div>
+          <div class="sidebar-icon" title="Workforce" onclick="adminTab(this,'workforce')">👥</div>
+          <div class="sidebar-icon" title="Projects" onclick="adminTab(this,'projects')">📁</div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Revenue" onclick="adminTab(this,'revenue')"><span class="nav-symbol nav-payments"></span></div>
-          <div class="sidebar-icon" title="Payments" onclick="adminTab(this,'payments')"><span class="nav-symbol nav-payments"></span></div>
+          <div class="sidebar-icon" title="Revenue" onclick="adminTab(this,'revenue')">💰</div>
+          <div class="sidebar-icon" title="Payments" onclick="adminTab(this,'payments')">💳</div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Import" onclick="adminTab(this,'import')"><span class="nav-symbol nav-import"></span></div>
-          <div class="sidebar-icon" title="Performance" onclick="adminTab(this,'performance')"><span class="nav-symbol nav-performance"></span></div>
+          <div class="sidebar-icon" title="Import" onclick="adminTab(this,'import')">📥</div>
+          <div class="sidebar-icon" title="Performance" onclick="adminTab(this,'performance')">🏆</div>
         </div>
 
         <!-- Content -->
@@ -2194,106 +832,120 @@
 
           <!-- DASHBOARD TAB -->
           <div id="admin-dashboard">
-            <div class="section-title"><span class="dot"></span>Admin Overview</div>
-            <div class="section-sub">Simple view of today's work, pending approvals, and quick admin actions.</div>
+            <div class="section-title"><span class="dot"></span>Overview</div>
+            <div class="section-sub">Today, May 26 2025 — All Projects</div>
 
-            <div class="admin-filter-bar">
-              <input id="adminGlobalSearch" type="search" placeholder="Search task, worker, project, client, payment" onkeydown="if(event.key === 'Enter') adminSearchDashboard()">
-              <button class="apply-btn admin-btn" onclick="adminSearchDashboard()">Search</button>
-            </div>
-
-            <div class="admin-kpi-grid simple-admin-kpis">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Tasks Today</div><div class="stat-value blue">286</div><div class="stat-change up">Open task list</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Pending Review</div><div class="stat-value orange">57</div><div class="stat-change down">Needs admin check</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">Active Workers</div><div class="stat-value green">1,216</div><div class="stat-change up">View workforce</div></div>
-              <div class="stat-card purple tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active Projects</div><div class="stat-value purple">18</div><div class="stat-change up">View projects</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending Payments</div><div class="stat-value red">₹32K</div><div class="stat-change down">Process payouts</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Revenue</div><div class="stat-value teal">₹4.2L</div><div class="stat-change up">This month</div></div>
-            </div>
-
-            <div class="admin-dashboard-grid">
-              <div class="card">
-                <div class="card-header"><div class="card-title">Pending Work</div><span class="tag orange">Action Needed</span></div>
-                <div class="approval-row"><span>WF task applications</span><b id="adminPendingApplications">0</b><button>Review</button></div>
-                <div class="approval-row"><span>Workforce profile</span><b id="adminLinkedWorkerName">Linked</b><button>View Workforce</button></div>
-                <div class="approval-row"><span>Payment requests</span><b>7</b><button>Process</button></div>
+            <div class="stat-grid">
+              <div class="stat-card blue">
+                <div class="stat-label">Total Leads</div>
+                <div class="stat-value blue">1,284</div>
+                <div class="stat-change up">▲ 12% this month</div>
               </div>
-              <div class="card">
-                <div class="card-header"><div class="card-title">Quick Actions</div><span class="tag blue">Most Used</span></div>
-                <div class="quick-actions">
-                  <button>Create Task</button><button>Add Worker</button><button>Create Project</button>
-                  <button>Process Payments</button><button>Generate Reports</button><button>View Workforce</button>
+              <div class="stat-card orange">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value orange">47</div>
+                <div class="stat-change down">▼ 3 today</div>
+              </div>
+              <div class="stat-card green">
+                <div class="stat-label">Monthly Revenue</div>
+                <div class="stat-value green">₹4.2L</div>
+                <div class="stat-change up">▲ 18% vs last</div>
+              </div>
+              <div class="stat-card purple">
+                <div class="stat-label">Active Workforce</div>
+                <div class="stat-value purple">138</div>
+                <div class="stat-change up">▲ 6 new</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Revenue — Last 8 Months</div>
+                <span class="tag blue">₹28.4L YTD</span>
+              </div>
+              <div class="bar-chart">
+                <div class="bar" style="height:60%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Oct: ₹2.8L"></div>
+                <div class="bar" style="height:50%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Nov: ₹2.3L"></div>
+                <div class="bar" style="height:70%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Dec: ₹3.2L"></div>
+                <div class="bar" style="height:55%;background:linear-gradient(180deg,var(--purple),#3a1a8a);" title="Jan: ₹2.5L"></div>
+                <div class="bar" style="height:80%;background:linear-gradient(180deg,var(--purple),#3a1a8a);" title="Feb: ₹3.7L"></div>
+                <div class="bar" style="height:65%;background:linear-gradient(180deg,var(--teal),#0a5a60);" title="Mar: ₹3.0L"></div>
+                <div class="bar" style="height:75%;background:linear-gradient(180deg,var(--teal),#0a5a60);" title="Apr: ₹3.5L"></div>
+                <div class="bar" style="height:90%;background:linear-gradient(180deg,var(--green),#005a3a);" title="May: ₹4.2L"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                <span style="font-size:9px;color:var(--muted)">Oct</span>
+                <span style="font-size:9px;color:var(--muted)">Nov</span>
+                <span style="font-size:9px;color:var(--muted)">Dec</span>
+                <span style="font-size:9px;color:var(--muted)">Jan</span>
+                <span style="font-size:9px;color:var(--muted)">Feb</span>
+                <span style="font-size:9px;color:var(--muted)">Mar</span>
+                <span style="font-size:9px;color:var(--muted)">Apr</span>
+                <span style="font-size:9px;color:var(--muted)">May</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Active Projects</div>
+                <span class="tag green">8 Running</span>
+              </div>
+              <div class="donut-wrap">
+                <div class="donut">
+                  <svg width="64" height="64" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--blue)" stroke-width="10" stroke-dasharray="82 81" stroke-linecap="round"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--green)" stroke-width="10" stroke-dasharray="40 123" stroke-dashoffset="-82" stroke-linecap="round"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--orange)" stroke-width="10" stroke-dasharray="22 141" stroke-dashoffset="-122" stroke-linecap="round"/>
+                  </svg>
+                  <div class="donut-center" style="color:var(--text)"><span>8</span><span style="font-size:8px;color:var(--muted)">total</span></div>
+                </div>
+                <div class="donut-legend">
+                  <div class="donut-item"><div class="donut-dot" style="background:var(--blue)"></div>Active (5)</div>
+                  <div class="donut-item"><div class="donut-dot" style="background:var(--green)"></div>Completed (2)</div>
+                  <div class="donut-item"><div class="donut-dot" style="background:var(--orange)"></div>On Hold (1)</div>
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="card-header"><div class="card-title">Today Summary</div><span class="tag green">Live</span></div>
-              <div class="ops-grid simple-ops-grid">
-                <div><b>312</b><span>Workers online</span></div>
-                <div><b>218</b><span>Tasks submitted</span></div>
-                <div><b id="adminVerifiedApplications">0</b><span>WF verified</span></div>
-                <div><b id="adminRejectedApplications">0</b><span>WF rejected</span></div>
-                <div><b>23</b><span>Overdue tasks</span></div>
-                <div><b>₹32K</b><span>Pending payout</span></div>
+              <div class="card-header">
+                <div class="card-title">Recent Payments</div>
+                <span class="tag orange">View All</span>
+              </div>
+              <div class="pay-row">
+                <div><div class="pay-name">Rahul Sharma</div><div class="pay-tid">TXN#84729A</div></div>
+                <div style="text-align:right"><div class="pay-amount" style="color:var(--green)">₹8,400</div><span class="badge paid">Paid</span></div>
+              </div>
+              <div class="pay-row">
+                <div><div class="pay-name">Priya Mehta</div><div class="pay-tid">TXN#84730B</div></div>
+                <div style="text-align:right"><div class="pay-amount" style="color:var(--teal)">₹6,200</div><span class="badge processing">Processing</span></div>
+              </div>
+              <div class="pay-row">
+                <div><div class="pay-name">Amit Verma</div><div class="pay-tid">TXN#84731C</div></div>
+                <div style="text-align:right"><div class="pay-amount" style="color:var(--orange)">₹5,500</div><span class="badge pending">Pending</span></div>
               </div>
             </div>
           </div>
 
           <!-- LEADS TAB (hidden) -->
           <div id="admin-leads" style="display:none">
-            <div class="section-title"><span class="dot"></span>Task Management</div>
-            <div class="section-sub">Create, assign, monitor, review, approve, reject, and analyze tasks across projects.</div>
+            <div class="section-title"><span class="dot"></span>Lead Management</div>
+            <div class="section-sub">47 pending approval • 3 self-assign requests</div>
 
             <div class="stat-grid">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Total Tasks</div><div class="stat-value blue">12,480</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Pending Review</div><div class="stat-value orange">47</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Approved</div><div class="stat-value green">1,109</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Rejected</div><div class="stat-value red">128</div></div>
-            </div>
-
-            <div class="module-toolbar">
-              <input placeholder="Search task, project, worker, city">
-              <select><option>All Workflows</option><option>Draft</option><option>Assigned</option><option>Accepted</option><option>In Progress</option><option>Submitted</option><option>Under Review</option><option>Approved</option><option>Rejected</option><option>Rework Required</option><option>Completed</option><option>Closed</option></select>
-              <select><option>All Priorities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
-              <button>Create Task</button><button>Bulk Create</button><button>Templates</button><button>Export</button>
-            </div>
-
-            <div class="module-grid">
-              <div class="module-card">
-                <div class="module-title">Task Creation & Assignment</div>
-                <div class="chip-row"><span>Create Task</span><span>Bulk Task Creation</span><span>Task Templates</span><span>Recurring Tasks</span><span>Task Categories</span><span>Priority Levels</span><span>SOP Uploads</span></div>
-                <div class="chip-row"><span>Assign Worker</span><span>Team Leader</span><span>Multiple Workers</span><span>State</span><span>City</span><span>Zone</span><span>Bulk Assignment</span></div>
-              </div>
-              <div class="module-card">
-                <div class="module-title">Submission Review</div>
-                <div class="approval-row"><span>Forms Review</span><b>57</b><button>Review</button></div>
-                <div class="approval-row"><span>Document Review</span><b>18</b><button>Open</button></div>
-                <div class="approval-row"><span>Geo-tagged Images</span><b>42</b><button>Validate</button></div>
-                <div class="approval-row"><span>GPS + Timestamp Validation</span><b>96%</b><button>Audit</button></div>
-              </div>
-            </div>
-
-            <div class="module-grid">
-              <div class="module-card">
-                <div class="module-title">Rework Management</div>
-                <div class="ops-grid"><div><b>9</b><span>Rework Requests</span></div><div><b>4</b><span>Rework Deadlines</span></div><div><b>21</b><span>Rework History</span></div></div>
-              </div>
-              <div class="module-card">
-                <div class="module-title">Task Monitoring & Reports</div>
-                <div class="metric-strip"><b>86%<span>Completion</span></b><b>91%<span>Approval</span></b><b>2.4%<span>Rejection</span></b></div>
-                <div class="chip-row"><span>Daily</span><span>Weekly</span><span>Monthly</span><span>Project-wise</span><span>Client-wise</span><span>Worker Performance</span></div>
-              </div>
+              <div class="stat-card blue"><div class="stat-label">Total Leads</div><div class="stat-value blue">1,284</div></div>
+              <div class="stat-card orange"><div class="stat-label">Pending</div><div class="stat-value orange">47</div></div>
+              <div class="stat-card green"><div class="stat-label">Approved</div><div class="stat-value green">1,109</div></div>
+              <div class="stat-card red"><div class="stat-label">Rejected</div><div class="stat-value red">128</div></div>
             </div>
 
             <div class="sec-div"><span>Self-Assign Requests</span></div>
-            <div id="adminAppliedTasks"></div>
             <div class="lead-card">
               <div class="lead-left">
                 <div class="lead-id">LEAD #2847 • PIN: 125001</div>
                 <div class="lead-title">Solar Panel Installation Survey</div>
                 <div class="lead-meta">Applied by: Rahul Sharma • 2h ago</div>
-                <div class="lead-meta">Address: B-12, Sector 5, Hisar, Haryana — 125001</div>
               </div>
               <div style="display:flex;gap:6px">
                 <button class="apply-btn admin-btn" onclick="approveLead(this)">Approve</button>
@@ -2305,7 +957,6 @@
                 <div class="lead-id">LEAD #2848 • PIN: 125002</div>
                 <div class="lead-title">Fiber Broadband New Connection</div>
                 <div class="lead-meta">Applied by: Priya Mehta • 5h ago</div>
-                <div class="lead-meta">Address: House 48, Model Town Extension, Hisar, Haryana — 125002</div>
               </div>
               <div style="display:flex;gap:6px">
                 <button class="apply-btn admin-btn">Approve</button>
@@ -2315,12 +966,12 @@
 
             <div class="sec-div"><span>All Leads</span></div>
             <table class="data-table">
-              <thead><tr><th>Lead ID</th><th>Title</th><th>Address</th><th>Assigned To</th><th>Status</th></tr></thead>
+              <thead><tr><th>Lead ID</th><th>Title</th><th>Assigned To</th><th>Status</th></tr></thead>
               <tbody>
-                <tr><td>#2840</td><td>Water Meter Reading</td><td>Row R-4, Block C, Model Town, Hisar, Haryana — 125005</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--blue),var(--purple))">R</div>Rahul S.</div></td><td><span class="badge approved">Approved</span></td></tr>
-                <tr><td>#2841</td><td>Electricity Survey</td><td>Shop 21, Urban Estate Market, Hisar, Haryana — 125001</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--orange),var(--red))">P</div>Priya M.</div></td><td><span class="badge inprogress">In Progress</span></td></tr>
-                <tr><td>#2842</td><td>Gas Pipeline Check</td><td>Gas Pipeline Route, Sector 11, Hisar, Haryana — 125011</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--green),var(--teal))">A</div>Amit V.</div></td><td><span class="badge pending">Pending</span></td></tr>
-                <tr><td>#2843</td><td>Solar Assessment</td><td>B-12, Sector 5, Hisar, Haryana — 125001</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--teal),var(--blue))">S</div>Sunita K.</div></td><td><span class="badge review">Under Review</span></td></tr>
+                <tr><td>#2840</td><td>Water Meter Reading</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--blue),var(--purple))">R</div>Rahul S.</div></td><td><span class="badge approved">Approved</span></td></tr>
+                <tr><td>#2841</td><td>Electricity Survey</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--orange),var(--red))">P</div>Priya M.</div></td><td><span class="badge inprogress">In Progress</span></td></tr>
+                <tr><td>#2842</td><td>Gas Pipeline Check</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--green),var(--teal))">A</div>Amit V.</div></td><td><span class="badge pending">Pending</span></td></tr>
+                <tr><td>#2843</td><td>Solar Assessment</td><td><div class="user-row"><div class="user-avatar" style="background:linear-gradient(135deg,var(--teal),var(--blue))">S</div>Sunita K.</div></td><td><span class="badge review">Under Review</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -2328,29 +979,8 @@
           <!-- WORKFORCE TAB (hidden) -->
           <div id="admin-workforce" style="display:none">
             <div class="section-title"><span class="dot"></span>Workforce Directory</div>
-            <div class="section-sub">Centralized worker, auditor, surveyor, mystery shopper, team leader, and employee records.</div>
-            <div class="stat-grid">
-              <div class="stat-card blue"><div class="stat-label">Total Workforce</div><div class="stat-value blue">1,842</div></div>
-              <div class="stat-card green"><div class="stat-label">Active Workforce</div><div class="stat-value green">1,216</div></div>
-              <div class="stat-card teal"><div class="stat-label">Online Workforce</div><div class="stat-value teal">312</div></div>
-              <div class="stat-card purple"><div class="stat-label">New Registrations</div><div class="stat-value purple">64</div></div>
-              <div class="stat-card green"><div class="stat-label">Verified Workers</div><div class="stat-value green">1,004</div></div>
-              <div class="stat-card orange"><div class="stat-label">Available Workers</div><div class="stat-value orange">428</div></div>
-              <div class="stat-card red"><div class="stat-label">Suspended</div><div class="stat-value red">19</div></div>
-            </div>
-            <div class="module-toolbar">
-              <input placeholder="Search worker, mobile, city, ID">
-              <select><option>All Categories</option><option>Field Executive</option><option>Auditor</option><option>Surveyor</option><option>Mystery Shopper</option><option>Team Leader</option><option>Supervisor</option><option>Manager</option></select>
-              <select><option>All Availability</option><option>Available</option><option>Busy</option><option>On Assignment</option><option>Offline</option><option>Suspended</option></select>
-              <button>Add Worker</button><button>Verify KYC</button><button>Export</button>
-            </div>
+            <div class="section-sub">Full workforce profile and payout details</div>
             <div id="adminWfProfile"></div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">KYC Verification</div><div class="chip-row"><span>Aadhaar</span><span>PAN</span><span>Driving License</span><span>Passport</span><span>Selfie</span><span>Address Proof</span></div></div>
-              <div class="module-card"><div class="module-title">Attendance & Activity</div><div class="ops-grid"><div><b>09:18</b><span>Avg Login</span></div><div><b>8.4h</b><span>Working Hours</span></div><div><b>94%</b><span>GPS Attendance</span></div><div><b>12m</b><span>Last Activity Avg</span></div></div></div>
-              <div class="module-card"><div class="module-title">Performance Tracking</div><div class="metric-strip"><b>924<span>Assigned</span></b><b>781<span>Completed</span></b><b>91%<span>Approval</span></b></div><div class="chip-row"><span>Earnings</span><span>Incentives</span><span>Rejection Rate</span><span>Attendance</span></div></div>
-              <div class="module-card"><div class="module-title">Geographic Mapping</div><div class="chip-row"><span>State-wise Workforce</span><span>City-wise Workforce</span><span>District-wise Workforce</span><span>Live Workforce Map</span></div></div>
-            </div>
             <table class="data-table">
               <thead><tr><th>Name</th><th>Email</th><th>Mobile No</th><th>Address</th><th>Bank</th><th>Status</th></tr></thead>
               <tbody>
@@ -2362,27 +992,12 @@
           <!-- PROJECTS TAB (hidden) -->
           <div id="admin-projects" style="display:none">
             <div class="section-title"><span class="dot"></span>Project Management</div>
-            <div class="section-sub">Complete project lifecycle, milestones, workforce allocation, budgets, risks, and closure tracking.</div>
+            <div class="section-sub">8 total projects</div>
             <div class="stat-grid">
-              <div class="stat-card purple tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Total Projects</div><div class="stat-value purple">48</div></div>
-              <div class="stat-card blue tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active</div><div class="stat-value blue">5</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Delayed</div><div class="stat-value red">2</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Upcoming</div><div class="stat-value teal">6</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('projects')"><div class="stat-label">On Hold</div><div class="stat-value orange">1</div></div>
-              <div class="stat-card purple tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
-            </div>
-            <div class="module-toolbar">
-              <input placeholder="Search project, code, client, manager">
-              <select><option>All Categories</option><option>Survey</option><option>Audit</option><option>Mystery Shopping</option><option>Banking Onboarding</option><option>BGV</option><option>Data Collection</option><option>Sales Campaign</option><option>Retail Audit</option></select>
-              <select><option>All Status</option><option>Not Started</option><option>In Progress</option><option>Under Review</option><option>Completed</option><option>Delayed</option><option>On Hold</option></select>
-              <button>Create Project</button><button>Milestones</button><button>Gantt</button><button>Export</button>
-            </div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">Project Creation</div><div class="chip-row"><span>Project ID</span><span>Project Name</span><span>Project Code</span><span>Category</span><span>Type</span><span>Scope of Work</span></div></div>
-              <div class="module-card"><div class="module-title">Client & Billing</div><div class="chip-row"><span>Client Name</span><span>Contact Person</span><span>Email</span><span>Mobile</span><span>Billing Info</span></div></div>
-              <div class="module-card"><div class="module-title">Planning & Allocation</div><div class="chip-row"><span>Start Date</span><span>End Date</span><span>Milestones</span><span>Deliverables</span><span>Project Manager</span><span>Team Leaders</span><span>Workers</span></div></div>
-              <div class="module-card"><div class="module-title">Budget, Documents & Risks</div><div class="chip-row"><span>Approved Budget</span><span>Workforce Cost</span><span>Operational Cost</span><span>Agreements</span><span>SOPs</span><span>Invoices</span><span>Risk Workflow</span></div></div>
+              <div class="stat-card blue"><div class="stat-label">Active</div><div class="stat-value blue">5</div></div>
+              <div class="stat-card green"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
+              <div class="stat-card orange"><div class="stat-label">On Hold</div><div class="stat-value orange">1</div></div>
+              <div class="stat-card purple"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">Project Revenue</div></div>
@@ -2397,46 +1012,22 @@
           <!-- REVENUE TAB -->
           <div id="admin-revenue" style="display:none">
             <div class="section-title"><span class="dot"></span>Revenue Dashboard</div>
-            <div class="section-sub">Revenue monitoring, invoicing, collections, outstanding tracking, GST, and profitability analytics.</div>
             <div class="stat-grid">
-              <div class="stat-card purple tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">This Month</div><div class="stat-value green">₹4.2L</div><div class="stat-change up">▲ 18%</div></div>
-              <div class="stat-card blue tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Annual Revenue</div><div class="stat-value blue">₹51.8L</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Outstanding</div><div class="stat-value orange">₹7.6L</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Collected</div><div class="stat-value green">₹20.8L</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Net Profit</div><div class="stat-value teal">₹8.7L</div></div>
-              <div class="stat-card yellow tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Gross Margin</div><div class="stat-value yellow">31%</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Top Project</div><div class="stat-value teal">₹8.4L</div></div>
-            </div>
-            <div class="module-toolbar"><input placeholder="Search invoice, client, project"><select><option>All Invoice Status</option><option>Draft</option><option>Sent</option><option>Paid</option><option>Partially Paid</option><option>Overdue</option><option>Cancelled</option></select><button>Create Invoice</button><button>Collection Follow-up</button><button>GST Report</button><button>Export</button></div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">Client Revenue Tracking</div><div class="approval-row"><span>OYO</span><b>₹10.8L</b><button>Open</button></div><div class="approval-row"><span>Urban Infra</span><b>₹8.4L</b><button>Open</button></div><div class="approval-row"><span>NetGrid</span><b>₹6.2L</b><button>Open</button></div></div>
-              <div class="module-card"><div class="module-title">Invoice & Collections</div><div class="chip-row"><span>Invoice Creation</span><span>Invoice Approval</span><span>Payment Received</span><span>Partial Payments</span><span>Pending Collections</span><span>Reminder System</span><span>Escalation Workflow</span></div></div>
-              <div class="module-card"><div class="module-title">Expense & Profitability</div><div class="ops-grid"><div><b>₹9.4L</b><span>Workforce Costs</span></div><div><b>₹1.8L</b><span>Vendor Costs</span></div><div><b>₹68K</b><span>Software</span></div><div><b>2.6x</b><span>ROI</span></div></div></div>
-              <div class="module-card"><div class="module-title">Revenue Reports</div><div class="chip-row"><span>Revenue Report</span><span>Collection Report</span><span>Outstanding Report</span><span>Profitability Report</span><span>Client Revenue Report</span><span>GST Reports</span><span>Tax Reports</span></div></div>
+              <div class="stat-card green"><div class="stat-label">This Month</div><div class="stat-value green">₹4.2L</div><div class="stat-change up">▲ 18%</div></div>
+              <div class="stat-card blue"><div class="stat-label">YTD Total</div><div class="stat-value blue">₹28.4L</div></div>
+              <div class="stat-card teal"><div class="stat-label">Top Project</div><div class="stat-value teal">₹8.4L</div></div>
+              <div class="stat-card orange"><div class="stat-label">Avg/Month</div><div class="stat-value orange">₹3.5L</div></div>
             </div>
           </div>
 
           <!-- PAYMENTS TAB -->
           <div id="admin-payments" style="display:none">
             <div class="section-title"><span class="dot"></span>Payment Management</div>
-            <div class="section-sub">Outgoing payments, salary, incentives, reimbursements, vendor payments, approvals, and audit compliance.</div>
             <div class="stat-grid">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Total Processed</div><div class="stat-value blue">₹18.6L</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending Payments</div><div class="stat-value red">₹32K</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Approved Payments</div><div class="stat-value green">₹2.4L</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Salary Pending</div><div class="stat-value orange">₹86K</div></div>
-              <div class="stat-card purple tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Incentive Pending</div><div class="stat-value purple">₹18K</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Vendor Pending</div><div class="stat-value teal">₹54K</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Paid This Month</div><div class="stat-value green">₹2.1L</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Processing</div><div class="stat-value orange">₹48K</div></div>
-            </div>
-            <div class="module-toolbar"><input placeholder="Search beneficiary, UPI, bank, request"><select><option>All Beneficiaries</option><option>Worker</option><option>Auditor</option><option>Surveyor</option><option>Mystery Shopper</option><option>Team Leader</option><option>Employee</option><option>Vendor</option><option>Agency</option></select><select><option>All Categories</option><option>Task Payments</option><option>Survey Payments</option><option>Audit Payments</option><option>Salary</option><option>Incentive</option><option>Vendor</option><option>Reimbursements</option></select><button>Create Request</button><button>Approve</button><button>Export</button></div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">Payment Requests & Approval Levels</div><div class="approval-row"><span>Team Leader Approval</span><b>18</b><button>Review</button></div><div class="approval-row"><span>Manager Approval</span><b>11</b><button>Review</button></div><div class="approval-row"><span>Finance Approval</span><b>7</b><button>Approve</button></div><div class="approval-row"><span>Final Admin Approval</span><b>4</b><button>Process</button></div></div>
-              <div class="module-card"><div class="module-title">Worker Earnings</div><div class="ops-grid"><div><b>₹84K</b><span>Total Earnings</span></div><div><b>₹26K</b><span>Task Earnings</span></div><div><b>₹12K</b><span>Incentives</span></div><div><b>₹6.2K</b><span>Pending</span></div></div></div>
-              <div class="module-card"><div class="module-title">Salary, Incentive & Reimbursement</div><div class="chip-row"><span>Salary Processing</span><span>Attendance Integration</span><span>Deduction</span><span>Performance Incentives</span><span>Referral Bonus</span><span>Travel</span><span>Fuel</span><span>Food</span><span>Accommodation</span></div></div>
-              <div class="module-card"><div class="module-title">Processing & Compliance</div><div class="chip-row"><span>Bank Transfer</span><span>UPI</span><span>NEFT</span><span>RTGS</span><span>IMPS</span><span>Cheque</span><span>PAN Verification</span><span>GST Verification</span><span>Bank Verification</span><span>Audit Logs</span></div></div>
+              <div class="stat-card green"><div class="stat-label">Paid This Month</div><div class="stat-value green">₹2.1L</div></div>
+              <div class="stat-card orange"><div class="stat-label">Processing</div><div class="stat-value orange">₹48K</div></div>
+              <div class="stat-card red"><div class="stat-label">Pending</div><div class="stat-value red">₹32K</div></div>
+              <div class="stat-card blue"><div class="stat-label">Total Processed</div><div class="stat-value blue">₹18.6L</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">Transactions</div><span class="tag blue">Filter by Month</span></div>
@@ -2521,14 +1112,13 @@
       <!-- Panel header -->
       <div class="panel-header wf">
         <div class="panel-title">
-          <img class="panel-logo-image" src="assets/mtss-services-logo.png" alt="MTSS Services">
+          <span>👷</span>
           Workforce Portal
           <span class="panel-badge">FIELD OPS</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <span style="font-size:10px;color:var(--muted)">Rahul S.</span>
           <div class="avatar wf" style="width:28px;height:28px;font-size:11px">RS</div>
-          <button class="logout-btn" onclick="logoutWf()">Logout</button>
         </div>
       </div>
 
@@ -2536,64 +1126,62 @@
 
         <!-- Sidebar -->
         <div class="sidebar wf">
-          <div class="sidebar-icon active" title="Home" onclick="wfTab(this,'home')"><span class="nav-symbol nav-home"></span></div>
-          <div class="sidebar-icon" title="Opportunities" onclick="wfTab(this,'opportunities')"><span class="nav-symbol nav-leads"></span></div>
-          <div class="sidebar-icon" title="My Tasks" onclick="wfTab(this,'tasks')"><span class="nav-symbol nav-tasks"></span></div>
+          <div class="sidebar-icon active" title="Home" onclick="wfTab(this,'home')">🏠</div>
+          <div class="sidebar-icon" title="My Tasks" onclick="wfTab(this,'tasks')">✅</div>
+          <div class="sidebar-icon" title="My Leads" onclick="wfTab(this,'leads')">🎯</div>
+          <div class="sidebar-icon" title="Projects" onclick="wfTab(this,'projects')">📁</div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Payments" onclick="wfTab(this,'payments')"><span class="nav-symbol nav-payments"></span></div>
-          <div class="sidebar-icon" title="Performance" onclick="wfTab(this,'performance')"><span class="nav-symbol nav-performance"></span></div>
+          <div class="sidebar-icon" title="Payments" onclick="wfTab(this,'payments')">💰</div>
+          <div class="sidebar-icon" title="Performance" onclick="wfTab(this,'performance')">📈</div>
           <div class="sidebar-divider"></div>
-          <div class="sidebar-icon" title="Profile" onclick="wfTab(this,'profile')"><span class="nav-symbol nav-profile"></span></div>
-          <div class="sidebar-icon" title="Export" onclick="wfTab(this,'export')"><span class="nav-symbol nav-export"></span></div>
+          <div class="sidebar-icon" title="Profile" onclick="wfTab(this,'profile')">👤</div>
+          <div class="sidebar-icon" title="Export" onclick="wfTab(this,'export')">💾</div>
         </div>
 
         <!-- Content -->
-        <div class="content wf" id="wfContent" style="position:relative;">
+        <div class="content wf" id="wfContent" style="position:relative;transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);">
 
           <!-- HOME TAB -->
           <div id="wf-home">
-            <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>Hello, Rahul</div>
-            <div class="section-sub">A clear overview of your assigned audits, payouts, and nearby opportunities.</div>
+            <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>My Dashboard</div>
+            <div class="section-sub">Welcome back, Rahul 👋 — Today, May 26</div>
 
-            <!-- Stat cards -->
+            <!-- 6 stat cards -->
             <div class="home-stats">
               <div class="hs-card" onclick="showTaskFilter('review')" style="border-top:2px solid var(--blue)">
                 <div class="hs-icon">🔍</div>
                 <div class="hs-val" style="color:var(--blue)">8</div>
-                <div class="hs-lbl">In Review Audits</div>
+                <div class="hs-lbl">Under Review</div>
               </div>
               <div class="hs-card" onclick="showTaskFilter('rejected')" style="border-top:2px solid var(--red)">
                 <div class="hs-icon">❌</div>
                 <div class="hs-val" style="color:var(--red)">3</div>
-                <div class="hs-lbl">Rejected Audits</div>
+                <div class="hs-lbl">Rejected</div>
               </div>
               <div class="hs-card" onclick="showTaskFilter('approved')" style="border-top:2px solid var(--green)">
                 <div class="hs-icon">✅</div>
                 <div class="hs-val" style="color:var(--green)">42</div>
-                <div class="hs-lbl">Completed Audits</div>
+                <div class="hs-lbl">Completed</div>
               </div>
               <div class="hs-card" onclick="showTaskFilter('inprogress')" style="border-top:2px solid var(--purple)">
-                <div class="hs-icon">In</div>
+                <div class="hs-icon">âš¡</div>
                 <div class="hs-val" style="color:var(--purple)">5</div>
-                <div class="hs-lbl">Active Audits</div>
+                <div class="hs-lbl">In Process</div>
               </div>
               <div class="hs-card" onclick="showPaymentFilter('paid')" style="border-top:2px solid var(--yellow)">
                 <div class="hs-icon">💰</div>
                 <div class="hs-val" style="color:var(--yellow)">₹84K</div>
-                <div class="hs-lbl">Earned Amount</div>
+                <div class="hs-lbl">Total Earned</div>
               </div>
               <div class="hs-card" onclick="showPaymentFilter('ready')" style="border-top:2px solid var(--teal)">
                 <div class="hs-icon">🏦</div>
                 <div class="hs-val" style="color:var(--teal)">₹6.2K</div>
-                <div class="hs-lbl">Ready for Processing</div>
+                <div class="hs-lbl">Ready to Pay</div>
               </div>
             </div>
 
             <!-- Area tasks -->
-            <div class="section-line">
-              <div class="section-line-title">Opportunities near your location</div>
-              <button class="view-all-btn" onclick="event.stopPropagation(); setWfTab('opportunities')">View All</button>
-            </div>
+            <div class="sec-div"><span>Tasks in My Area (PIN: 125001)</span></div>
             <div class="area-task task-clickable" onclick="openTask('t1')">
               <div class="area-task-icon" style="background:rgba(59,111,255,0.15)">📡</div>
               <div class="area-task-info">
@@ -2610,7 +1198,7 @@
               </div>
               <button class="apply-btn wf-btn">Apply</button>
             </div>
-            <div class="area-task task-clickable" onclick="openTask('t3')">
+            <div class="area-task task-clickable" onclick="openTask('t3")">
               <div class="area-task-icon" style="background:rgba(255,214,0,0.15)">🔋</div>
               <div class="area-task-info">
                 <div class="area-task-name">EV Charging Point Survey</div>
@@ -2634,41 +1222,80 @@
             </div>
           </div>
 
-          <!-- OPPORTUNITIES TAB -->
-          <div id="wf-opportunities" style="display:none">
-            <div class="section-title"><span class="dot" style="background:var(--green)"></span>Opportunities</div>
-            <div class="section-sub">Available task opportunities near your location.</div>
-            <div class="opportunity-filters single-filter-bar">
-              <input id="oppShopFilter" type="search" placeholder="Shop or task" aria-label="Shop name" oninput="scheduleOpportunitySearch()">
-              <input id="oppLocationFilter" type="search" placeholder="Location" aria-label="Location" oninput="scheduleOpportunitySearch()">
-              <input id="oppProjectFilter" type="search" placeholder="Project ID" aria-label="Project ID" oninput="scheduleOpportunitySearch()">
-              <select id="oppCityFilter" aria-label="City" onchange="renderOpportunityList()"></select>
-              <select id="oppStateFilter" aria-label="State" onchange="renderOpportunityList()"></select>
-              <input id="oppDateFilter" type="date" aria-label="Date" onchange="renderOpportunityList()">
-              <button class="search-filter-btn" type="button" onclick="renderOpportunityList()">Search</button>
-              <button class="clear-filter-btn" type="button" onclick="clearOpportunityFilters()">Clear Filter</button>
-            </div>
-            <div id="wfOpportunityList"></div>
-          </div>
-
           <!-- TASKS TAB -->
           <div id="wf-tasks" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span><span id="wfTaskTitle">My Tasks</span></div>
             <div class="section-sub">58 total from joining • Filter by month</div>
-            <div class="task-status-grid" id="taskStatusCards"></div>
-            <div id="wfTaskRows" class="task-card-list"></div>
+            <table class="data-table">
+              <thead><tr><th>Task</th><th>Project</th><th>Due</th><th>Status</th></tr></thead>
+              <tbody id="wfTaskRows">
+                <tr class="task-clickable" onclick="openTask('t1')"><td><div style="font-weight:600;font-size:12px">Solar Inspection #3 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">8 questions • Click to open</div></td><td><span class="tag blue">Solar Alpha</span></td><td style="font-size:11px;color:var(--muted)">May 28</td><td><span class="badge inprogress">In Process</span></td></tr>
+                <tr class="task-clickable" onclick="openTask('t2')"><td><div style="font-weight:600;font-size:12px">Meter Reading R-4 <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">5 questions • Click to open</div></td><td><span class="tag green">Water Drive</span></td><td style="font-size:11px;color:var(--muted)">May 26</td><td><span class="badge review">Under Review</span></td></tr>
+                <tr class="task-clickable" onclick="openTask('t3')"><td><div style="font-weight:600;font-size:12px">Fiber Cable Check <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">3 questions • Click to open</div></td><td><span class="tag purple">Fiber Connect</span></td><td style="font-size:11px;color:var(--muted)">May 25</td><td><span class="badge approved">Completed</span></td></tr>
+                <tr class="task-clickable" onclick="openTask('t4')"><td><div style="font-weight:600;font-size:12px">Gas Leak Survey <span style="font-size:9px;color:var(--blue)">↗</span></div><div style="font-size:10px;color:var(--muted)">6 questions • Click to open</div></td><td><span class="tag orange">Gas Infra</span></td><td style="font-size:11px;color:var(--muted)">May 22</td><td><span class="badge rejected">Rejected</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- LEADS TAB (WF) -->
+          <div id="wf-leads" style="display:none">
+            <div class="section-title"><span class="dot" style="background:var(--green)"></span>My Leads</div>
+            <div class="section-sub">12 assigned • 3 self-applied pending</div>
+            <div class="lead-card">
+              <div class="lead-left">
+                <div class="lead-id">LEAD #2840 • Admin Assigned</div>
+                <div class="lead-title">Water Meter Reading — Block A</div>
+                <div class="lead-meta">Due: May 28 • PIN: 125001</div>
+              </div>
+              <span class="badge approved">Approved</span>
+            </div>
+            <div class="lead-card">
+              <div class="lead-left">
+                <div class="lead-id">LEAD #2847 • Self Applied</div>
+                <div class="lead-title">Solar Panel Installation Survey</div>
+                <div class="lead-meta">Applied: May 24 • PIN: 125001</div>
+              </div>
+              <span class="badge pending">Pending Approval</span>
+            </div>
+            <div class="lead-card">
+              <div class="lead-left">
+                <div class="lead-id">LEAD #2841 • Admin Assigned</div>
+                <div class="lead-title">Electricity Survey — Sector 3</div>
+                <div class="lead-meta">Due: Jun 1 • PIN: 125003</div>
+              </div>
+              <span class="badge inprogress">In Progress</span>
+            </div>
+          </div>
+
+          <!-- PROJECTS TAB (WF) -->
+          <div id="wf-projects" style="display:none">
+            <div class="section-title"><span class="dot" style="background:var(--green)"></span>My Projects</div>
+            <div class="stat-grid">
+              <div class="stat-card teal"><div class="stat-label">Active</div><div class="stat-value teal">3</div></div>
+              <div class="stat-card green"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Solar Survey Alpha</div><span class="badge approved">Active</span></div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:8px">18 tasks assigned • 14 completed</div>
+              <div class="progress-bar"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Fiber Connect</div><span class="badge approved">Active</span></div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:8px">12 tasks assigned • 8 completed</div>
+              <div class="progress-bar"><div class="progress-fill" style="width:67%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div>
+            </div>
           </div>
 
           <!-- PAYMENTS TAB (WF) -->
           <div id="wf-payments" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Payments & Earnings</div>
             <div class="home-stats" style="grid-template-columns:repeat(2,1fr)">
-              <div class="hs-card tab-link" onclick="showPaymentFilter('paid')" style="border-top:2px solid var(--yellow)">
+              <div class="hs-card" style="border-top:2px solid var(--yellow)">
                 <div class="hs-icon">💰</div>
                 <div class="hs-val" style="color:var(--yellow)">₹84,200</div>
                 <div class="hs-lbl">Total Earned</div>
               </div>
-              <div class="hs-card tab-link" onclick="showPaymentFilter('ready')" style="border-top:2px solid var(--teal)">
+              <div class="hs-card" style="border-top:2px solid var(--teal)">
                 <div class="hs-icon">🏦</div>
                 <div class="hs-val" style="color:var(--teal)">₹6,200</div>
                 <div class="hs-lbl">Ready to Pay</div>
@@ -2687,10 +1314,10 @@
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>My Performance</div>
             <div class="section-sub">Since joining: Mar 12, 2024</div>
             <div class="stat-grid">
-              <div class="stat-card green tab-link" onclick="showTaskFilter('approved')"><div class="stat-label">Tasks Completed</div><div class="stat-value green">42</div></div>
-              <div class="stat-card blue tab-link" onclick="setWfTab('performance')"><div class="stat-label">Completion Rate</div><div class="stat-value blue">84%</div></div>
-              <div class="stat-card yellow tab-link" onclick="setWfTab('performance')"><div class="stat-label">Rating</div><div class="stat-value yellow">4.8★</div></div>
-              <div class="stat-card purple tab-link" onclick="setWfTab('performance')"><div class="stat-label">Rank</div><div class="stat-value purple">#1</div></div>
+              <div class="stat-card green"><div class="stat-label">Tasks Completed</div><div class="stat-value green">42</div></div>
+              <div class="stat-card blue"><div class="stat-label">Completion Rate</div><div class="stat-value blue">84%</div></div>
+              <div class="stat-card yellow"><div class="stat-label">Rating</div><div class="stat-value yellow">4.8★</div></div>
+              <div class="stat-card purple"><div class="stat-label">Rank</div><div class="stat-value purple">#1</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">KPI Breakdown</div></div>
@@ -2722,30 +1349,30 @@
           <div id="wf-export" style="display:none">
             <div class="section-title"><span class="dot" style="background:var(--green)"></span>Backup & Export</div>
             <div class="section-sub">Export your personal records</div>
-            <div class="export-card-grid">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📊</div>
                 <div style="font-weight:600;font-size:12px">Excel Export</div>
                 <div style="font-size:10px;color:var(--muted)">Tasks, leads, payments</div>
-                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('excel', this)">Download .xls</button>
+                <button class="apply-btn wf-btn" style="width:100%">Download .xlsx</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📄</div>
                 <div style="font-weight:600;font-size:12px">PDF Statement</div>
                 <div style="font-size:10px;color:var(--muted)">Payment records</div>
-                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('pdf', this)">Download PDF</button>
+                <button class="apply-btn wf-btn" style="width:100%">Download PDF</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">🔗</div>
                 <div style="font-weight:600;font-size:12px">Google Sheets</div>
                 <div style="font-size:10px;color:var(--muted)">Push to Sheets</div>
-                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('sheets', this)">Export to Sheets</button>
+                <button class="apply-btn wf-btn" style="width:100%">Export to Sheets</button>
               </div>
               <div class="area-task" style="flex-direction:column;align-items:flex-start;gap:8px;padding:14px">
                 <div style="font-size:20px">📋</div>
                 <div style="font-weight:600;font-size:12px">CSV Export</div>
                 <div style="font-size:10px;color:var(--muted)">Raw data export</div>
-                <button class="apply-btn wf-btn" style="width:100%" onclick="exportWorkforceData('csv', this)">Download .csv</button>
+                <button class="apply-btn wf-btn" style="width:100%">Download .csv</button>
               </div>
             </div>
           </div>
@@ -2767,7 +1394,9 @@
           </div>
           <div class="mtab-row" id="slidePanelTabs">
             <button class="mtab active" onclick="switchMTab(0)">Overview</button>
-            <button class="mtab" onclick="switchMTab(1)">Questionnaire</button>
+            <button class="mtab" onclick="switchMTab(1)">Location</button>
+            <button class="mtab" onclick="switchMTab(2)">Payment</button>
+            <button class="mtab" onclick="switchMTab(3)">Questionnaire</button>
           </div>
           <div class="slide-body" id="slidePanelBody">
             <!-- dynamically filled -->
@@ -2783,94 +1412,18 @@
 <script>
 // â”€â”€ Admin tab switching â”€â”€
 function adminTab(el, tab) {
-  setAdminTab(tab, el);
+  document.querySelectorAll('.admin .sidebar-icon').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('[id^="admin-"]').forEach(s => s.style.display = 'none');
+  document.getElementById('admin-' + tab).style.display = 'block';
 }
-
-function setAdminTab(tab, sourceIcon) {
-  document.querySelectorAll('#adminPanel .sidebar-icon').forEach(i => i.classList.remove('active'));
-  const icon = sourceIcon || document.querySelector(`#adminPanel .sidebar-icon[onclick*="'${tab}'"]`);
-  if (icon) icon.classList.add('active');
-  document.querySelectorAll('#adminContent > [id^="admin-"]').forEach(s => s.style.display = 'none');
-  const section = document.getElementById('admin-' + tab);
-  if (section) section.style.display = 'block';
-  if (tab === 'leads') renderAdminAppliedTasks();
-  if (tab === 'workforce') renderAdminWorkforceProfile();
-  refreshAdminLinkedData();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function showAdminToast(message) {
-  let toast = document.getElementById('adminActionToast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'adminActionToast';
-    toast.className = 'admin-action-toast';
-    document.body.appendChild(toast);
-  }
-  toast.textContent = message;
-  toast.style.display = 'block';
-  clearTimeout(window.adminActionToastTimer);
-  window.adminActionToastTimer = setTimeout(() => {
-    toast.style.display = 'none';
-  }, 2600);
-}
-
-function getAdminActionTarget(label) {
-  const text = (label || '').toLowerCase();
-  if (text.includes('worker') || text.includes('workforce') || text.includes('kyc') || text.includes('document')) return 'workforce';
-  if (text.includes('payment') || text.includes('salary') || text.includes('incentive') || text.includes('beneficiary') || text.includes('receipt')) return 'payments';
-  if (text.includes('invoice') || text.includes('collection') || text.includes('gst') || text.includes('revenue')) return 'revenue';
-  if (text.includes('project') || text.includes('client') || text.includes('milestone') || text.includes('gantt') || text.includes('profile')) return 'projects';
-  if (text.includes('task') || text.includes('submission') || text.includes('survey') || text.includes('audit') || text.includes('template') || text.includes('review')) return 'leads';
-  if (text.includes('report') || text.includes('performance')) return 'performance';
-  return 'dashboard';
-}
-
-function adminAction(label, targetTab) {
-  const target = targetTab || getAdminActionTarget(label);
-  if (target) setAdminTab(target);
-  const cleanLabel = (label || 'Action').trim();
-  showAdminToast(cleanLabel + ' opened successfully.');
-}
-
-function adminSearchDashboard() {
-  const input = document.getElementById('adminGlobalSearch');
-  const term = input ? input.value.trim() : '';
-  const target = term ? getAdminActionTarget(term) : 'dashboard';
-  adminAction(term ? 'Search result for "' + term + '"' : 'Global search', target);
-}
-
-function adminExportReport(label) {
-  const stamp = new Date().toISOString().slice(0, 10);
-  const rows = [
-    ['Section', 'Metric', 'Value'],
-    ['Projects', 'Active Projects', '18'],
-    ['Workforce', 'Registered Workers', '1842'],
-    ['Tasks', 'Pending Reviews', '57'],
-    ['Revenue', 'Monthly Revenue', '420000'],
-    ['Payments', 'Pending Payments', '32000']
-  ];
-  const csv = rows.map(row => row.map(value => '"' + String(value).replace(/"/g, '""') + '"').join(',')).join('\n');
-  downloadFile('mtss-admin-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + stamp + '.csv', csv, 'text/csv;charset=utf-8');
-  showAdminToast(label + ' downloaded successfully.');
-}
-
-document.addEventListener('click', function(event) {
-  const button = event.target.closest('button');
-  if (!button || !button.closest('#adminPanel')) return;
-  if (!button.closest('.approval-row') && !button.closest('.activity-row') && !button.closest('.quick-actions') && !button.closest('.module-toolbar')) return;
-  if (button.hasAttribute('data-admin-handled')) return;
-  const label = button.textContent.trim() || 'Dashboard action';
-  if (/export|report/i.test(label)) {
-    adminExportReport(label);
-  } else {
-    adminAction(label);
-  }
-});
 
 // â”€â”€ Workforce tab switching â”€â”€
 function wfTab(el, tab) {
-  setWfTab(tab, el);
+  document.querySelectorAll('.wf .sidebar-icon').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('[id^="wf-"]').forEach(s => s.style.display = 'none');
+  document.getElementById('wf-' + tab).style.display = 'block';
 }
 
 // â”€â”€ Top nav view switching â”€â”€
@@ -2900,177 +1453,18 @@ function approveLead(btn) {
   card.style.opacity = '0.6';
 }
 
-const appliedTaskState = JSON.parse(localStorage.getItem('mtssAppliedTasks') || '{}');
-let currentTaskId = null;
-let currentMTab = 0;
-let opportunityRenderTimer = 0;
-let firebasePortalLoadStarted = false;
-
-function saveAppliedTaskState() {
-  localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
-  taskRenderVersion += 1;
-  lastTaskRenderKey = '';
-  updatePendingAuditCount();
-  refreshAdminLinkedData();
-}
-
-function updatePendingAuditCount() {
-  const el = document.getElementById('pendingAuditCount');
-  if (!el) return;
-  const pendingApplications = Object.values(appliedTaskState).filter(state => state === 'pending').length;
-  const pendingTasks = Object.values(TASKS || {}).filter(task => task.status === 'pending').length;
-  el.textContent = String(pendingApplications + pendingTasks);
-  refreshAdminLinkedData();
-}
-
-function refreshAdminLinkedData() {
-  const counts = Object.values(appliedTaskState).reduce((total, state) => {
-    total[state] = (total[state] || 0) + 1;
-    return total;
-  }, {});
-  const pending = document.getElementById('adminPendingApplications');
-  const verified = document.getElementById('adminVerifiedApplications');
-  const rejected = document.getElementById('adminRejectedApplications');
-  const workerName = document.getElementById('adminLinkedWorkerName');
-  let linkedName = 'Linked';
-  try {
-    linkedName = profileState.name.split(' ')[0] || 'Linked';
-  } catch (error) {
-    linkedName = 'Linked';
-  }
-  if (pending) pending.textContent = String(counts.pending || 0);
-  if (verified) verified.textContent = String(counts.verified || 0);
-  if (rejected) rejected.textContent = String(counts.rejected || 0);
-  if (workerName) workerName.textContent = linkedName;
-}
-
-function waitForFirebaseServices(timeoutMs = 5000) {
-  const started = Date.now();
-  return new Promise(resolve => {
-    const check = () => {
-      if (window.mtssFirebase) return resolve(window.mtssFirebase);
-      if (Date.now() - started > timeoutMs) return resolve(null);
-      setTimeout(check, 120);
-    };
-    check();
-  });
-}
-
-async function saveTaskApplicationToFirebase(taskId) {
-  const services = await waitForFirebaseServices(2500);
-  if (!services || !services.saveApplication || !TASKS[taskId]) return;
-  const task = TASKS[taskId];
-  try {
-    await services.saveApplication(taskId, {
-      taskId,
-      taskTitle: task.title,
-      project: task.project,
-      address: task.address,
-      payout: task.payment.amount,
-      status: appliedTaskState[taskId],
-      workforceName: profileState.name,
-      workforceEmail: profileState.email,
-      workforceMobile: profileState.mobile,
-      updatedAt: new Date().toISOString()
+// â”€â”€ Apply button â”€â”€
+document.querySelectorAll('.apply-btn.wf-btn').forEach(btn => {
+  if (btn.textContent === 'Apply') {
+    btn.addEventListener('click', function() {
+      this.textContent = 'â³ Pending';
+      this.style.background = 'rgba(255,122,0,0.3)';
+      this.style.color = 'var(--orange)';
+      this.style.border = '1px solid rgba(255,122,0,0.4)';
+      this.style.cursor = 'default';
     });
-  } catch (error) {
-    console.warn('Firebase task application save failed.', error);
   }
-}
-
-function renderTaskApplyButton(taskId) {
-  const state = appliedTaskState[taskId];
-  const cfg = state === 'pending'
-    ? { label: 'Pending', cls: 'pending', disabled: true }
-    : state === 'verified'
-      ? { label: 'Verified by Admin', cls: 'verified', disabled: true }
-      : state === 'rejected'
-        ? { label: 'Reapply Task', cls: 'rejected', disabled: false }
-        : { label: 'Apply', cls: '', disabled: false };
-
-  return `<button class="apply-btn wf-btn task-apply-btn ${cfg.cls}" onclick="applyForTask(event,'${taskId}')" ${cfg.disabled ? 'disabled' : ''}>${cfg.label}</button>`;
-}
-
-function applyForTask(event, taskId) {
-  if (event) event.stopPropagation();
-  if (!TASKS[taskId]) return;
-  appliedTaskState[taskId] = 'pending';
-  saveAppliedTaskState();
-  saveTaskApplicationToFirebase(taskId);
-  renderDashboardTaskSummary();
-  renderOpportunityList();
-  if (document.getElementById('wf-tasks')?.style.display !== 'none') {
-    renderTaskRows(currentTaskFilter || 'all');
-  } else {
-    lastTaskRenderKey = '';
-  }
-  renderAdminAppliedTasks();
-}
-
-function verifyAppliedTask(taskId, approved) {
-  if (!TASKS[taskId]) return;
-  appliedTaskState[taskId] = approved ? 'verified' : 'rejected';
-  saveAppliedTaskState();
-  saveTaskApplicationToFirebase(taskId);
-  renderDashboardTaskSummary();
-  renderOpportunityList();
-  if (document.getElementById('wf-tasks')?.style.display !== 'none') {
-    renderTaskRows(currentTaskFilter || 'all');
-  } else {
-    lastTaskRenderKey = '';
-  }
-  renderAdminAppliedTasks();
-}
-
-function renderAdminAppliedTasks() {
-  const wrap = document.getElementById('adminAppliedTasks');
-  refreshAdminLinkedData();
-  if (!wrap) return;
-
-  const entries = Object.entries(appliedTaskState)
-    .filter(([, state]) => state === 'pending' || state === 'verified' || state === 'rejected')
-    .filter(([taskId]) => TASKS[taskId]);
-
-  if (!entries.length) {
-    wrap.innerHTML = `
-      <div class="lead-card">
-        <div class="lead-left">
-          <div class="lead-id">No WF task applications yet</div>
-          <div class="lead-title">Applied tasks will appear here for admin verification.</div>
-          <div class="lead-meta">WF applies from dashboard or task list.</div>
-        </div>
-        <span class="badge pending">Waiting</span>
-      </div>
-    `;
-    return;
-  }
-
-  wrap.innerHTML = entries.map(([taskId, state]) => {
-    const task = TASKS[taskId];
-    const statusBadge = state === 'pending'
-      ? '<span class="badge pending">Pending Verify</span>'
-      : state === 'verified'
-        ? '<span class="badge approved">Verified</span>'
-        : '<span class="badge rejected">Rejected</span>';
-    const actions = state === 'pending'
-      ? `<div style="display:flex;gap:6px;flex-wrap:wrap">
-          <button class="apply-btn admin-btn" onclick="verifyAppliedTask('${taskId}', true)">Verify</button>
-          <button onclick="verifyAppliedTask('${taskId}', false)" style="padding:8px 12px;border-radius:8px;font-size:10px;font-weight:700;border:1px solid var(--red);background:transparent;color:var(--red);cursor:pointer">Reject</button>
-        </div>`
-      : statusBadge;
-
-    return `
-      <div class="lead-card">
-        <div class="lead-left">
-          <div class="lead-id">${task.id} &bull; ${task.project}</div>
-          <div class="lead-title">${task.title}</div>
-          <div class="lead-meta">Applied by: ${profileState.name} &bull; ${task.address}</div>
-        </div>
-        ${actions}
-      </div>
-    `;
-  }).join('');
-}
+});
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TASK DATA
@@ -3081,7 +1475,6 @@ const TASKS = {
     project: 'Solar Survey Alpha', projectColor: 'var(--blue)',
     status: 'inprogress', statusLabel: 'In Process',
     description: 'Conduct a detailed inspection of rooftop solar panels in Block B, Sector 5. Document panel condition, wiring status, tilt angle, and shading patterns. Take photographic evidence for each unit.',
-    whatToDo: ['Visit the assigned rooftop location during the task window.', 'Inspect panel condition, wiring, tilt angle, and shading.', 'Upload clear photos and complete all questionnaire answers before submission.'],
     assignedDate: 'May 20, 2025', dueDate: 'May 28, 2025',
     startTime: '10:00 AM', endTime: '1:00 PM', duration: '3 hours',
     address: 'B-12, Sector 5, Hisar, Haryana — 125001',
@@ -3106,7 +1499,6 @@ const TASKS = {
     project: 'Water Meter Drive', projectColor: 'var(--green)',
     status: 'review', statusLabel: 'Under Review',
     description: 'Record water meter readings for all residential units in Row R-4, Block C. Verify meter serial numbers, note any tampering signs, and enter all readings into the field form.',
-    whatToDo: ['Keep this task ready for admin review.', 'Check that readings, serial numbers, and access notes are complete.', 'Wait for approval or correction feedback before payout processing.'],
     assignedDate: 'May 18, 2025', dueDate: 'May 26, 2025',
     startTime: '9:00 AM', endTime: '12:00 PM', duration: '3 hours',
     address: 'Row R-4, Block C, Model Town, Hisar — 125005',
@@ -3128,7 +1520,6 @@ const TASKS = {
     project: 'Fiber Connect', projectColor: 'var(--purple)',
     status: 'approved', statusLabel: 'Completed',
     description: 'Inspect underground fiber optic cable routing from Junction Box JB-7 to JB-14 along NH-9 service road. Check for cable integrity, junction box seals, and signal test points.',
-    whatToDo: ['No further field action is required.', 'Keep proof and task notes available for records.', 'Track the payout section for payment confirmation.'],
     assignedDate: 'May 12, 2025', dueDate: 'May 25, 2025',
     startTime: '8:00 AM', endTime: '11:00 AM', duration: '3 hours',
     address: 'NH-9 Service Road, JB-7 to JB-14, Hisar — 125004',
@@ -3152,7 +1543,6 @@ const TASKS = {
     status: 'rejected', statusLabel: 'Rejected',
     rejectionReason: 'Questionnaire incomplete — Q5 and Q6 not answered. Task evidence photos missing. Please resubmit with all required fields.',
     description: 'Survey gas pipeline route in Sector 11 for potential leaks using portable gas detectors. Mark hotspots, record pressure readings at test valves, and complete the safety checklist.',
-    whatToDo: ['Review the rejection reason carefully.', 'Complete the missing questionnaire answers and attach required photos.', 'Resubmit the corrected task for admin review.'],
     assignedDate: 'May 10, 2025', dueDate: 'May 22, 2025',
     startTime: '7:30 AM', endTime: '11:00 AM', duration: '3.5 hours',
     address: 'Gas Pipeline Route, Sector 11, Hisar — 125011',
@@ -3172,16 +1562,13 @@ const TASKS = {
   }
 };
 
-function setWfTab(tab, sourceIcon, resetTaskFilter = true) {
-  closeTask();
-  document.querySelectorAll('#wfPanel .sidebar-icon').forEach(i => i.classList.remove('active'));
-  const icon = sourceIcon || document.querySelector(`#wfPanel .sidebar-icon[onclick*="'${tab}'"]`);
+function setWfTab(tab) {
+  document.querySelectorAll('.wf .sidebar-icon').forEach(i => i.classList.remove('active'));
+  const icon = document.querySelector(`.wf .sidebar-icon[onclick*="'${tab}'"]`);
   if (icon) icon.classList.add('active');
-  document.querySelectorAll('#wfContent > [id^="wf-"]').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('[id^="wf-"]').forEach(s => s.style.display = 'none');
   const section = document.getElementById('wf-' + tab);
   if (section) section.style.display = 'block';
-  if (tab === 'tasks' && resetTaskFilter) renderTaskRows('all');
-  window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
 function parseAmount(amount) {
@@ -3224,83 +1611,10 @@ function renderPayoutBreakdown(task) {
         <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--teal);">${formatAmount(payout.special)}</div>
         <div style="font-size:10px;color:var(--muted);margin-top:5px;line-height:1.45;">Reimbursement ${formatAmount(payout.reimbursement)} &bull; Travel Allowance ${formatAmount(payout.travel)}</div>
       </div>
-      <div style="grid-column:1 / -1;padding:12px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);">
-        <div style="font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;">Total Expense</div>
-        <div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--green);">${formatAmount(payout.base + payout.special)}</div>
-      </div>
     </div>
   `;
 }
 
-function renderWhatToDo(task) {
-  const steps = task.whatToDo || ['Review the task details.', 'Visit the assigned location.', 'Complete the questionnaire and submit your work.'];
-  return `
-    <div class="what-to-do-card">
-      <div class="what-to-do-title">What to do</div>
-      <ul class="what-to-do-list">
-        ${steps.map(step => `<li>${step}</li>`).join('')}
-      </ul>
-    </div>
-  `;
-}
-
-const TASK_STATUS_CARDS = [
-  { key: 'active', label: 'Active', color: 'var(--purple)' },
-  { key: 'pending', label: 'Pending', color: 'var(--orange)' },
-  { key: 'allocated', label: 'Allocated', color: 'var(--blue)' },
-  { key: 'submitted', label: 'Submitted', color: 'var(--teal)' },
-  { key: 'completed', label: 'Completed', color: 'var(--green)' },
-  { key: 'rejected', label: 'Rejected', color: 'var(--red)' },
-  { key: 'approved', label: 'Approved', color: 'var(--yellow)' },
-  { key: 'reschedule', label: 'Reschedule', color: 'var(--pink)' },
-  { key: 'expired', label: 'Expired', color: 'var(--muted)' }
-];
-
-let currentTaskFilter = 'all';
-let taskRenderVersion = 0;
-let lastTaskRenderKey = '';
-let taskRenderFrame = 0;
-
-function taskMatchesFilter(taskId, task, statusFilter = 'all') {
-  if (statusFilter === 'all') return true;
-  if (statusFilter === 'active') return task.status === 'inprogress';
-  if (statusFilter === 'pending') return task.status === 'pending' || appliedTaskState[taskId] === 'pending';
-  if (statusFilter === 'allocated') return ['inprogress', 'review', 'approved', 'rejected', 'pending'].includes(task.status);
-  if (statusFilter === 'submitted') return task.status === 'review';
-  if (statusFilter === 'completed') return task.status === 'approved';
-  if (statusFilter === 'approved') return task.status === 'approved';
-  if (statusFilter === 'reschedule') return task.status === 'reschedule';
-  if (statusFilter === 'expired') return task.status === 'expired';
-  return task.status === statusFilter;
-}
-
-function getTaskSnapshot(statusFilter = 'all') {
-  const counts = Object.fromEntries(TASK_STATUS_CARDS.map(card => [card.key, 0]));
-  const visible = [];
-
-  Object.entries(TASKS).forEach(([taskId, task]) => {
-    TASK_STATUS_CARDS.forEach(card => {
-      if (taskMatchesFilter(taskId, task, card.key)) counts[card.key] += 1;
-    });
-    if (taskMatchesFilter(taskId, task, statusFilter)) visible.push([taskId, task]);
-  });
-
-  return { counts, visible };
-}
-
-function renderTaskStatusCards(activeFilter = currentTaskFilter, counts = {}) {
-  const wrap = document.getElementById('taskStatusCards');
-  if (!wrap) return;
-  wrap.innerHTML = TASK_STATUS_CARDS.map(card => {
-    const count = counts[card.key] || 0;
-    return `
-      <button class="task-status-card ${activeFilter === card.key ? 'active' : ''}" style="--status-color:${card.color}" type="button" onclick="showTaskFilter('${card.key}')">
-        <span class="task-status-label">${card.label}</span>
-        <span class="task-status-count" style="display:block;color:${card.color}">${count}</span>
-      </button>
-    `;
-  }).join('');
-}
 
 function renderTaskRows(statusFilter = 'all') {
   const rows = document.getElementById('wfTaskRows');
@@ -3312,13 +1626,7 @@ function renderTaskRows(statusFilter = 'all') {
     rejected: 'Rejected Tasks',
     approved: 'Completed Tasks',
     inprogress: 'In Process Tasks',
-    active: 'Active Tasks',
-    pending: 'Pending Tasks',
-    allocated: 'Allocated Tasks',
-    submitted: 'Submitted Tasks',
-    completed: 'Completed Tasks',
-    reschedule: 'Reschedule Tasks',
-    expired: 'Expired Tasks'
+    pending: 'Pending Tasks'
   };
   const statusNotes = {
     all: 'All assigned tasks',
@@ -3326,13 +1634,7 @@ function renderTaskRows(statusFilter = 'all') {
     rejected: 'Tasks needing correction and resubmission',
     approved: 'Completed and approved tasks',
     inprogress: 'Tasks currently assigned or being worked on',
-    active: 'Tasks currently assigned or being worked on',
-    pending: 'Audits waiting for admin verification or action',
-    allocated: 'Tasks allocated to your workforce account',
-    submitted: 'Tasks submitted and waiting for admin review',
-    completed: 'Tasks marked completed',
-    reschedule: 'Tasks waiting for a new schedule',
-    expired: 'Tasks past their active window'
+    pending: 'Tasks waiting for action'
   };
   const tagClass = {
     'Solar Survey Alpha': 'blue',
@@ -3341,64 +1643,34 @@ function renderTaskRows(statusFilter = 'all') {
     'Gas Infra Check': 'orange'
   };
 
-  currentTaskFilter = statusFilter;
-  const snapshot = getTaskSnapshot(statusFilter);
-  const tasks = snapshot.visible;
-  const title = document.getElementById('wfTaskTitle');
-  if (title) title.textContent = statusTitles[statusFilter] || statusTitles.all;
-  const sub = title?.closest('.section-title')?.nextElementSibling;
+  const tasks = Object.entries(TASKS).filter(([, task]) => statusFilter === 'all' || task.status === statusFilter);
+  document.getElementById('wfTaskTitle').textContent = statusTitles[statusFilter] || statusTitles.all;
+  const sub = document.getElementById('wfTaskTitle').closest('.section-title').nextElementSibling;
   if (sub) sub.textContent = `${tasks.length} task${tasks.length === 1 ? '' : 's'} found - ${statusNotes[statusFilter] || statusNotes.all}`;
-  renderTaskStatusCards(statusFilter, snapshot.counts);
 
-  const renderKey = `${statusFilter}:${taskRenderVersion}:${tasks.map(([taskId]) => taskId).join('|')}`;
-  if (renderKey === lastTaskRenderKey && rows.children.length) return;
-  lastTaskRenderKey = renderKey;
-
-  cancelAnimationFrame(taskRenderFrame);
-  taskRenderFrame = requestAnimationFrame(() => {
-    rows.innerHTML = tasks.length
-      ? tasks.map(([taskId, task]) => renderMyTaskCard(taskId, task, tagClass[task.project] || 'blue')).join('')
-      : `<div class="empty-task-card">No tasks in this status.</div>`;
-  });
-}
-
-function renderMyTaskCard(taskId, task, tagClassName) {
-  const assignor = task.contactName.split('(')[0].trim();
-  const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
-  const iconByStatus = {
-    inprogress: '&#9203;',
-    review: '&#128269;',
-    approved: '&#10003;',
-    rejected: '&#9888;',
-    pending: '&#128203;'
-  };
-
-  return `
-    <div class="area-task my-task-card task-clickable" onclick="openTask('${taskId}')">
-      <div class="area-task-icon">${iconByStatus[task.status] || '&#128203;'}</div>
-      <div class="area-task-info">
-        <div class="area-task-name">${task.title}</div>
-        <div class="area-task-meta"><span class="tag ${tagClassName}">${task.project}</span> &bull; ${task.statusLabel}</div>
-        <div class="task-detail-grid">
-          <div class="task-detail"><div class="task-detail-label">Address</div><div class="task-detail-value">${shortAddress}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value task-date-value">${task.dueDate}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Assigned By</div><div class="task-detail-value">${assignor}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Payout</div><div class="task-detail-value">${renderPayoutSummary(task)}</div></div>
-        </div>
-      </div>
-      <div class="task-action-stack">
-        <a class="task-map-btn" href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()">Maps</a>
-        <div class="task-bottom-actions">
-          <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Assigned Payout</div></div>
-          <span class="badge ${task.status}">${task.statusLabel}</span>
-        </div>
-      </div>
-    </div>
+  rows.innerHTML = tasks.length ? tasks.map(([taskId, task]) => {
+    const assignor = task.contactName.split('(')[0].trim();
+    return `
+      <tr class="task-clickable" onclick="openTask('${taskId}')">
+        <td>
+          <div style="font-weight:600;font-size:12px">${task.title} <span style="font-size:9px;color:var(--blue)">Open</span></div>
+          <div style="font-size:10px;color:var(--muted)">Address: ${task.address}</div>
+          <div style="font-size:10px;color:var(--muted)">Assigned by ${assignor} &bull; ${renderPayoutSummary(task)}</div>
+        </td>
+        <td><span class="tag ${tagClass[task.project] || 'blue'}">${task.project}</span></td>
+        <td style="font-size:11px;color:var(--muted)">${task.dueDate}</td>
+        <td><span class="badge ${task.status}">${task.statusLabel}</span></td>
+      </tr>
+    `;
+  }).join('') : `
+    <tr>
+      <td colspan="4" style="padding:18px;text-align:center;color:var(--muted)">No tasks in this status.</td>
+    </tr>
   `;
 }
 
 function showTaskFilter(statusFilter) {
-  setWfTab('tasks', null, false);
+  setWfTab('tasks');
   renderTaskRows(statusFilter);
 }
 
@@ -3445,9 +1717,6 @@ function showPortal(role) {
     document.querySelector('.sidebar.wf').style.display = '';
     document.getElementById('wfContent').style.display = '';
     setWfTab('home');
-  } else {
-    setAdminTab('dashboard');
-    renderAdminAppliedTasks();
   }
   document.getElementById('wfLoggedOut').style.display = 'none';
 }
@@ -3482,8 +1751,6 @@ function authenticate() {
     const name = document.getElementById('authName').value.trim();
     if (name) {
       profileState.name = name;
-      saveProfileLocal();
-      saveProfileToFirebase();
       renderProfileDetails(false);
     }
   }
@@ -3510,146 +1777,16 @@ function loginWf() {
 }
 
 const profileState = {
-  name: 'Demo Workforce User',
+  name: 'Rahul Sharma',
   role: 'Workforce Member • Active since Mar 2024',
-  email: 'demo.workforce@example.com',
-  mobile: '+91 00000 00000',
-  address: 'Demo Address',
-  pin: '000000',
-  bank: '••••••0000',
-  bankName: 'Demo Bank',
-  ifsc: 'DEMO0000001'
+  email: 'rahul.sharma@email.com',
+  mobile: '+91 98765 43210',
+  address: 'B-12, Sector 5, Hisar',
+  pin: '125001',
+  bank: '••••••7842',
+  bankName: 'HDFC Bank',
+  ifsc: 'HDFC0001234'
 };
-
-function saveProfileLocal() {
-  localStorage.setItem('mtssWorkforceProfile', JSON.stringify(getProfilePayload()));
-  refreshAdminLinkedData();
-  renderAdminWorkforceProfile();
-}
-
-function loadProfileLocal() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('mtssWorkforceProfile') || '{}');
-    if (saved && typeof saved === 'object') {
-      Object.assign(profileState, {
-        name: saved.name || profileState.name,
-        role: saved.role || profileState.role,
-        email: saved.email || profileState.email,
-        mobile: saved.mobile || profileState.mobile,
-        address: saved.address || profileState.address,
-        pin: saved.pin || profileState.pin,
-        bank: saved.bankAccount || saved.bank || profileState.bank,
-        bankName: saved.bankName || profileState.bankName,
-        ifsc: saved.ifsc || profileState.ifsc
-      });
-    }
-  } catch (error) {
-    console.warn('Saved workforce profile could not be loaded.', error);
-  }
-}
-
-loadProfileLocal();
-
-function applyPortalData(data) {
-  if (!data || !data.workforceProfile) return;
-  const profile = data.workforceProfile;
-  profileState.name = profile.name || profileState.name;
-  profileState.role = profile.role || profileState.role;
-  profileState.email = profile.email || profileState.email;
-  profileState.mobile = profile.mobile || profileState.mobile;
-  profileState.address = profile.address || profileState.address;
-  profileState.pin = profile.pin || profileState.pin;
-  profileState.bank = profile.bankAccount || profile.bank || profileState.bank;
-  profileState.bankName = profile.bankName || profileState.bankName;
-  profileState.ifsc = profile.ifsc || profileState.ifsc;
-  saveProfileLocal();
-  renderProfileDetails(false);
-}
-
-function getProfilePayload() {
-  return {
-    name: profileState.name,
-    role: profileState.role,
-    email: profileState.email,
-    mobile: profileState.mobile,
-    address: profileState.address,
-    pin: profileState.pin,
-    bank: profileState.bank,
-    bankAccount: profileState.bank,
-    bankName: profileState.bankName,
-    ifsc: profileState.ifsc,
-    updatedAt: new Date().toISOString()
-  };
-}
-
-async function saveProfileToFirebase() {
-  const services = await waitForFirebaseServices(2500);
-  if (!services || !services.saveProfile) return;
-  try {
-    await services.saveProfile(getProfilePayload());
-  } catch (error) {
-    console.warn('Firebase profile save failed.', error);
-  }
-}
-
-async function loadFirebasePortalData() {
-  if (firebasePortalLoadStarted) return;
-  firebasePortalLoadStarted = true;
-  const services = await waitForFirebaseServices(7000);
-  if (!services) return;
-
-  try {
-    const profile = await services.getProfile();
-    if (profile) {
-      applyPortalData({ workforceProfile: profile });
-    } else {
-      await saveProfileToFirebase();
-    }
-  } catch (error) {
-    console.warn('Firebase profile load failed.', error);
-  }
-
-  try {
-    const applications = await services.getApplications();
-    if (applications && Object.keys(applications).length) {
-      Object.keys(appliedTaskState).forEach(key => delete appliedTaskState[key]);
-      Object.assign(appliedTaskState, applications);
-      saveAppliedTaskState();
-      renderDashboardTaskSummary();
-      renderOpportunityList();
-      if (document.getElementById('wf-tasks')?.style.display !== 'none') {
-        renderTaskRows(currentTaskFilter || 'all');
-      }
-      renderAdminAppliedTasks();
-    }
-  } catch (error) {
-    console.warn('Firebase application load failed.', error);
-  }
-}
-
-window.mtssLoadFirebasePortalData = loadFirebasePortalData;
-
-function runWhenIdle(callback) {
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(callback, { timeout: 2500 });
-  } else {
-    setTimeout(callback, 600);
-  }
-}
-
-function scheduleDeferredFirebaseLoad() {
-  runWhenIdle(() => loadFirebasePortalData());
-}
-
-async function loadGithubPortalData() {
-  try {
-    const response = await fetch('data/portal-data.json', { cache: 'no-store' });
-    if (!response.ok) return;
-    applyPortalData(await response.json());
-  } catch (error) {
-    console.warn('Portal data file not available yet.', error);
-  }
-}
 
 function renderProfileDetails(editing = false) {
   const details = document.getElementById('profileDetails');
@@ -3709,9 +1846,6 @@ function saveProfile() {
   profileState.bankName = document.getElementById('editBankName').value.trim() || profileState.bankName;
   profileState.ifsc = document.getElementById('editIfsc').value.trim() || profileState.ifsc;
   renderProfileDetails(false);
-  saveProfileLocal();
-  saveProfileToFirebase();
-  showAdminToast('Workforce profile linked with admin portal.');
 }
 
 function renderAdminWorkforceProfile() {
@@ -3744,346 +1878,40 @@ function renderAdminWorkforceProfile() {
   `;
 }
 
-function getExportRows() {
-  return Object.entries(TASKS).map(([taskId, task]) => ({
-    taskId: task.id,
-    title: task.title,
-    project: task.project,
-    status: task.statusLabel,
-    dueDate: task.dueDate,
-    address: task.address,
-    payout: task.payment.amount,
-    paymentStatus: task.payment.statusLabel,
-    appliedStatus: appliedTaskState[taskId] || 'Not Applied',
-    workforceName: profileState.name,
-    workforceEmail: profileState.email,
-    workforceMobile: profileState.mobile,
-    bankAccount: profileState.bank,
-    ifsc: profileState.ifsc,
-    bankName: profileState.bankName
-  }));
-}
-
-function getPaymentExportRows() {
-  return Object.entries(TASKS).map(([taskId, task]) => ({
-    bankAccount: profileState.bank,
-    bankName: profileState.bankName,
-    ifscCode: profileState.ifsc,
-    transactionId: task.payment.txnId,
-    taskId: task.id,
-    taskTitle: task.title,
-    project: task.project,
-    taskAddress: task.address,
-    payout: task.payment.amount,
-    paymentStatus: task.payment.statusLabel,
-    paymentMethod: task.payment.method
-  }));
-}
-
-function csvEscape(value) {
-  return `"${String(value ?? '').replace(/"/g, '""')}"`;
-}
-
-function buildCsv(rows) {
-  if (!rows.length) return '';
-  const headers = Object.keys(rows[0]);
-  return [
-    headers.map(csvEscape).join(','),
-    ...rows.map(row => headers.map(header => csvEscape(row[header])).join(','))
-  ].join('\n');
-}
-
-function htmlEscape(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-function downloadFile(filename, content, mimeType) {
-  const blob = new Blob([content], { type: mimeType });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
-
-function setExportButtonState(btn, label) {
-  if (!btn) return;
-  const original = btn.dataset.originalLabel || btn.textContent;
-  btn.dataset.originalLabel = original;
-  btn.textContent = label;
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = original;
-    btn.disabled = false;
-  }, 1400);
-}
-
-function exportWorkforceData(type, btn) {
-  const rows = getExportRows();
-  const paymentRows = getPaymentExportRows();
-  const stamp = new Date().toISOString().slice(0, 10);
-  const csv = buildCsv(rows);
-
-  if (type === 'csv') {
-    downloadFile(`mtss-workforce-export-${stamp}.csv`, csv, 'text/csv;charset=utf-8');
-    setExportButtonState(btn, 'Downloaded');
-    return;
-  }
-
-  if (type === 'sheets') {
-    downloadFile(`mtss-google-sheets-import-${stamp}.csv`, csv, 'text/csv;charset=utf-8');
-    setExportButtonState(btn, 'Sheets CSV Ready');
-    return;
-  }
-
-  if (type === 'excel') {
-    const headers = Object.keys(paymentRows[0] || {});
-    const tableRows = paymentRows.map(row => `<tr>${headers.map(header => `<td>${htmlEscape(row[header])}</td>`).join('')}</tr>`).join('');
-    const workforceDetails = `Workforce Details: ${profileState.name} | ${profileState.email} | ${profileState.mobile} | ${profileState.address}`;
-    const table = `
-      <html><head><meta charset="utf-8"></head><body>
-      <table border="1">
-        <tbody>
-          <tr><td colspan="${headers.length}"><strong>${htmlEscape(workforceDetails)}</strong></td></tr>
-          <tr><td colspan="${headers.length}"><strong>MTSS Workforce Payment Report</strong></td></tr>
-        </tbody>
-        <thead><tr>${headers.map(header => `<th>${htmlEscape(header)}</th>`).join('')}</tr></thead>
-        <tbody>${tableRows}</tbody>
-      </table>
-      </body></html>
-    `;
-    downloadFile(`mtss-payment-records-${stamp}.xls`, table, 'application/vnd.ms-excel;charset=utf-8');
-    setExportButtonState(btn, 'Downloaded');
-    return;
-  }
-
-  if (type === 'backup') {
-    const backup = {
-      exportedAt: new Date().toISOString(),
-      profile: getProfilePayload(),
-      applications: appliedTaskState,
-      tasks: TASKS
-    };
-    downloadFile(`mtss-workforce-backup-${stamp}.json`, JSON.stringify(backup, null, 2), 'application/json;charset=utf-8');
-    setExportButtonState(btn, 'Backup Ready');
-    return;
-  }
-
-  if (type === 'pdf') {
-    openPdfStatement(paymentRows);
-    setExportButtonState(btn, 'PDF Opened');
-  }
-}
-
-function openPdfStatement(paymentRows) {
-  const totalPayout = paymentRows.reduce((sum, row) => sum + parseAmount(row.payout), 0);
-  const html = `
-    <html>
-      <head>
-        <title>MTSS Workforce Statement</title>
-        <style>
-          body{font-family:Arial,sans-serif;color:#101828;padding:24px}
-          h1{font-size:20px;margin:0 0 8px}
-          .muted{color:#667085;font-size:12px;margin-bottom:16px}
-          .box{border:1px solid #eaecf0;border-radius:8px;padding:12px;margin-bottom:14px}
-          table{width:100%;border-collapse:collapse;font-size:11px}
-          th,td{border:1px solid #eaecf0;padding:7px;text-align:left}
-          th{background:#f9fafb}
-        </style>
-      </head>
-      <body>
-        <h1>MTSS Workforce Statement</h1>
-        <div class="muted">Generated on ${new Date().toLocaleString()}</div>
-        <div class="box">
-          <strong>${htmlEscape(profileState.name)}</strong><br>
-          ${htmlEscape(profileState.email)} | ${htmlEscape(profileState.mobile)}<br>
-          ${htmlEscape(profileState.address)}<br>
-          Bank: ${htmlEscape(profileState.bankName)} | ${htmlEscape(profileState.bank)} | IFSC: ${htmlEscape(profileState.ifsc)}<br>
-          Total Assigned Payout: ₹${totalPayout.toLocaleString('en-IN')}
-        </div>
-        <table>
-          <thead><tr><th>Task</th><th>Project</th><th>Address</th><th>Payout</th><th>Payment</th><th>Method</th></tr></thead>
-          <tbody>
-            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.taskTitle)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.taskAddress)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td><td>${htmlEscape(row.paymentMethod)}</td></tr>`).join('')}
-          </tbody>
-        </table>
-        <script>window.onload=function(){window.print();};<\/script>
-      </body>
-    </html>
-  `;
-  const printWindow = window.open('', '_blank');
-  if (!printWindow) {
-    downloadFile(`mtss-workforce-statement-${new Date().toISOString().slice(0, 10)}.html`, html, 'text/html;charset=utf-8');
-    return;
-  }
-  printWindow.document.open();
-  printWindow.document.write(html);
-  printWindow.document.close();
-}
-
-function renderOpportunityCard(taskId, task, distanceLabel) {
-  const assignor = task.contactName.split('(')[0].trim();
-  const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
-  const iconByTask = { t1: '&#128225;', t2: '&#9889;', t3: '&#128268;', t4: '&#128736;' };
-  const bgByTask = {
-    t1: 'rgba(59,111,255,0.15)',
-    t2: 'rgba(0,195,122,0.15)',
-    t3: 'rgba(255,214,0,0.15)',
-    t4: 'rgba(255,122,0,0.15)'
-  };
-
-  return `
-    <div class="area-task task-clickable" onclick="openTask('${taskId}')">
-      <div class="area-task-icon" style="background:${bgByTask[taskId] || 'rgba(21,112,239,0.12)'}">${iconByTask[taskId] || '&#128203;'}</div>
-      <div class="area-task-info">
-        <div class="area-task-name">${task.title}</div>
-        <div class="area-task-meta">${task.project} &bull; ${distanceLabel} &bull; ${task.statusLabel}</div>
-        <div class="task-detail-grid">
-          <div class="task-detail"><div class="task-detail-label">Address</div><div class="task-detail-value">${shortAddress}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value task-date-value">${task.dueDate}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Assigned By</div><div class="task-detail-value">${assignor}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Base Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).base)}</div></div>
-          <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)}</div></div>
-        </div>
-      </div>
-      <div class="task-action-stack">
-        <a class="task-map-btn" href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()">Maps</a>
-        <div class="task-bottom-actions">
-          <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Payout</div></div>
-          ${renderTaskApplyButton(taskId)}
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderOpportunityList() {
-  const list = document.getElementById('wfOpportunityList');
-  if (!list) return;
-  populateOpportunityDropdowns();
-  const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away', t4: '4.1km away' };
-  const filters = getOpportunityFilters();
-  const entries = Object.entries(TASKS).filter(([, task]) => matchesOpportunityFilters(task, filters));
-
-  list.innerHTML = entries.length ? entries
-    .map(([taskId, task]) => renderOpportunityCard(taskId, task, distanceByTask[taskId] || 'Nearby'))
-    .join('') : `<div class="empty-task-card">No opportunities match these filters.</div>`;
-}
-
-const INDIA_STATES = [
-  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
-  'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
-  'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
-  'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'
-];
-
-const INDIA_CITIES = [
-  'Agartala', 'Agra', 'Ahmedabad', 'Ahmednagar', 'Aizawl', 'Ajmer', 'Akola', 'Alappuzha', 'Aligarh', 'Alipurduar', 'Allahabad', 'Alwar', 'Ambala', 'Amravati', 'Amritsar', 'Anand', 'Anantapur', 'Arrah', 'Asansol', 'Aurangabad',
-  'Bareilly', 'Bathinda', 'Belagavi', 'Bengaluru', 'Berhampur', 'Bhagalpur', 'Bharatpur', 'Bharuch', 'Bhavnagar', 'Bhilai', 'Bhilwara', 'Bhopal', 'Bhubaneswar', 'Bidar', 'Bikaner', 'Bilaspur', 'Bokaro', 'Bongaigaon', 'Bulandshahr', 'Burdwan',
-  'Chandigarh', 'Chandrapur', 'Chennai', 'Chhapra', 'Chittoor', 'Coimbatore', 'Cuttack',
-  'Daman', 'Darbhanga', 'Darjeeling', 'Dehradun', 'Delhi', 'Dhanbad', 'Dharamshala', 'Dibrugarh', 'Dimapur', 'Dindigul', 'Durg', 'Durgapur', 'Dwarka',
-  'Erode', 'Etawah',
-  'Faridabad', 'Firozabad',
-  'Gandhinagar', 'Gangtok', 'Gaya', 'Ghaziabad', 'Gorakhpur', 'Greater Noida', 'Guntur', 'Gurugram', 'Guwahati', 'Gwalior',
-  'Haldia', 'Haldwani', 'Hisar', 'Howrah', 'Hubballi', 'Hyderabad',
-  'Imphal', 'Indore', 'Itanagar',
-  'Jabalpur', 'Jaipur', 'Jalandhar', 'Jalgaon', 'Jammu', 'Jamnagar', 'Jamshedpur', 'Jhansi', 'Jodhpur', 'Jorhat', 'Junagadh',
-  'Kadapa', 'Kakinada', 'Kalaburagi', 'Kalyan', 'Kannur', 'Kanpur', 'Karimnagar', 'Karnal', 'Kochi', 'Kolhapur', 'Kolkata', 'Kollam', 'Korba', 'Kota', 'Kottayam', 'Kozhikode', 'Kurnool',
-  'Leh', 'Lucknow', 'Ludhiana',
-  'Madurai', 'Malappuram', 'Mangaluru', 'Mathura', 'Meerut', 'Moradabad', 'Mumbai', 'Muzaffarpur', 'Mysuru',
-  'Nagpur', 'Nanded', 'Nashik', 'Navi Mumbai', 'Nellore', 'Noida',
-  'Panaji', 'Panipat', 'Patiala', 'Patna', 'Pimpri-Chinchwad', 'Pondicherry', 'Prayagraj', 'Pune', 'Puri',
-  'Raipur', 'Rajahmundry', 'Rajkot', 'Ranchi', 'Ratlam', 'Rewa', 'Rohtak', 'Rourkela',
-  'Sagar', 'Salem', 'Sambalpur', 'Satara', 'Shillong', 'Shimla', 'Siliguri', 'Solapur', 'Sonipat', 'Srinagar', 'Surat',
-  'Thane', 'Thanjavur', 'Thiruvananthapuram', 'Thrissur', 'Tiruchirappalli', 'Tirunelveli', 'Tirupati', 'Tumakuru',
-  'Udaipur', 'Ujjain',
-  'Vadodara', 'Varanasi', 'Vasai-Virar', 'Vellore', 'Vijayawada', 'Visakhapatnam',
-  'Warangal'
-];
-
-function populateOpportunityDropdowns() {
-  const citySelect = document.getElementById('oppCityFilter');
-  const stateSelect = document.getElementById('oppStateFilter');
-  if (citySelect && !citySelect.dataset.ready) {
-    citySelect.innerHTML = `<option value="">City</option>${INDIA_CITIES.map(city => `<option value="${city}">${city}</option>`).join('')}`;
-    citySelect.dataset.ready = 'true';
-  }
-  if (stateSelect && !stateSelect.dataset.ready) {
-    stateSelect.innerHTML = `<option value="">State</option>${INDIA_STATES.map(state => `<option value="${state}">${state}</option>`).join('')}`;
-    stateSelect.dataset.ready = 'true';
-  }
-}
-
-function getOpportunityFilters() {
-  const value = id => (document.getElementById(id)?.value || '').trim().toLowerCase();
-  return {
-    shop: value('oppShopFilter'),
-    location: value('oppLocationFilter'),
-    projectId: value('oppProjectFilter'),
-    city: value('oppCityFilter'),
-    state: value('oppStateFilter'),
-    date: (document.getElementById('oppDateFilter')?.value || '').trim()
-  };
-}
-
-function taskDateToInputValue(dateText) {
-  const date = new Date(dateText);
-  if (Number.isNaN(date.getTime())) return '';
-  const yyyy = date.getFullYear();
-  const mm = String(date.getMonth() + 1).padStart(2, '0');
-  const dd = String(date.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
-}
-
-function matchesOpportunityFilters(task, filters) {
-  const searchableShop = `${task.title} ${task.contactName} ${task.description}`.toLowerCase();
-  const searchableLocation = `${task.address} ${task.mapsUrl}`.toLowerCase();
-  const searchableProject = `${task.id} ${task.project}`.toLowerCase();
-  const addressParts = task.address.split(',').map(part => part.trim().toLowerCase());
-  const cityText = addressParts.join(' ');
-  const stateText = task.address.toLowerCase();
-
-  if (filters.shop && !searchableShop.includes(filters.shop)) return false;
-  if (filters.location && !searchableLocation.includes(filters.location)) return false;
-  if (filters.projectId && !searchableProject.includes(filters.projectId)) return false;
-  if (filters.city && !cityText.includes(filters.city)) return false;
-  if (filters.state && !stateText.includes(filters.state)) return false;
-  if (filters.date && taskDateToInputValue(task.dueDate) !== filters.date) return false;
-  return true;
-}
-
-function clearOpportunityFilters() {
-  ['oppShopFilter', 'oppLocationFilter', 'oppProjectFilter', 'oppCityFilter', 'oppStateFilter', 'oppDateFilter'].forEach(id => {
-    const input = document.getElementById(id);
-    if (input) input.value = '';
-  });
-  renderOpportunityList();
-}
-
-function scheduleOpportunitySearch() {
-  clearTimeout(opportunityRenderTimer);
-  opportunityRenderTimer = setTimeout(renderOpportunityList, 180);
-}
-
 function renderDashboardTaskSummary() {
   const taskIds = ['t1', 't2', 't3'];
   const distanceByTask = { t1: '3.2km away', t2: '1.8km away', t3: '0.9km away' };
+  const iconByTask = { t1: '&#128225;', t2: '&#9889;', t3: '&#128268;' };
+  const bgByTask = {
+    t1: 'rgba(59,111,255,0.15)',
+    t2: 'rgba(0,195,122,0.15)',
+    t3: 'rgba(255,214,0,0.15)'
+  };
 
   document.querySelectorAll('#wf-home .area-task').forEach((card, index) => {
     const taskId = taskIds[index];
     const task = TASKS[taskId];
     if (!task) return;
 
+    const assignor = task.contactName.split('(')[0].trim();
+    const shortAddress = task.address.split(',').slice(0, 2).join(',').replace(' — ', ' - ');
+
     card.setAttribute('onclick', `openTask('${taskId}')`);
-    card.outerHTML = renderOpportunityCard(taskId, task, distanceByTask[taskId]);
+    card.innerHTML = `
+      <div class="area-task-icon" style="background:${bgByTask[taskId]}">${iconByTask[taskId]}</div>
+      <div class="area-task-info">
+        <div class="area-task-name">${task.title}</div>
+        <div class="area-task-meta">${task.project} &bull; ${distanceByTask[taskId]} &bull; ${task.statusLabel}</div>
+        <div class="task-detail-grid">
+          <div class="task-detail"><div class="task-detail-label">Address</div><div class="task-detail-value">${shortAddress}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Submission</div><div class="task-detail-value">${task.dueDate}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Assigned By</div><div class="task-detail-value">${assignor}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Base Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).base)}</div></div>
+          <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)}</div></div>
+        </div>
+      </div>
+      <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Payout</div></div>
+    `;
   });
 
   const upcoming = document.querySelector('#wf-home .card.task-clickable');
@@ -4091,45 +1919,38 @@ function renderDashboardTaskSummary() {
   if (upcoming && task) {
     const assignor = task.contactName.split('(')[0].trim();
     upcoming.innerHTML = `
-      <div class="upcoming-task-layout">
-        <div class="upcoming-task-main">
-          <div class="upcoming-task-title">${task.title}</div>
-          <div class="upcoming-task-meta">Address: ${task.address}</div>
-          <div class="upcoming-task-meta">Submission: ${task.dueDate} &bull; ${task.startTime} - ${task.endTime}</div>
-          <div class="upcoming-task-meta">Assigned by: ${assignor} &bull; ${task.contactPhone}</div>
-          <div class="task-detail-grid">
-            <div class="task-detail"><div class="task-detail-label">Assigned Date</div><div class="task-detail-value task-date-value">${task.assignedDate}</div></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px">${task.title}</div>
+          <div style="font-size:11px;color:var(--muted)">Address: ${task.address}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Submission: ${task.dueDate} &bull; ${task.startTime} - ${task.endTime}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Assigned by: ${assignor} &bull; ${task.contactPhone}</div>
+          <div class="task-detail-grid" style="max-width:520px">
+            <div class="task-detail"><div class="task-detail-label">Assigned Date</div><div class="task-detail-value">${task.assignedDate}</div></div>
             <div class="task-detail"><div class="task-detail-label">Base Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).base)}</div></div>
             <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)} &bull; ${task.payment.statusLabel}</div></div>
             <div class="task-detail"><div class="task-detail-label">Project</div><div class="task-detail-value">${task.project}</div></div>
             <div class="task-detail"><div class="task-detail-label">Task ID</div><div class="task-detail-value">${task.id}</div></div>
           </div>
         </div>
-        <div class="task-action-stack">
-          <a class="task-map-btn" href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()">Maps</a>
-          <div class="task-bottom-actions">
-            ${renderTaskApplyButton('t1')}
-          </div>
-        </div>
+        <a href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="padding:6px 12px;border-radius:8px;background:rgba(0,195,122,0.15);color:var(--green);font-size:10px;font-weight:600;text-decoration:none;border:1px solid rgba(0,195,122,0.25)">Maps</a>
       </div>
     `;
   }
 }
 
 renderDashboardTaskSummary();
-renderOpportunityList();
 renderTaskRows('all');
-updatePendingAuditCount();
 renderProfileDetails(false);
-renderAdminAppliedTasks();
-loadGithubPortalData();
-scheduleDeferredFirebaseLoad();
 if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
   showPortal(sessionStorage.getItem('mtssRole') || 'wf');
 } else {
   setAuthMode('wfSignin');
   showAuth();
 }
+
+let currentTaskId = null;
+let currentMTab = 0;
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // OPEN TASK — SLIDE INTO PANEL (no modal)
@@ -4169,13 +1990,11 @@ function openTask(taskId) {
 
   // â”€â”€ Slide in â”€â”€
   panel.classList.add('open');
-  document.body.classList.add('detail-open');
   document.getElementById('wfContent').classList.add('pushed');
 }
 
 function closeTask() {
   document.getElementById('wfSlidePanel').classList.remove('open');
-  document.body.classList.remove('detail-open');
   document.getElementById('wfContent').classList.remove('pushed');
   currentTaskId = null;
 }
@@ -4186,7 +2005,7 @@ function switchMTab(idx) {
   const t = TASKS[currentTaskId];
   const sc = { inprogress:'var(--purple)', review:'var(--blue)', approved:'var(--green)', rejected:'var(--red)', pending:'var(--orange)' }[t.status] || 'var(--muted)';
   document.querySelectorAll('.mtab').forEach((tb,i) => tb.classList.toggle('active', i === idx));
-  renderPane(t, idx === 1 ? 3 : idx, sc);
+  renderPane(t, idx, sc);
 }
 
 function renderPane(t, idx, sc) {
@@ -4207,25 +2026,15 @@ function renderPane(t, idx, sc) {
     // OVERVIEW
     body.innerHTML = `
       ${rejHtml}
-      <div class="task-overview-text">${t.description}</div>
-      ${renderWhatToDo(t)}
-      <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Task Address</div>
-      <div style="padding:12px;border-radius:12px;background:#f9fafb;border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;">
-        <span style="font-size:18px;flex-shrink:0;color:${sc};">Address</span>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:12px;font-weight:700;line-height:1.5;color:#101828;">${t.address}</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:3px;">Complete field address for this task</div>
-        </div>
-        <a href="${t.mapsUrl}" target="_blank" style="padding:7px 12px;border-radius:20px;background:${sc}22;color:${sc};border:1px solid ${sc}44;font-size:10px;font-weight:700;text-decoration:none;flex-shrink:0;" onclick="event.stopPropagation()">Maps</a>
-      </div>
+      <div style="font-size:12px;line-height:1.7;color:rgba(240,240,255,0.8);margin-bottom:16px;">${t.description}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
-        <div class="task-date-card"><div class="task-detail-label">Assigned</div><div class="task-date-value">${t.assignedDate}</div></div>
-        <div class="task-date-card"><div class="task-detail-label">Due Date</div><div class="task-date-value">${t.dueDate}</div></div>
-        <div class="task-date-card"><div class="task-detail-label">Task Window</div><div class="task-date-value">${t.startTime} - ${t.endTime}</div></div>
-        <div class="task-date-card"><div class="task-detail-label">Duration</div><div class="task-date-value">${t.duration}</div></div>
+        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Assigned</div><div style="font-size:11px;font-weight:600;">ðŸ“… ${t.assignedDate}</div></div>
+        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Due Date</div><div style="font-size:11px;font-weight:600;">⏰ ${t.dueDate}</div></div>
+        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Task Window</div><div style="font-size:11px;font-weight:600;">🕙 ${t.startTime} – ${t.endTime}</div></div>
+        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Duration</div><div style="font-size:11px;font-weight:600;">⌛ ${t.duration}</div></div>
       </div>
       <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Contact Person</div>
-      <div style="padding:12px;border-radius:12px;background:#f9fafb;border:1px solid var(--border);display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;align-items:center;gap:10px;margin-bottom:16px;">
         <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,${sc},${sc}88);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:14px;flex-shrink:0;">${t.contactName[0]}</div>
         <div style="flex:1;min-width:0;">
           <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.contactName}</div>
@@ -4242,7 +2051,7 @@ function renderPane(t, idx, sc) {
     // LOCATION
     body.innerHTML = `
       <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Task Address</div>
-      <div style="padding:12px;border-radius:12px;background:#f9fafb;border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;">
+      <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;">
         <span style="font-size:20px;flex-shrink:0;">📍</span>
         <div style="flex:1"><div style="font-size:12px;font-weight:600;line-height:1.5;">${t.address}</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">Tap to open navigation</div></div>
         <a href="${t.mapsUrl}" target="_blank" style="padding:7px 12px;border-radius:20px;background:linear-gradient(135deg,var(--green),var(--teal));color:white;font-size:10px;font-weight:700;text-decoration:none;flex-shrink:0;">Maps ↗</a>
@@ -4266,14 +2075,14 @@ function renderPane(t, idx, sc) {
             <div style="font-size:9px;color:rgba(255,255,255,0.5);margin-top:2px;">Click to open Google Maps</div>
           </div>
         </div>
-        <div style="padding:8px 12px;background:#f9fafb;display:flex;justify-content:space-between;">
+        <div style="padding:8px 12px;background:rgba(0,0,0,0.3);display:flex;justify-content:space-between;">
           <span style="font-size:10px;color:var(--muted);">${t.address}</span>
           <span style="font-size:10px;font-weight:600;color:var(--green);">Open ↗</span>
         </div>
       </div>
       <div style="padding:10px 12px;border-radius:10px;background:rgba(59,111,255,0.08);border:1px solid rgba(59,111,255,0.2);">
         <div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:3px;">💡 Tip</div>
-        <div style="font-size:11px;line-height:1.5;color:#667085;">If location changed, call <strong>${t.contactName.split('(')[0].trim()}</strong> at <a href="tel:${t.contactPhone}" style="color:var(--blue);text-decoration:none;">${t.contactPhone}</a></div>
+        <div style="font-size:11px;line-height:1.5;color:rgba(240,240,255,0.7);">If location changed, call <strong>${t.contactName.split('(')[0].trim()}</strong> at <a href="tel:${t.contactPhone}" style="color:var(--blue);text-decoration:none;">${t.contactPhone}</a></div>
       </div>`;
 
   } else if (idx === 2) {
@@ -4286,10 +2095,10 @@ function renderPane(t, idx, sc) {
       </div>
       ${renderPayoutBreakdown(t)}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
-        <div style="padding:10px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Transaction ID</div><div style="font-size:11px;font-weight:600;font-family:monospace;">${t.payment.txnId}</div></div>
-        <div style="padding:10px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Method</div><div style="font-size:11px;font-weight:600;">💳 ${t.payment.method}</div></div>
+        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Transaction ID</div><div style="font-size:11px;font-weight:600;font-family:monospace;">${t.payment.txnId}</div></div>
+        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Method</div><div style="font-size:11px;font-weight:600;">💳 ${t.payment.method}</div></div>
       </div>
-      <div style="padding:10px 12px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);margin-bottom:14px;">
+      <div style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);margin-bottom:14px;">
         <div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:5px;">Note</div>
         <div style="font-size:11px;line-height:1.6;">${t.payment.note}</div>
       </div>
@@ -4316,7 +2125,7 @@ function renderPane(t, idx, sc) {
       } else {
         inputHtml = `<input type="text" value="${q.answer}" placeholder="Enter answer..." style="width:100%;margin-top:6px;padding:6px 9px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:11px;font-family:var(--font-body);">`;
       }
-      return `<div style="padding:9px 12px;border-radius:10px;background:#f9fafb;border:1px solid ${answered?sc+'44':'var(--border)'};margin-bottom:7px;">
+      return `<div style="padding:9px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid ${answered?sc+'44':'var(--border)'};margin-bottom:7px;">
         <div style="display:flex;align-items:flex-start;gap:7px;">
           <div style="width:18px;height:18px;border-radius:50%;background:${answered?sc:'rgba(255,255,255,0.1)'};display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;margin-top:1px;color:white;">${i+1}</div>
           <div style="flex:1">
@@ -4336,7 +2145,7 @@ function renderPane(t, idx, sc) {
       <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:14px;">
         <div style="height:100%;width:${Math.round(answeredCount/totalQ*100)}%;background:${sc};border-radius:3px;"></div>
       </div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:12px;padding:8px 10px;background:#f9fafb;border-radius:8px;border:1px solid var(--border);">📋 Complete all questions before submitting the task.</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:12px;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid var(--border);">📋 Complete all questions before submitting the task.</div>
       ${qHtml}
       ${t.status !== 'approved' ? `
       <div style="display:flex;gap:8px;margin-top:14px;">
@@ -4367,145 +2176,38 @@ function submitQuestionnaire(btn, sc) {
 }
 </script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  import { getAnalytics, isSupported as analyticsSupported } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
-  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-  import {
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    getFirestore,
-    serverTimestamp,
-    setDoc
-  } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCVncG1bk-00eAnvkhnXuOyVTomu5LedNI",
-    authDomain: "mtss-admin.firebaseapp.com",
-    projectId: "mtss-admin",
-    storageBucket: "mtss-admin.firebasestorage.app",
-    messagingSenderId: "929174375972",
-    appId: "1:929174375972:web:4886b1cd1292d6c2fb92b1",
-    measurementId: "G-L1234D524T"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-
-  analyticsSupported()
-    .then(supported => supported ? getAnalytics(app) : null)
-    .catch(error => console.warn("Firebase analytics unavailable.", error));
-
-  signInAnonymously(auth).catch(error => {
-    console.warn("Anonymous Firebase auth failed. Enable Anonymous sign-in or update Firestore rules.", error);
-  });
-
-  window.mtssFirebase = {
-    async getProfile() {
-      const snap = await getDoc(doc(db, "workforceProfiles", "default"));
-      return snap.exists() ? snap.data() : null;
-    },
-    async saveProfile(profile) {
-      await setDoc(doc(db, "workforceProfiles", "default"), {
-        ...profile,
-        serverUpdatedAt: serverTimestamp()
-      }, { merge: true });
-    },
-    async getApplications() {
-      const snap = await getDocs(collection(db, "taskApplications"));
-      const states = {};
-      snap.forEach(item => {
-        const data = item.data();
-        if (data && data.status) states[item.id] = data.status;
-      });
-      return states;
-    },
-    async saveApplication(taskId, application) {
-      await setDoc(doc(db, "taskApplications", taskId), {
-        ...application,
-        serverUpdatedAt: serverTimestamp()
-      }, { merge: true });
-    }
-  };
-
-  window.mtssLoadFirebasePortalData?.();
-</script>
-
 <!-- TASK DETAIL TRIGGER STYLES -->
 <style>
-  .orb,
-  .stat-card,
-  .card,
-  .hs-card,
-  .bar,
-  .progress-fill {
-    animation:none !important;
-  }
-  .stat-card,
-  .card,
-  .hs-card,
-  .area-task,
-  .lead-card,
-  .task-status-card,
-  .apply-btn,
-  .sidebar-icon,
-  .tab-link,
-  .task-clickable {
-    transition:border-color 0.08s linear, background-color 0.08s linear, color 0.08s linear !important;
-  }
-  .stat-card:hover,
-  .hs-card:hover,
-  .area-task:hover,
-  .lead-card:hover,
-  .task-status-card:hover,
-  .task-status-card.active,
-  .search-filter-btn:hover {
-    transform:none !important;
-    box-shadow:none !important;
-  }
   .task-clickable { cursor:pointer; transition:all 0.2s; }
   .task-clickable:hover { background:rgba(255,255,255,0.06) !important; border-color:rgba(255,255,255,0.18) !important; }
   .task-clickable td { cursor:pointer; }
 
   /* â”€â”€ SLIDE PANEL â”€â”€ */
   #wfSlidePanel {
-    position:fixed;
-    top:65px;
-    right:0;
-    bottom:0;
-    left:80px;
-    width:auto;
-    z-index:220;
-    background:#fff;
+    position:absolute; top:0; right:0; bottom:0;
+    width:100%; z-index:50;
+    background:var(--dark2);
     border-left:1px solid var(--border);
     transform:translateX(100%);
-    transition:transform 0.12s linear;
+    transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);
     display:flex; flex-direction:column;
     overflow:hidden;
-    box-shadow:-12px 0 30px rgba(16,24,40,0.12);
   }
   #wfSlidePanel.open { transform:translateX(0); }
-  #wfContent.pushed { transform:none; pointer-events:none; }
+  #wfContent.pushed { transform:translateX(-18%); pointer-events:none; }
   .slide-header {
     padding:14px 18px 12px;
-    background:#fff;
+    background:var(--dark3);
     border-bottom:1px solid var(--border);
     flex-shrink:0;
   }
   .slide-body {
-    flex:1;
-    overflow-y:auto;
-    padding:18px;
-    color:#101828;
-    background:#fff;
+    flex:1; overflow-y:auto; padding:18px;
   }
   .slide-body::-webkit-scrollbar { width:3px; }
   .slide-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
   .mtab-row {
-    display:flex; background:#f9fafb;
+    display:flex; background:var(--dark3);
     border-bottom:1px solid var(--border);
     flex-shrink:0;
   }
@@ -4517,347 +2219,7 @@ function submitQuestionnaire(btn, sc) {
     border-bottom:2px solid transparent;
     transition:all 0.2s;
   }
-  .mtab.active { color:var(--text); border-bottom-color:var(--accent-color,var(--green)); background:#fff; }
-  @media (max-width:1366px) and (min-width:1025px) {
-    .panel-header {
-      padding-left:96px;
-      padding-right:20px;
-    }
-    .content {
-      padding:20px;
-    }
-    .home-stats {
-      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    }
-    .stat-grid {
-      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-    }
-    .admin-kpi-grid {
-      grid-template-columns:repeat(4,minmax(0,1fr));
-    }
-    .admin-filter-bar,
-    .module-toolbar {
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .task-detail-grid {
-      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    }
-    .opportunity-filters {
-      flex-wrap:wrap;
-    }
-    .area-task {
-      gap:12px;
-    }
-  }
-  @media (max-width:1024px) and (min-width:761px) {
-    .sidebar {
-      width:68px;
-      padding:14px 8px;
-    }
-    .sidebar-icon {
-      width:42px;
-      height:42px;
-    }
-    .panel-header {
-      padding-left:88px;
-      padding-right:18px;
-    }
-    .content {
-      margin-left:68px;
-      padding:18px;
-    }
-    .home-stats,
-    .stat-grid {
-      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    }
-    .admin-kpi-grid,
-    .admin-dashboard-grid,
-    .admin-filter-bar,
-    .module-grid,
-    .module-toolbar {
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    .ops-grid {
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    .task-detail-grid {
-      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    }
-    .opportunity-filters {
-      flex-wrap:wrap;
-    }
-    .single-filter-bar input,
-    .single-filter-bar select {
-      flex-basis:calc(50% - 5px);
-    }
-    .area-task {
-      align-items:flex-start;
-      flex-wrap:wrap;
-    }
-    .area-task-info {
-      min-width:calc(100% - 58px);
-    }
-    .task-action-stack {
-      width:100%;
-      min-width:0;
-      padding-left:54px;
-      align-items:stretch;
-    }
-    .upcoming-task-layout {
-      flex-wrap:wrap;
-    }
-    .upcoming-task-layout .task-action-stack {
-      padding-left:0;
-    }
-    .task-payout {
-      width:100%;
-      text-align:left;
-    }
-    .profile-form {
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    #wfSlidePanel {
-      top:65px;
-      left:68px;
-    }
-  }
-  @media (max-width:760px) {
-    body {
-      min-width:0;
-    }
-    .portals,
-    .panel,
-    .panel-body,
-    #wfPanel .panel-body {
-      min-height:auto;
-      overflow:visible !important;
-    }
-    .panel {
-      width:100%;
-    }
-    .panel-title {
-      font-size:15px;
-      min-width:0;
-      flex:1;
-    }
-    .panel-badge {
-      display:none;
-    }
-    .panel-logo-image {
-      width:30px;
-      height:30px;
-    }
-    .panel-header {
-      gap:8px;
-      align-items:center;
-    }
-    .panel-header > div:last-child {
-      margin-left:auto;
-    }
-    .sidebar {
-      position:sticky;
-      top:0;
-      z-index:95;
-      width:100%;
-      min-height:58px;
-      height:auto;
-      flex-direction:row;
-      align-items:center;
-      justify-content:flex-start;
-      gap:8px;
-      overflow-x:auto;
-      border-right:none;
-      border-bottom:1px solid var(--border);
-      -webkit-overflow-scrolling:touch;
-    }
-    .sidebar-icon {
-      flex:0 0 42px;
-    }
-    .content {
-      margin-left:0;
-      padding:14px;
-      width:100%;
-      overflow:visible;
-    }
-    .home-stats,
-    .stat-grid,
-    .profile-form,
-    .export-card-grid,
-    .task-status-grid,
-    .admin-kpi-grid,
-    .admin-dashboard-grid,
-    .admin-filter-bar,
-    .module-grid,
-    .module-toolbar {
-      grid-template-columns:1fr 1fr !important;
-      gap:10px;
-    }
-    .ops-grid,
-    .project-row {
-      grid-template-columns:1fr;
-    }
-    .card,
-    .profile-card,
-    .area-task,
-    .lead-card {
-      border-radius:8px;
-    }
-    .area-task {
-      display:grid;
-      grid-template-columns:40px minmax(0,1fr);
-      gap:12px;
-      align-items:start;
-    }
-    .area-task-info {
-      min-width:0;
-    }
-    .task-detail-grid {
-      grid-template-columns:1fr !important;
-    }
-    .opportunity-filters {
-      flex-wrap:wrap;
-      gap:9px;
-      padding:10px;
-    }
-    .single-filter-bar input,
-    .single-filter-bar select {
-      flex-basis:calc(50% - 5px);
-    }
-    .clear-filter-btn {
-      width:100%;
-    }
-    .search-filter-btn {
-      flex:1;
-    }
-    .task-action-stack {
-      grid-column:1 / -1;
-      width:100%;
-      min-width:0;
-      padding-left:0;
-      align-items:stretch;
-    }
-    .upcoming-task-layout {
-      display:block;
-    }
-    .upcoming-task-layout .task-action-stack {
-      margin-top:12px;
-      padding-left:0;
-    }
-    .task-payout {
-      width:100%;
-      text-align:left;
-      padding-left:12px;
-    }
-    .data-table {
-      display:block;
-      width:100%;
-      overflow-x:auto;
-      white-space:nowrap;
-      -webkit-overflow-scrolling:touch;
-    }
-    .profile-card {
-      flex-wrap:wrap;
-    }
-    .profile-edit {
-      margin-left:0;
-      width:100%;
-    }
-    #wfSlidePanel {
-      top:0;
-      left:0;
-      right:0;
-      bottom:0;
-      width:auto;
-      z-index:260;
-    }
-  }
-  @media (max-width:480px) {
-    .auth-screen {
-      padding:14px;
-    }
-    .panel-header {
-      padding:10px 12px;
-    }
-    .panel-title {
-      font-size:14px;
-    }
-    .content {
-      padding:12px;
-    }
-    .home-stats,
-    .stat-grid,
-    .profile-form,
-    .export-card-grid,
-    .task-status-grid,
-    .admin-kpi-grid,
-    .admin-dashboard-grid,
-    .admin-filter-bar,
-    .module-grid,
-    .module-toolbar,
-    .quick-actions {
-      grid-template-columns:1fr !important;
-    }
-    .ops-grid,
-    .approval-row,
-    .activity-row {
-      grid-template-columns:1fr;
-    }
-    .hs-card,
-    .stat-card,
-    .card {
-      padding:14px;
-    }
-    .section-title {
-      font-size:18px;
-    }
-    .section-line {
-      align-items:flex-start;
-      flex-direction:column;
-    }
-    .view-all-btn {
-      width:100%;
-    }
-    .area-task {
-      grid-template-columns:1fr;
-    }
-    .opportunity-filters {
-      display:block;
-    }
-    .single-filter-bar input,
-    .single-filter-bar select {
-      width:100%;
-      margin-bottom:8px;
-    }
-    .search-filter-btn,
-    .clear-filter-btn {
-      width:100%;
-      margin-bottom:8px;
-    }
-    .upcoming-task-title {
-      font-size:14px;
-      line-height:1.35;
-    }
-    .upcoming-task-meta {
-      font-size:12px;
-      overflow-wrap:anywhere;
-    }
-    .area-task-icon {
-      width:36px;
-      height:36px;
-    }
-    .slide-header,
-    .slide-body {
-      padding:14px;
-    }
-    .mtab {
-      min-width:110px;
-      flex:0 0 auto;
-    }
-    .mtab-row {
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-    }
-  }
+  .mtab.active { color:var(--text); border-bottom-color:var(--accent-color,var(--green)); background:rgba(255,255,255,0.04); }
 </style>
 </body>
 </html>
