@@ -2227,6 +2227,40 @@ function saveAppliedTaskState() {
   localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
 }
 
+function waitForFirebaseServices(timeoutMs = 5000) {
+  const started = Date.now();
+  return new Promise(resolve => {
+    const check = () => {
+      if (window.mtssFirebase) return resolve(window.mtssFirebase);
+      if (Date.now() - started > timeoutMs) return resolve(null);
+      setTimeout(check, 120);
+    };
+    check();
+  });
+}
+
+async function saveTaskApplicationToFirebase(taskId) {
+  const services = await waitForFirebaseServices(2500);
+  if (!services || !services.saveApplication || !TASKS[taskId]) return;
+  const task = TASKS[taskId];
+  try {
+    await services.saveApplication(taskId, {
+      taskId,
+      taskTitle: task.title,
+      project: task.project,
+      address: task.address,
+      payout: task.payment.amount,
+      status: appliedTaskState[taskId],
+      workforceName: profileState.name,
+      workforceEmail: profileState.email,
+      workforceMobile: profileState.mobile,
+      updatedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    console.warn('Firebase task application save failed.', error);
+  }
+}
+
 function renderTaskApplyButton(taskId) {
   const state = appliedTaskState[taskId];
   const cfg = state === 'pending'
@@ -2245,6 +2279,7 @@ function applyForTask(event, taskId) {
   if (!TASKS[taskId]) return;
   appliedTaskState[taskId] = 'pending';
   saveAppliedTaskState();
+  saveTaskApplicationToFirebase(taskId);
   renderDashboardTaskSummary();
   renderOpportunityList();
   renderTaskRows('all');
@@ -2255,6 +2290,7 @@ function verifyAppliedTask(taskId, approved) {
   if (!TASKS[taskId]) return;
   appliedTaskState[taskId] = approved ? 'verified' : 'rejected';
   saveAppliedTaskState();
+  saveTaskApplicationToFirebase(taskId);
   renderDashboardTaskSummary();
   renderOpportunityList();
   renderTaskRows('all');
@@ -2668,6 +2704,65 @@ function applyPortalData(data) {
   renderProfileDetails(false);
 }
 
+function getProfilePayload() {
+  return {
+    name: profileState.name,
+    role: profileState.role,
+    email: profileState.email,
+    mobile: profileState.mobile,
+    address: profileState.address,
+    pin: profileState.pin,
+    bank: profileState.bank,
+    bankAccount: profileState.bank,
+    bankName: profileState.bankName,
+    ifsc: profileState.ifsc,
+    updatedAt: new Date().toISOString()
+  };
+}
+
+async function saveProfileToFirebase() {
+  const services = await waitForFirebaseServices(2500);
+  if (!services || !services.saveProfile) return;
+  try {
+    await services.saveProfile(getProfilePayload());
+  } catch (error) {
+    console.warn('Firebase profile save failed.', error);
+  }
+}
+
+async function loadFirebasePortalData() {
+  const services = await waitForFirebaseServices(7000);
+  if (!services) return;
+
+  try {
+    const profile = await services.getProfile();
+    if (profile) {
+      applyPortalData({ workforceProfile: profile });
+    } else {
+      await saveProfileToFirebase();
+    }
+  } catch (error) {
+    console.warn('Firebase profile load failed.', error);
+  }
+
+  try {
+    const applications = await services.getApplications();
+    if (applications && Object.keys(applications).length) {
+      Object.keys(appliedTaskState).forEach(key => delete appliedTaskState[key]);
+      Object.assign(appliedTaskState, applications);
+      saveAppliedTaskState();
+      renderDashboardTaskSummary();
+      renderOpportunityList();
+      renderTaskRows('all');
+      renderAdminAppliedTasks();
+    }
+  } catch (error) {
+    console.warn('Firebase application load failed.', error);
+  }
+}
+
+window.mtssLoadFirebasePortalData = loadFirebasePortalData;
+
 async function loadGithubPortalData() {
   try {
     const response = await fetch('data/portal-data.json', { cache: 'no-store' });
@@ -2736,6 +2831,7 @@ function saveProfile() {
   profileState.bankName = document.getElementById('editBankName').value.trim() || profileState.bankName;
   profileState.ifsc = document.getElementById('editIfsc').value.trim() || profileState.ifsc;
   renderProfileDetails(false);
+  saveProfileToFirebase();
 }
 
 function renderAdminWorkforceProfile() {
@@ -2862,6 +2958,7 @@ renderTaskRows('all');
 renderProfileDetails(false);
 renderAdminAppliedTasks();
 loadGithubPortalData();
+loadFirebasePortalData();
 if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
   showPortal(sessionStorage.getItem('mtssRole') || 'wf');
 } else {
@@ -3092,6 +3189,73 @@ function submitQuestionnaire(btn, sc) {
   btn.style.background = 'linear-gradient(135deg,var(--green),var(--teal))';
   btn.disabled = true;
 }
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import { getAnalytics, isSupported as analyticsSupported } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+  import {
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    serverTimestamp,
+    setDoc
+  } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCVncG1bk-00eAnvkhnXuOyVTomu5LedNI",
+    authDomain: "mtss-admin.firebaseapp.com",
+    projectId: "mtss-admin",
+    storageBucket: "mtss-admin.firebasestorage.app",
+    messagingSenderId: "929174375972",
+    appId: "1:929174375972:web:4886b1cd1292d6c2fb92b1",
+    measurementId: "G-L1234D524T"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  analyticsSupported()
+    .then(supported => supported ? getAnalytics(app) : null)
+    .catch(error => console.warn("Firebase analytics unavailable.", error));
+
+  signInAnonymously(auth).catch(error => {
+    console.warn("Anonymous Firebase auth failed. Enable Anonymous sign-in or update Firestore rules.", error);
+  });
+
+  window.mtssFirebase = {
+    async getProfile() {
+      const snap = await getDoc(doc(db, "workforceProfiles", "default"));
+      return snap.exists() ? snap.data() : null;
+    },
+    async saveProfile(profile) {
+      await setDoc(doc(db, "workforceProfiles", "default"), {
+        ...profile,
+        serverUpdatedAt: serverTimestamp()
+      }, { merge: true });
+    },
+    async getApplications() {
+      const snap = await getDocs(collection(db, "taskApplications"));
+      const states = {};
+      snap.forEach(item => {
+        const data = item.data();
+        if (data && data.status) states[item.id] = data.status;
+      });
+      return states;
+    },
+    async saveApplication(taskId, application) {
+      await setDoc(doc(db, "taskApplications", taskId), {
+        ...application,
+        serverUpdatedAt: serverTimestamp()
+      }, { merge: true });
+    }
+  };
+
+  window.mtssLoadFirebasePortalData?.();
 </script>
 
 <!-- TASK DETAIL TRIGGER STYLES -->
