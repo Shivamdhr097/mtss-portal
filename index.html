@@ -2991,11 +2991,21 @@ function getExportRows() {
 
 function getPaymentExportRows() {
   return Object.entries(TASKS).map(([taskId, task]) => ({
+    workforceName: profileState.name,
+    workforceEmail: profileState.email,
+    workforceMobile: profileState.mobile,
+    workforceAddress: profileState.address,
+    bankAccount: profileState.bank,
+    bankName: profileState.bankName,
+    ifscCode: profileState.ifsc,
     transactionId: task.payment.txnId,
     taskId: task.id,
-    task: task.title,
+    taskTitle: task.title,
     project: task.project,
+    taskStatus: task.statusLabel,
+    assignedDate: task.assignedDate,
     dueDate: task.dueDate,
+    taskAddress: task.address,
     payout: task.payment.amount,
     paymentStatus: task.payment.statusLabel,
     paymentMethod: task.payment.method,
@@ -3073,7 +3083,7 @@ function exportWorkforceData(type, btn) {
     const tableRows = paymentRows.map(row => `<tr>${headers.map(header => `<td>${htmlEscape(row[header])}</td>`).join('')}</tr>`).join('');
     const table = `
       <html><head><meta charset="utf-8"></head><body>
-      <h2>MTSS Payment Records</h2>
+      <h2>MTSS Workforce Payment Report</h2>
       <table border="1">
         <thead><tr>${headers.map(header => `<th>${htmlEscape(header)}</th>`).join('')}</tr></thead>
         <tbody>${tableRows}</tbody>
@@ -3132,7 +3142,7 @@ function openPdfStatement(paymentRows) {
         <table>
           <thead><tr><th>Task</th><th>Project</th><th>Status</th><th>Due Date</th><th>Payout</th><th>Payment</th></tr></thead>
           <tbody>
-            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.task)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.applicationStatus)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
+            ${paymentRows.map(row => `<tr><td>${htmlEscape(row.taskTitle)}</td><td>${htmlEscape(row.project)}</td><td>${htmlEscape(row.applicationStatus)}</td><td>${htmlEscape(row.dueDate)}</td><td>${htmlEscape(row.payout)}</td><td>${htmlEscape(row.paymentStatus)}</td></tr>`).join('')}
           </tbody>
         </table>
         <script>window.onload=function(){window.print();};<\/script>
