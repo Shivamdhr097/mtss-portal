@@ -35,6 +35,9 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
+  body.detail-open {
+    overflow:hidden;
+  }
 
   /* â”€â”€ NOISE OVERLAY â”€â”€ */
   body::before {
@@ -3005,11 +3008,13 @@ function openTask(taskId) {
 
   // â”€â”€ Slide in â”€â”€
   panel.classList.add('open');
+  document.body.classList.add('detail-open');
   document.getElementById('wfContent').classList.add('pushed');
 }
 
 function closeTask() {
   document.getElementById('wfSlidePanel').classList.remove('open');
+  document.body.classList.remove('detail-open');
   document.getElementById('wfContent').classList.remove('pushed');
   currentTaskId = null;
 }
