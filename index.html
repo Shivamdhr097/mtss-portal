@@ -2214,8 +2214,8 @@
             <div class="admin-dashboard-grid">
               <div class="card">
                 <div class="card-header"><div class="card-title">Pending Work</div><span class="tag orange">Action Needed</span></div>
-                <div class="approval-row"><span>Task submissions waiting</span><b>57</b><button>Review</button></div>
-                <div class="approval-row"><span>New worker approvals</span><b>18</b><button>View</button></div>
+                <div class="approval-row"><span>WF task applications</span><b id="adminPendingApplications">0</b><button>Review</button></div>
+                <div class="approval-row"><span>Workforce profile</span><b id="adminLinkedWorkerName">Linked</b><button>View Workforce</button></div>
                 <div class="approval-row"><span>Payment requests</span><b>7</b><button>Process</button></div>
               </div>
               <div class="card">
@@ -2232,8 +2232,8 @@
               <div class="ops-grid simple-ops-grid">
                 <div><b>312</b><span>Workers online</span></div>
                 <div><b>218</b><span>Tasks submitted</span></div>
-                <div><b>172</b><span>Tasks approved</span></div>
-                <div><b>11</b><span>Tasks rejected</span></div>
+                <div><b id="adminVerifiedApplications">0</b><span>WF verified</span></div>
+                <div><b id="adminRejectedApplications">0</b><span>WF rejected</span></div>
                 <div><b>23</b><span>Overdue tasks</span></div>
                 <div><b>₹32K</b><span>Pending payout</span></div>
               </div>
@@ -2794,6 +2794,8 @@ function setAdminTab(tab, sourceIcon) {
   const section = document.getElementById('admin-' + tab);
   if (section) section.style.display = 'block';
   if (tab === 'leads') renderAdminAppliedTasks();
+  if (tab === 'workforce') renderAdminWorkforceProfile();
+  refreshAdminLinkedData();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2909,6 +2911,7 @@ function saveAppliedTaskState() {
   taskRenderVersion += 1;
   lastTaskRenderKey = '';
   updatePendingAuditCount();
+  refreshAdminLinkedData();
 }
 
 function updatePendingAuditCount() {
@@ -2917,6 +2920,28 @@ function updatePendingAuditCount() {
   const pendingApplications = Object.values(appliedTaskState).filter(state => state === 'pending').length;
   const pendingTasks = Object.values(TASKS || {}).filter(task => task.status === 'pending').length;
   el.textContent = String(pendingApplications + pendingTasks);
+  refreshAdminLinkedData();
+}
+
+function refreshAdminLinkedData() {
+  const counts = Object.values(appliedTaskState).reduce((total, state) => {
+    total[state] = (total[state] || 0) + 1;
+    return total;
+  }, {});
+  const pending = document.getElementById('adminPendingApplications');
+  const verified = document.getElementById('adminVerifiedApplications');
+  const rejected = document.getElementById('adminRejectedApplications');
+  const workerName = document.getElementById('adminLinkedWorkerName');
+  let linkedName = 'Linked';
+  try {
+    linkedName = profileState.name.split(' ')[0] || 'Linked';
+  } catch (error) {
+    linkedName = 'Linked';
+  }
+  if (pending) pending.textContent = String(counts.pending || 0);
+  if (verified) verified.textContent = String(counts.verified || 0);
+  if (rejected) rejected.textContent = String(counts.rejected || 0);
+  if (workerName) workerName.textContent = linkedName;
 }
 
 function waitForFirebaseServices(timeoutMs = 5000) {
@@ -2999,6 +3024,7 @@ function verifyAppliedTask(taskId, approved) {
 
 function renderAdminAppliedTasks() {
   const wrap = document.getElementById('adminAppliedTasks');
+  refreshAdminLinkedData();
   if (!wrap) return;
 
   const entries = Object.entries(appliedTaskState)
@@ -3456,6 +3482,8 @@ function authenticate() {
     const name = document.getElementById('authName').value.trim();
     if (name) {
       profileState.name = name;
+      saveProfileLocal();
+      saveProfileToFirebase();
       renderProfileDetails(false);
     }
   }
@@ -3493,6 +3521,35 @@ const profileState = {
   ifsc: 'DEMO0000001'
 };
 
+function saveProfileLocal() {
+  localStorage.setItem('mtssWorkforceProfile', JSON.stringify(getProfilePayload()));
+  refreshAdminLinkedData();
+  renderAdminWorkforceProfile();
+}
+
+function loadProfileLocal() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('mtssWorkforceProfile') || '{}');
+    if (saved && typeof saved === 'object') {
+      Object.assign(profileState, {
+        name: saved.name || profileState.name,
+        role: saved.role || profileState.role,
+        email: saved.email || profileState.email,
+        mobile: saved.mobile || profileState.mobile,
+        address: saved.address || profileState.address,
+        pin: saved.pin || profileState.pin,
+        bank: saved.bankAccount || saved.bank || profileState.bank,
+        bankName: saved.bankName || profileState.bankName,
+        ifsc: saved.ifsc || profileState.ifsc
+      });
+    }
+  } catch (error) {
+    console.warn('Saved workforce profile could not be loaded.', error);
+  }
+}
+
+loadProfileLocal();
+
 function applyPortalData(data) {
   if (!data || !data.workforceProfile) return;
   const profile = data.workforceProfile;
@@ -3505,6 +3562,7 @@ function applyPortalData(data) {
   profileState.bank = profile.bankAccount || profile.bank || profileState.bank;
   profileState.bankName = profile.bankName || profileState.bankName;
   profileState.ifsc = profile.ifsc || profileState.ifsc;
+  saveProfileLocal();
   renderProfileDetails(false);
 }
 
@@ -3651,7 +3709,9 @@ function saveProfile() {
   profileState.bankName = document.getElementById('editBankName').value.trim() || profileState.bankName;
   profileState.ifsc = document.getElementById('editIfsc').value.trim() || profileState.ifsc;
   renderProfileDetails(false);
+  saveProfileLocal();
   saveProfileToFirebase();
+  showAdminToast('Workforce profile linked with admin portal.');
 }
 
 function renderAdminWorkforceProfile() {
