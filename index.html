@@ -1130,21 +1130,37 @@
     -webkit-text-fill-color:initial;
   }
 
-  .portals { background:#f9fafb; }
+  .wrapper {
+    min-height:100vh;
+    background:#f9fafb;
+  }
+  .wrapper > .topnav {
+    display:none;
+  }
+  .portals {
+    background:#f9fafb;
+    min-height:100vh;
+  }
   .panel {
     max-width:100%;
     background:#f9fafb;
     border-right:none;
+    min-height:100vh;
   }
   .panel-header {
-    padding:13px 16px;
+    height:65px;
+    padding:12px 24px 12px 104px;
     background:#fff;
     border-bottom:1px solid #eaecf0;
     overflow:visible;
+    position:sticky;
+    top:0;
+    z-index:90;
+    box-shadow:none;
   }
   .panel-header::before { display:none; }
   .panel-title {
-    font-size:16px;
+    font-size:18px;
     font-weight:700;
     letter-spacing:0;
   }
@@ -1162,15 +1178,22 @@
   }
 
   .panel-body {
-    min-height:calc(100vh - 112px);
+    min-height:calc(100vh - 65px);
     background:#f9fafb;
+    overflow:visible;
   }
   .sidebar {
     width:80px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:100;
     background:#fff;
     border-right:1px solid #eaecf0;
     padding:18px 10px;
     gap:7px;
+    box-shadow:none;
   }
   .sidebar-icon {
     width:44px;
@@ -1237,9 +1260,11 @@
   .sidebar-divider { background:#eaecf0; }
 
   .content {
+    margin-left:80px;
     padding:24px;
     background:#f9fafb;
-    max-height:calc(100vh - 112px);
+    max-height:none;
+    overflow:visible;
   }
   .section-title {
     margin-bottom:6px;
@@ -1257,6 +1282,10 @@
     grid-template-columns:repeat(5,minmax(150px,1fr));
     gap:14px;
     margin-bottom:24px;
+  }
+  .stat-grid {
+    grid-template-columns:repeat(4,minmax(150px,1fr));
+    gap:14px;
   }
   .hs-card,
   .stat-card {
@@ -1371,6 +1400,15 @@
     background:#fff;
     border:1px solid #eaecf0;
     border-radius:8px;
+    box-shadow:0 1px 2px rgba(16,24,40,0.04);
+  }
+  .card {
+    padding:18px;
+    margin-bottom:16px;
+  }
+  .card-title {
+    font-size:14px;
+    color:#101828;
   }
   .data-table {
     background:#fff;
@@ -1386,6 +1424,7 @@
   .data-table td {
     border-bottom:1px solid #eaecf0;
     color:#344054;
+    background:#fff;
   }
   .data-table tr:hover td { background:#f9fafb; }
   .badge { border-radius:999px; }
@@ -1397,20 +1436,33 @@
 
   @media (max-width: 1180px) {
     .home-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .task-detail-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   }
 
   @media (max-width: 760px) {
     .topnav { padding:12px 14px; }
-    .panel-header { padding:12px 14px; }
+    .wrapper > .topnav { display:none; }
+    .panel-header {
+      height:auto;
+      min-height:58px;
+      padding:12px 14px;
+      position:relative;
+      top:auto;
+    }
     .panel-body { min-height:auto; }
     .sidebar {
+      position:relative;
+      left:auto;
+      top:auto;
+      bottom:auto;
       width:100%;
       background:#fff;
       border-bottom:1px solid #eaecf0;
       padding:8px 10px;
     }
     .content {
+      margin-left:0;
       padding:14px;
       max-height:none;
     }
@@ -1496,7 +1548,7 @@
       <!-- Panel header -->
       <div class="panel-header admin">
         <div class="panel-title">
-          <span>🏢</span>
+          <img class="panel-logo-image" src="assets/mtss-services-logo.png" alt="MTSS Services">
           Admin Portal
           <span class="panel-badge">MANAGEMENT</span>
         </div>
