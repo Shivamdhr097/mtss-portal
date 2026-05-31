@@ -2194,7 +2194,7 @@
                 <button class="apply-btn admin-btn" onclick="downloadSheetCsvPack(this)">Download CSV Pack</button>
               </div>
               <div id="sheetSyncMessage" style="font-size:11px;color:var(--muted);line-height:1.5">
-                Create a Google Sheet, deploy the Apps Script template as a Web App, paste the Web App URL here, then use Push/Pull.
+                Create a Google Sheet, deploy the Apps Script template as a Web App, paste the Web App URL here, then use Push/Pull. After connection, the portal auto-checks Google Sheets every 60 seconds.
               </div>
             </div>
           </div>
@@ -2551,6 +2551,9 @@ let currentMTab = 0;
 let opportunityRenderTimer = 0;
 let firebasePortalLoadStarted = false;
 const SHEET_WEBAPP_KEY = 'mtssGoogleSheetWebAppUrl';
+let sheetAutoSyncTimer = 0;
+let sheetPullInProgress = false;
+let lastSheetAutoSyncAt = '';
 
 function saveAppliedTaskState() {
   localStorage.setItem('mtssAppliedTasks', JSON.stringify(appliedTaskState));
@@ -2613,8 +2616,24 @@ function saveSheetConnection() {
     return;
   }
   localStorage.setItem(SHEET_WEBAPP_KEY, url);
-  updateSheetConnectionUi('Google Sheet link saved. You can now push or pull portal data.', true);
+  updateSheetConnectionUi('Google Sheet link saved. Auto-update is now active every 60 seconds.', true);
+  startGoogleSheetAutoSync(true);
 }
+
+function startGoogleSheetAutoSync(runNow = false) {
+  clearInterval(sheetAutoSyncTimer);
+  if (!getSheetWebAppUrl()) return;
+  sheetAutoSyncTimer = setInterval(() => pullPortalDataFromSheet(null, { silent: true }), 60000);
+  if (runNow) setTimeout(() => pullPortalDataFromSheet(null, { silent: true }), 800);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && getSheetWebAppUrl()) pullPortalDataFromSheet(null, { silent: true });
+});
+
+window.addEventListener('focus', () => {
+  if (getSheetWebAppUrl()) pullPortalDataFromSheet(null, { silent: true });
+});
 
 function getPortalSheetPayload() {
   const tasks = Object.entries(TASKS).map(([key, task]) => {
@@ -2773,6 +2792,8 @@ function applySheetPayload(payload) {
   renderDashboardTaskSummary();
   renderOpportunityList();
   renderTaskRows(currentTaskFilter || 'all');
+  renderAdminWorkforceProfile();
+  updatePendingAuditCount();
   renderAdminAppliedTasks();
 }
 
@@ -2796,21 +2817,25 @@ async function pushPortalDataToSheet(btn) {
   }
 }
 
-function pullPortalDataFromSheet(btn) {
+function pullPortalDataFromSheet(btn, options = {}) {
   const url = getSheetWebAppUrl();
   if (!url) {
-    updateSheetConnectionUi('Save your Apps Script Web App URL first.', false);
+    if (!options.silent) updateSheetConnectionUi('Save your Apps Script Web App URL first.', false);
     return;
   }
-  setExportButtonState(btn, 'Pulling...');
+  if (sheetPullInProgress) return;
+  sheetPullInProgress = true;
+  if (btn) setExportButtonState(btn, 'Pulling...');
   const callbackName = 'mtssSheetCallback' + Date.now();
   window[callbackName] = payload => {
     try {
       applySheetPayload(payload);
-      updateSheetConnectionUi('Portal updated from Google Sheet.', true);
+      lastSheetAutoSyncAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      updateSheetConnectionUi(options.silent ? `Auto-updated from Google Sheet at ${lastSheetAutoSyncAt}.` : 'Portal updated from Google Sheet.', true);
     } catch (error) {
-      updateSheetConnectionUi('Sheet data received but could not be applied.', false);
+      if (!options.silent) updateSheetConnectionUi('Sheet data received but could not be applied.', false);
     } finally {
+      sheetPullInProgress = false;
       delete window[callbackName];
       document.getElementById(callbackName)?.remove();
     }
@@ -2819,7 +2844,8 @@ function pullPortalDataFromSheet(btn) {
   script.id = callbackName;
   script.src = `${url}${url.includes('?') ? '&' : '?'}action=getPortalData&callback=${callbackName}&t=${Date.now()}`;
   script.onerror = () => {
-    updateSheetConnectionUi('Sheet pull failed. Confirm Apps Script is deployed for Anyone access.', false);
+    sheetPullInProgress = false;
+    if (!options.silent) updateSheetConnectionUi('Sheet pull failed. Confirm Apps Script is deployed for Anyone access.', false);
     delete window[callbackName];
     script.remove();
   };
@@ -4030,6 +4056,7 @@ updatePendingAuditCount();
 renderProfileDetails(false);
 renderAdminAppliedTasks();
 updateSheetConnectionUi();
+startGoogleSheetAutoSync(true);
 loadGithubPortalData();
 scheduleDeferredFirebaseLoad();
 if (sessionStorage.getItem('mtssWfAuthenticated') === 'true') {
