@@ -2931,7 +2931,7 @@ function renderPane(t, idx, sc) {
         <div class="task-date-card"><div class="task-detail-label">Duration</div><div class="task-date-value">${t.duration}</div></div>
       </div>
       <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Contact Person</div>
-      <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <div style="padding:12px;border-radius:12px;background:#f9fafb;border:1px solid var(--border);display:flex;align-items:center;gap:10px;margin-bottom:16px;">
         <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,${sc},${sc}88);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:14px;flex-shrink:0;">${t.contactName[0]}</div>
         <div style="flex:1;min-width:0;">
           <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.contactName}</div>
@@ -2948,7 +2948,7 @@ function renderPane(t, idx, sc) {
     // LOCATION
     body.innerHTML = `
       <div style="font-size:10px;font-weight:700;font-family:var(--font-head);text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;">Task Address</div>
-      <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;">
+      <div style="padding:12px;border-radius:12px;background:#f9fafb;border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;">
         <span style="font-size:20px;flex-shrink:0;">📍</span>
         <div style="flex:1"><div style="font-size:12px;font-weight:600;line-height:1.5;">${t.address}</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">Tap to open navigation</div></div>
         <a href="${t.mapsUrl}" target="_blank" style="padding:7px 12px;border-radius:20px;background:linear-gradient(135deg,var(--green),var(--teal));color:white;font-size:10px;font-weight:700;text-decoration:none;flex-shrink:0;">Maps ↗</a>
@@ -2972,14 +2972,14 @@ function renderPane(t, idx, sc) {
             <div style="font-size:9px;color:rgba(255,255,255,0.5);margin-top:2px;">Click to open Google Maps</div>
           </div>
         </div>
-        <div style="padding:8px 12px;background:rgba(0,0,0,0.3);display:flex;justify-content:space-between;">
+        <div style="padding:8px 12px;background:#f9fafb;display:flex;justify-content:space-between;">
           <span style="font-size:10px;color:var(--muted);">${t.address}</span>
           <span style="font-size:10px;font-weight:600;color:var(--green);">Open ↗</span>
         </div>
       </div>
       <div style="padding:10px 12px;border-radius:10px;background:rgba(59,111,255,0.08);border:1px solid rgba(59,111,255,0.2);">
         <div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:3px;">💡 Tip</div>
-        <div style="font-size:11px;line-height:1.5;color:rgba(240,240,255,0.7);">If location changed, call <strong>${t.contactName.split('(')[0].trim()}</strong> at <a href="tel:${t.contactPhone}" style="color:var(--blue);text-decoration:none;">${t.contactPhone}</a></div>
+        <div style="font-size:11px;line-height:1.5;color:#667085;">If location changed, call <strong>${t.contactName.split('(')[0].trim()}</strong> at <a href="tel:${t.contactPhone}" style="color:var(--blue);text-decoration:none;">${t.contactPhone}</a></div>
       </div>`;
 
   } else if (idx === 2) {
@@ -2992,10 +2992,10 @@ function renderPane(t, idx, sc) {
       </div>
       ${renderPayoutBreakdown(t)}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
-        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Transaction ID</div><div style="font-size:11px;font-weight:600;font-family:monospace;">${t.payment.txnId}</div></div>
-        <div style="padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Method</div><div style="font-size:11px;font-weight:600;">💳 ${t.payment.method}</div></div>
+        <div style="padding:10px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Transaction ID</div><div style="font-size:11px;font-weight:600;font-family:monospace;">${t.payment.txnId}</div></div>
+        <div style="padding:10px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Method</div><div style="font-size:11px;font-weight:600;">💳 ${t.payment.method}</div></div>
       </div>
-      <div style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);margin-bottom:14px;">
+      <div style="padding:10px 12px;border-radius:10px;background:#f9fafb;border:1px solid var(--border);margin-bottom:14px;">
         <div style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:5px;">Note</div>
         <div style="font-size:11px;line-height:1.6;">${t.payment.note}</div>
       </div>
@@ -3022,7 +3022,7 @@ function renderPane(t, idx, sc) {
       } else {
         inputHtml = `<input type="text" value="${q.answer}" placeholder="Enter answer..." style="width:100%;margin-top:6px;padding:6px 9px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:11px;font-family:var(--font-body);">`;
       }
-      return `<div style="padding:9px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid ${answered?sc+'44':'var(--border)'};margin-bottom:7px;">
+      return `<div style="padding:9px 12px;border-radius:10px;background:#f9fafb;border:1px solid ${answered?sc+'44':'var(--border)'};margin-bottom:7px;">
         <div style="display:flex;align-items:flex-start;gap:7px;">
           <div style="width:18px;height:18px;border-radius:50%;background:${answered?sc:'rgba(255,255,255,0.1)'};display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;margin-top:1px;color:white;">${i+1}</div>
           <div style="flex:1">
@@ -3042,7 +3042,7 @@ function renderPane(t, idx, sc) {
       <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:14px;">
         <div style="height:100%;width:${Math.round(answeredCount/totalQ*100)}%;background:${sc};border-radius:3px;"></div>
       </div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:12px;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid var(--border);">📋 Complete all questions before submitting the task.</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:12px;padding:8px 10px;background:#f9fafb;border-radius:8px;border:1px solid var(--border);">📋 Complete all questions before submitting the task.</div>
       ${qHtml}
       ${t.status !== 'approved' ? `
       <div style="display:flex;gap:8px;margin-top:14px;">
@@ -3081,30 +3081,40 @@ function submitQuestionnaire(btn, sc) {
 
   /* â”€â”€ SLIDE PANEL â”€â”€ */
   #wfSlidePanel {
-    position:absolute; top:0; right:0; bottom:0;
-    width:100%; z-index:50;
-    background:var(--dark2);
+    position:fixed;
+    top:65px;
+    right:0;
+    bottom:0;
+    left:80px;
+    width:auto;
+    z-index:220;
+    background:#fff;
     border-left:1px solid var(--border);
     transform:translateX(100%);
     transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);
     display:flex; flex-direction:column;
     overflow:hidden;
+    box-shadow:-12px 0 30px rgba(16,24,40,0.12);
   }
   #wfSlidePanel.open { transform:translateX(0); }
-  #wfContent.pushed { transform:translateX(-18%); pointer-events:none; }
+  #wfContent.pushed { transform:none; pointer-events:none; }
   .slide-header {
     padding:14px 18px 12px;
-    background:var(--dark3);
+    background:#fff;
     border-bottom:1px solid var(--border);
     flex-shrink:0;
   }
   .slide-body {
-    flex:1; overflow-y:auto; padding:18px;
+    flex:1;
+    overflow-y:auto;
+    padding:18px;
+    color:#101828;
+    background:#fff;
   }
   .slide-body::-webkit-scrollbar { width:3px; }
   .slide-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
   .mtab-row {
-    display:flex; background:var(--dark3);
+    display:flex; background:#f9fafb;
     border-bottom:1px solid var(--border);
     flex-shrink:0;
   }
@@ -3116,7 +3126,17 @@ function submitQuestionnaire(btn, sc) {
     border-bottom:2px solid transparent;
     transition:all 0.2s;
   }
-  .mtab.active { color:var(--text); border-bottom-color:var(--accent-color,var(--green)); background:rgba(255,255,255,0.04); }
+  .mtab.active { color:var(--text); border-bottom-color:var(--accent-color,var(--green)); background:#fff; }
+  @media (max-width:760px) {
+    #wfSlidePanel {
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      width:auto;
+      z-index:260;
+    }
+  }
 </style>
 </body>
 </html>
