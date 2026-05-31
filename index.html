@@ -634,10 +634,33 @@
   .task-action-stack {
     flex-shrink:0;
     min-width:132px;
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:8px;
+  }
+  .task-bottom-actions {
+    width:100%;
     display:flex;
     flex-direction:column;
     align-items:stretch;
     gap:8px;
+  }
+  .task-map-btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#eff8ff;
+    color:#1570ef;
+    font-size:12px;
+    font-weight:700;
+    text-decoration:none;
+    border:1px solid #b2ddff;
+    line-height:1.2;
   }
   .task-apply-btn {
     width:100%;
@@ -912,6 +935,7 @@
     .task-action-stack {
       width:100%;
       padding-left:42px;
+      align-items:stretch;
     }
     .data-table {
       display:block;
@@ -2579,8 +2603,11 @@ function renderDashboardTaskSummary() {
         </div>
       </div>
       <div class="task-action-stack">
-        <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Payout</div></div>
-        ${renderTaskApplyButton(taskId)}
+        <a class="task-map-btn" href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()">Maps</a>
+        <div class="task-bottom-actions">
+          <div class="task-payout"><div class="task-payout-value">${task.payment.amount}</div><div class="task-payout-label">Payout</div></div>
+          ${renderTaskApplyButton(taskId)}
+        </div>
       </div>
     `;
   });
@@ -2604,9 +2631,11 @@ function renderDashboardTaskSummary() {
             <div class="task-detail"><div class="task-detail-label">Task ID</div><div class="task-detail-value">${task.id}</div></div>
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;min-width:132px">
-          <a href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="padding:8px 12px;border-radius:8px;background:rgba(0,195,122,0.15);color:var(--green);font-size:10px;font-weight:600;text-decoration:none;border:1px solid rgba(0,195,122,0.25);text-align:center">Maps</a>
-          ${renderTaskApplyButton('t1')}
+        <div class="task-action-stack">
+          <a class="task-map-btn" href="${task.mapsUrl}" target="_blank" onclick="event.stopPropagation()">Maps</a>
+          <div class="task-bottom-actions">
+            ${renderTaskApplyButton('t1')}
+          </div>
         </div>
       </div>
     `;
