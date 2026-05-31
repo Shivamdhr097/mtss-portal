@@ -1606,266 +1606,6 @@
     max-height:none;
     overflow:visible;
   }
-  .admin-filter-bar {
-    display:grid;
-    grid-template-columns:2fr repeat(4,minmax(120px,1fr)) auto;
-    gap:10px;
-    margin-bottom:18px;
-    padding:12px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#fff;
-  }
-  .admin-filter-bar input,
-  .admin-filter-bar select,
-  .activity-search {
-    height:36px;
-    border:1px solid #d0d5dd;
-    border-radius:8px;
-    background:#fff;
-    color:#101828;
-    padding:0 10px;
-    font-size:11px;
-    font-weight:600;
-    min-width:0;
-  }
-  .kpi-group-title {
-    margin:18px 0 8px;
-    font-size:11px;
-    font-weight:800;
-    color:#344054;
-    letter-spacing:0.8px;
-    text-transform:uppercase;
-  }
-  .admin-kpi-grid {
-    display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    gap:10px;
-    margin-bottom:12px;
-  }
-  #admin-dashboard .admin-filter-bar {
-    grid-template-columns:minmax(0,1fr) auto;
-  }
-  .simple-admin-kpis {
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-  .simple-ops-grid {
-    grid-template-columns:repeat(6,minmax(0,1fr));
-  }
-  .mini-trend {
-    height:20px;
-    margin-top:9px;
-    border-radius:4px;
-    background:linear-gradient(90deg,transparent,currentColor);
-    opacity:0.18;
-  }
-  .mini-trend.blue { color:var(--blue); }
-  .mini-trend.green { color:var(--green); }
-  .mini-trend.orange { color:var(--orange); }
-  .mini-trend.purple { color:var(--purple); }
-  .mini-trend.red { color:var(--red); }
-  .mini-trend.teal { color:var(--teal); }
-  .mini-trend.yellow { color:var(--yellow); }
-  .admin-dashboard-grid {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:14px;
-  }
-  .ops-grid {
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:8px;
-  }
-  .ops-grid div {
-    padding:10px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#f9fafb;
-  }
-  .ops-grid b,
-  .metric-strip b {
-    display:block;
-    font-family:var(--font-head);
-    font-size:18px;
-    color:#1570ef;
-  }
-  .ops-grid span,
-  .project-row span,
-  .activity-row span {
-    display:block;
-    margin-top:3px;
-    font-size:10px;
-    color:#667085;
-    line-height:1.35;
-  }
-  .approval-row,
-  .activity-row {
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    gap:10px;
-    align-items:center;
-    padding:9px 0;
-    border-bottom:1px solid #eaecf0;
-    font-size:12px;
-  }
-  .approval-row button,
-  .activity-row button,
-  .quick-actions button {
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#1570ef;
-    border-radius:8px;
-    padding:7px 10px;
-    font-size:10px;
-    font-weight:800;
-    cursor:pointer;
-  }
-  .admin-filter-mini {
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:10px;
-  }
-  .admin-filter-mini span {
-    padding:4px 8px;
-    border-radius:999px;
-    background:#f2f4f7;
-    color:#667085;
-    font-size:10px;
-    font-weight:700;
-  }
-  .project-row {
-    display:grid;
-    grid-template-columns:1.4fr 1fr auto;
-    gap:12px;
-    align-items:center;
-    padding:12px 0;
-    border-bottom:1px solid #eaecf0;
-  }
-  .chart-stack {
-    display:grid;
-    gap:14px;
-  }
-  .chart-stack > div > span {
-    display:block;
-    margin-bottom:8px;
-    font-size:11px;
-    font-weight:800;
-    color:#344054;
-  }
-  .bar-chart.compact {
-    height:54px;
-  }
-  .metric-strip {
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-  }
-  .metric-strip b {
-    padding:10px;
-    border-radius:8px;
-    background:#f9fafb;
-    text-align:center;
-  }
-  .alert-row {
-    padding:10px 12px;
-    border-radius:8px;
-    margin-bottom:8px;
-    border:1px solid #eaecf0;
-    font-size:12px;
-    font-weight:700;
-  }
-  .alert-row.high { background:#fff1f3; color:#c01048; border-color:#fecdd6; }
-  .alert-row.med { background:#fffaeb; color:#b54708; border-color:#fedf89; }
-  .alert-row.low { background:#eff8ff; color:#175cd3; border-color:#b2ddff; }
-  .quick-actions {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-  }
-  .module-toolbar {
-    display:grid;
-    grid-template-columns:2fr repeat(2,minmax(120px,1fr)) repeat(4,auto);
-    gap:8px;
-    align-items:center;
-    padding:12px;
-    margin-bottom:14px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#fff;
-  }
-  .module-toolbar input,
-  .module-toolbar select {
-    min-width:0;
-    height:34px;
-    border:1px solid #d0d5dd;
-    border-radius:8px;
-    background:#fff;
-    color:#101828;
-    padding:0 10px;
-    font-size:11px;
-    font-weight:600;
-  }
-  .module-toolbar button {
-    height:34px;
-    padding:0 10px;
-    border-radius:8px;
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#1570ef;
-    font-size:10px;
-    font-weight:800;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .admin-action-toast {
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    z-index:300;
-    max-width:min(360px,calc(100vw - 32px));
-    padding:12px 14px;
-    border-radius:8px;
-    border:1px solid #b2ddff;
-    background:#eff8ff;
-    color:#175cd3;
-    box-shadow:0 12px 28px rgba(16,24,40,0.14);
-    font-size:12px;
-    font-weight:800;
-    line-height:1.35;
-  }
-  .module-grid {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-    margin-bottom:14px;
-  }
-  .module-card {
-    padding:14px;
-    border:1px solid #eaecf0;
-    border-radius:8px;
-    background:#fff;
-  }
-  .module-title {
-    margin-bottom:10px;
-    font-size:12px;
-    font-weight:800;
-    color:#101828;
-  }
-  .chip-row {
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-  }
-  .chip-row span {
-    padding:5px 8px;
-    border-radius:999px;
-    background:#f2f4f7;
-    color:#344054;
-    font-size:10px;
-    font-weight:700;
-  }
   .section-title {
     margin-bottom:6px;
     font-size:22px;
@@ -2194,96 +1934,112 @@
 
           <!-- DASHBOARD TAB -->
           <div id="admin-dashboard">
-            <div class="section-title"><span class="dot"></span>Admin Overview</div>
-            <div class="section-sub">Simple view of today's work, pending approvals, and quick admin actions.</div>
+            <div class="section-title"><span class="dot"></span>Overview</div>
+            <div class="section-sub">Today, May 26 2025 — All Projects</div>
 
-            <div class="admin-filter-bar">
-              <input id="adminGlobalSearch" type="search" placeholder="Search task, worker, project, client, payment" onkeydown="if(event.key === 'Enter') adminSearchDashboard()">
-              <button class="apply-btn admin-btn" onclick="adminSearchDashboard()">Search</button>
-            </div>
-
-            <div class="admin-kpi-grid simple-admin-kpis">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Tasks Today</div><div class="stat-value blue">286</div><div class="stat-change up">Open task list</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Pending Review</div><div class="stat-value orange">57</div><div class="stat-change down">Needs admin check</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('workforce')"><div class="stat-label">Active Workers</div><div class="stat-value green">1,216</div><div class="stat-change up">View workforce</div></div>
-              <div class="stat-card purple tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active Projects</div><div class="stat-value purple">18</div><div class="stat-change up">View projects</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending Payments</div><div class="stat-value red">₹32K</div><div class="stat-change down">Process payouts</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Revenue</div><div class="stat-value teal">₹4.2L</div><div class="stat-change up">This month</div></div>
-            </div>
-
-            <div class="admin-dashboard-grid">
-              <div class="card">
-                <div class="card-header"><div class="card-title">Pending Work</div><span class="tag orange">Action Needed</span></div>
-                <div class="approval-row"><span>WF task applications</span><b id="adminPendingApplications">0</b><button>Review</button></div>
-                <div class="approval-row"><span>Workforce profile</span><b id="adminLinkedWorkerName">Linked</b><button>View Workforce</button></div>
-                <div class="approval-row"><span>Payment requests</span><b>7</b><button>Process</button></div>
+            <div class="stat-grid">
+              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')">
+                <div class="stat-label">Total Leads</div>
+                <div class="stat-value blue">1,284</div>
+                <div class="stat-change up">▲ 12% this month</div>
               </div>
-              <div class="card">
-                <div class="card-header"><div class="card-title">Quick Actions</div><span class="tag blue">Most Used</span></div>
-                <div class="quick-actions">
-                  <button>Create Task</button><button>Add Worker</button><button>Create Project</button>
-                  <button>Process Payments</button><button>Generate Reports</button><button>View Workforce</button>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value orange">47</div>
+                <div class="stat-change down">▼ 3 today</div>
+              </div>
+              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')">
+                <div class="stat-label">Monthly Revenue</div>
+                <div class="stat-value green">₹4.2L</div>
+                <div class="stat-change up">▲ 18% vs last</div>
+              </div>
+              <div class="stat-card purple tab-link" onclick="setAdminTab('workforce')">
+                <div class="stat-label">Active Workforce</div>
+                <div class="stat-value purple">138</div>
+                <div class="stat-change up">▲ 6 new</div>
+              </div>
+            </div>
+
+            <div class="card tab-link" onclick="setAdminTab('revenue')">
+              <div class="card-header">
+                <div class="card-title">Revenue — Last 8 Months</div>
+                <span class="tag blue">₹28.4L YTD</span>
+              </div>
+              <div class="bar-chart">
+                <div class="bar" style="height:60%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Oct: ₹2.8L"></div>
+                <div class="bar" style="height:50%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Nov: ₹2.3L"></div>
+                <div class="bar" style="height:70%;background:linear-gradient(180deg,var(--blue),#1a3a8a);" title="Dec: ₹3.2L"></div>
+                <div class="bar" style="height:55%;background:linear-gradient(180deg,var(--purple),#3a1a8a);" title="Jan: ₹2.5L"></div>
+                <div class="bar" style="height:80%;background:linear-gradient(180deg,var(--purple),#3a1a8a);" title="Feb: ₹3.7L"></div>
+                <div class="bar" style="height:65%;background:linear-gradient(180deg,var(--teal),#0a5a60);" title="Mar: ₹3.0L"></div>
+                <div class="bar" style="height:75%;background:linear-gradient(180deg,var(--teal),#0a5a60);" title="Apr: ₹3.5L"></div>
+                <div class="bar" style="height:90%;background:linear-gradient(180deg,var(--green),#005a3a);" title="May: ₹4.2L"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                <span style="font-size:9px;color:var(--muted)">Oct</span>
+                <span style="font-size:9px;color:var(--muted)">Nov</span>
+                <span style="font-size:9px;color:var(--muted)">Dec</span>
+                <span style="font-size:9px;color:var(--muted)">Jan</span>
+                <span style="font-size:9px;color:var(--muted)">Feb</span>
+                <span style="font-size:9px;color:var(--muted)">Mar</span>
+                <span style="font-size:9px;color:var(--muted)">Apr</span>
+                <span style="font-size:9px;color:var(--muted)">May</span>
+              </div>
+            </div>
+
+            <div class="card tab-link" onclick="setAdminTab('projects')">
+              <div class="card-header">
+                <div class="card-title">Active Projects</div>
+                <span class="tag green">8 Running</span>
+              </div>
+              <div class="donut-wrap">
+                <div class="donut">
+                  <svg width="64" height="64" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--blue)" stroke-width="10" stroke-dasharray="82 81" stroke-linecap="round"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--green)" stroke-width="10" stroke-dasharray="40 123" stroke-dashoffset="-82" stroke-linecap="round"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--orange)" stroke-width="10" stroke-dasharray="22 141" stroke-dashoffset="-122" stroke-linecap="round"/>
+                  </svg>
+                  <div class="donut-center" style="color:var(--text)"><span>8</span><span style="font-size:8px;color:var(--muted)">total</span></div>
+                </div>
+                <div class="donut-legend">
+                  <div class="donut-item"><div class="donut-dot" style="background:var(--blue)"></div>Active (5)</div>
+                  <div class="donut-item"><div class="donut-dot" style="background:var(--green)"></div>Completed (2)</div>
+                  <div class="donut-item"><div class="donut-dot" style="background:var(--orange)"></div>On Hold (1)</div>
                 </div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-header"><div class="card-title">Today Summary</div><span class="tag green">Live</span></div>
-              <div class="ops-grid simple-ops-grid">
-                <div><b>312</b><span>Workers online</span></div>
-                <div><b>218</b><span>Tasks submitted</span></div>
-                <div><b id="adminVerifiedApplications">0</b><span>WF verified</span></div>
-                <div><b id="adminRejectedApplications">0</b><span>WF rejected</span></div>
-                <div><b>23</b><span>Overdue tasks</span></div>
-                <div><b>₹32K</b><span>Pending payout</span></div>
+            <div class="card tab-link" onclick="setAdminTab('payments')">
+              <div class="card-header">
+                <div class="card-title">Recent Payments</div>
+                <span class="tag orange">View All</span>
+              </div>
+              <div class="pay-row">
+                <div><div class="pay-name">Rahul Sharma</div><div class="pay-tid">TXN#84729A</div></div>
+                <div style="text-align:right"><div class="pay-amount" style="color:var(--green)">₹8,400</div><span class="badge paid">Paid</span></div>
+              </div>
+              <div class="pay-row">
+                <div><div class="pay-name">Priya Mehta</div><div class="pay-tid">TXN#84730B</div></div>
+                <div style="text-align:right"><div class="pay-amount" style="color:var(--teal)">₹6,200</div><span class="badge processing">Processing</span></div>
+              </div>
+              <div class="pay-row">
+                <div><div class="pay-name">Amit Verma</div><div class="pay-tid">TXN#84731C</div></div>
+                <div style="text-align:right"><div class="pay-amount" style="color:var(--orange)">₹5,500</div><span class="badge pending">Pending</span></div>
               </div>
             </div>
           </div>
 
           <!-- LEADS TAB (hidden) -->
           <div id="admin-leads" style="display:none">
-            <div class="section-title"><span class="dot"></span>Task Management</div>
-            <div class="section-sub">Create, assign, monitor, review, approve, reject, and analyze tasks across projects.</div>
+            <div class="section-title"><span class="dot"></span>Lead Management</div>
+            <div class="section-sub">47 pending approval • 3 self-assign requests</div>
 
             <div class="stat-grid">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Total Tasks</div><div class="stat-value blue">12,480</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Pending Review</div><div class="stat-value orange">47</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Total Leads</div><div class="stat-value blue">1,284</div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Pending</div><div class="stat-value orange">47</div></div>
               <div class="stat-card green tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Approved</div><div class="stat-value green">1,109</div></div>
               <div class="stat-card red tab-link" onclick="setAdminTab('leads')"><div class="stat-label">Rejected</div><div class="stat-value red">128</div></div>
-            </div>
-
-            <div class="module-toolbar">
-              <input placeholder="Search task, project, worker, city">
-              <select><option>All Workflows</option><option>Draft</option><option>Assigned</option><option>Accepted</option><option>In Progress</option><option>Submitted</option><option>Under Review</option><option>Approved</option><option>Rejected</option><option>Rework Required</option><option>Completed</option><option>Closed</option></select>
-              <select><option>All Priorities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
-              <button>Create Task</button><button>Bulk Create</button><button>Templates</button><button>Export</button>
-            </div>
-
-            <div class="module-grid">
-              <div class="module-card">
-                <div class="module-title">Task Creation & Assignment</div>
-                <div class="chip-row"><span>Create Task</span><span>Bulk Task Creation</span><span>Task Templates</span><span>Recurring Tasks</span><span>Task Categories</span><span>Priority Levels</span><span>SOP Uploads</span></div>
-                <div class="chip-row"><span>Assign Worker</span><span>Team Leader</span><span>Multiple Workers</span><span>State</span><span>City</span><span>Zone</span><span>Bulk Assignment</span></div>
-              </div>
-              <div class="module-card">
-                <div class="module-title">Submission Review</div>
-                <div class="approval-row"><span>Forms Review</span><b>57</b><button>Review</button></div>
-                <div class="approval-row"><span>Document Review</span><b>18</b><button>Open</button></div>
-                <div class="approval-row"><span>Geo-tagged Images</span><b>42</b><button>Validate</button></div>
-                <div class="approval-row"><span>GPS + Timestamp Validation</span><b>96%</b><button>Audit</button></div>
-              </div>
-            </div>
-
-            <div class="module-grid">
-              <div class="module-card">
-                <div class="module-title">Rework Management</div>
-                <div class="ops-grid"><div><b>9</b><span>Rework Requests</span></div><div><b>4</b><span>Rework Deadlines</span></div><div><b>21</b><span>Rework History</span></div></div>
-              </div>
-              <div class="module-card">
-                <div class="module-title">Task Monitoring & Reports</div>
-                <div class="metric-strip"><b>86%<span>Completion</span></b><b>91%<span>Approval</span></b><b>2.4%<span>Rejection</span></b></div>
-                <div class="chip-row"><span>Daily</span><span>Weekly</span><span>Monthly</span><span>Project-wise</span><span>Client-wise</span><span>Worker Performance</span></div>
-              </div>
             </div>
 
             <div class="sec-div"><span>Self-Assign Requests</span></div>
@@ -2328,29 +2084,8 @@
           <!-- WORKFORCE TAB (hidden) -->
           <div id="admin-workforce" style="display:none">
             <div class="section-title"><span class="dot"></span>Workforce Directory</div>
-            <div class="section-sub">Centralized worker, auditor, surveyor, mystery shopper, team leader, and employee records.</div>
-            <div class="stat-grid">
-              <div class="stat-card blue"><div class="stat-label">Total Workforce</div><div class="stat-value blue">1,842</div></div>
-              <div class="stat-card green"><div class="stat-label">Active Workforce</div><div class="stat-value green">1,216</div></div>
-              <div class="stat-card teal"><div class="stat-label">Online Workforce</div><div class="stat-value teal">312</div></div>
-              <div class="stat-card purple"><div class="stat-label">New Registrations</div><div class="stat-value purple">64</div></div>
-              <div class="stat-card green"><div class="stat-label">Verified Workers</div><div class="stat-value green">1,004</div></div>
-              <div class="stat-card orange"><div class="stat-label">Available Workers</div><div class="stat-value orange">428</div></div>
-              <div class="stat-card red"><div class="stat-label">Suspended</div><div class="stat-value red">19</div></div>
-            </div>
-            <div class="module-toolbar">
-              <input placeholder="Search worker, mobile, city, ID">
-              <select><option>All Categories</option><option>Field Executive</option><option>Auditor</option><option>Surveyor</option><option>Mystery Shopper</option><option>Team Leader</option><option>Supervisor</option><option>Manager</option></select>
-              <select><option>All Availability</option><option>Available</option><option>Busy</option><option>On Assignment</option><option>Offline</option><option>Suspended</option></select>
-              <button>Add Worker</button><button>Verify KYC</button><button>Export</button>
-            </div>
+            <div class="section-sub">Full workforce profile and payout details</div>
             <div id="adminWfProfile"></div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">KYC Verification</div><div class="chip-row"><span>Aadhaar</span><span>PAN</span><span>Driving License</span><span>Passport</span><span>Selfie</span><span>Address Proof</span></div></div>
-              <div class="module-card"><div class="module-title">Attendance & Activity</div><div class="ops-grid"><div><b>09:18</b><span>Avg Login</span></div><div><b>8.4h</b><span>Working Hours</span></div><div><b>94%</b><span>GPS Attendance</span></div><div><b>12m</b><span>Last Activity Avg</span></div></div></div>
-              <div class="module-card"><div class="module-title">Performance Tracking</div><div class="metric-strip"><b>924<span>Assigned</span></b><b>781<span>Completed</span></b><b>91%<span>Approval</span></b></div><div class="chip-row"><span>Earnings</span><span>Incentives</span><span>Rejection Rate</span><span>Attendance</span></div></div>
-              <div class="module-card"><div class="module-title">Geographic Mapping</div><div class="chip-row"><span>State-wise Workforce</span><span>City-wise Workforce</span><span>District-wise Workforce</span><span>Live Workforce Map</span></div></div>
-            </div>
             <table class="data-table">
               <thead><tr><th>Name</th><th>Email</th><th>Mobile No</th><th>Address</th><th>Bank</th><th>Status</th></tr></thead>
               <tbody>
@@ -2362,27 +2097,12 @@
           <!-- PROJECTS TAB (hidden) -->
           <div id="admin-projects" style="display:none">
             <div class="section-title"><span class="dot"></span>Project Management</div>
-            <div class="section-sub">Complete project lifecycle, milestones, workforce allocation, budgets, risks, and closure tracking.</div>
+            <div class="section-sub">8 total projects</div>
             <div class="stat-grid">
-              <div class="stat-card purple tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Total Projects</div><div class="stat-value purple">48</div></div>
               <div class="stat-card blue tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Active</div><div class="stat-value blue">5</div></div>
               <div class="stat-card green tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Completed</div><div class="stat-value green">2</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Delayed</div><div class="stat-value red">2</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Upcoming</div><div class="stat-value teal">6</div></div>
               <div class="stat-card orange tab-link" onclick="setAdminTab('projects')"><div class="stat-label">On Hold</div><div class="stat-value orange">1</div></div>
               <div class="stat-card purple tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
-            </div>
-            <div class="module-toolbar">
-              <input placeholder="Search project, code, client, manager">
-              <select><option>All Categories</option><option>Survey</option><option>Audit</option><option>Mystery Shopping</option><option>Banking Onboarding</option><option>BGV</option><option>Data Collection</option><option>Sales Campaign</option><option>Retail Audit</option></select>
-              <select><option>All Status</option><option>Not Started</option><option>In Progress</option><option>Under Review</option><option>Completed</option><option>Delayed</option><option>On Hold</option></select>
-              <button>Create Project</button><button>Milestones</button><button>Gantt</button><button>Export</button>
-            </div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">Project Creation</div><div class="chip-row"><span>Project ID</span><span>Project Name</span><span>Project Code</span><span>Category</span><span>Type</span><span>Scope of Work</span></div></div>
-              <div class="module-card"><div class="module-title">Client & Billing</div><div class="chip-row"><span>Client Name</span><span>Contact Person</span><span>Email</span><span>Mobile</span><span>Billing Info</span></div></div>
-              <div class="module-card"><div class="module-title">Planning & Allocation</div><div class="chip-row"><span>Start Date</span><span>End Date</span><span>Milestones</span><span>Deliverables</span><span>Project Manager</span><span>Team Leaders</span><span>Workers</span></div></div>
-              <div class="module-card"><div class="module-title">Budget, Documents & Risks</div><div class="chip-row"><span>Approved Budget</span><span>Workforce Cost</span><span>Operational Cost</span><span>Agreements</span><span>SOPs</span><span>Invoices</span><span>Risk Workflow</span></div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">Project Revenue</div></div>
@@ -2397,46 +2117,22 @@
           <!-- REVENUE TAB -->
           <div id="admin-revenue" style="display:none">
             <div class="section-title"><span class="dot"></span>Revenue Dashboard</div>
-            <div class="section-sub">Revenue monitoring, invoicing, collections, outstanding tracking, GST, and profitability analytics.</div>
             <div class="stat-grid">
-              <div class="stat-card purple tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Total Revenue</div><div class="stat-value purple">₹28.4L</div></div>
               <div class="stat-card green tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">This Month</div><div class="stat-value green">₹4.2L</div><div class="stat-change up">▲ 18%</div></div>
-              <div class="stat-card blue tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Annual Revenue</div><div class="stat-value blue">₹51.8L</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Outstanding</div><div class="stat-value orange">₹7.6L</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Collected</div><div class="stat-value green">₹20.8L</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Net Profit</div><div class="stat-value teal">₹8.7L</div></div>
-              <div class="stat-card yellow tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Gross Margin</div><div class="stat-value yellow">31%</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">YTD Total</div><div class="stat-value blue">₹28.4L</div></div>
               <div class="stat-card teal tab-link" onclick="setAdminTab('projects')"><div class="stat-label">Top Project</div><div class="stat-value teal">₹8.4L</div></div>
-            </div>
-            <div class="module-toolbar"><input placeholder="Search invoice, client, project"><select><option>All Invoice Status</option><option>Draft</option><option>Sent</option><option>Paid</option><option>Partially Paid</option><option>Overdue</option><option>Cancelled</option></select><button>Create Invoice</button><button>Collection Follow-up</button><button>GST Report</button><button>Export</button></div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">Client Revenue Tracking</div><div class="approval-row"><span>OYO</span><b>₹10.8L</b><button>Open</button></div><div class="approval-row"><span>Urban Infra</span><b>₹8.4L</b><button>Open</button></div><div class="approval-row"><span>NetGrid</span><b>₹6.2L</b><button>Open</button></div></div>
-              <div class="module-card"><div class="module-title">Invoice & Collections</div><div class="chip-row"><span>Invoice Creation</span><span>Invoice Approval</span><span>Payment Received</span><span>Partial Payments</span><span>Pending Collections</span><span>Reminder System</span><span>Escalation Workflow</span></div></div>
-              <div class="module-card"><div class="module-title">Expense & Profitability</div><div class="ops-grid"><div><b>₹9.4L</b><span>Workforce Costs</span></div><div><b>₹1.8L</b><span>Vendor Costs</span></div><div><b>₹68K</b><span>Software</span></div><div><b>2.6x</b><span>ROI</span></div></div></div>
-              <div class="module-card"><div class="module-title">Revenue Reports</div><div class="chip-row"><span>Revenue Report</span><span>Collection Report</span><span>Outstanding Report</span><span>Profitability Report</span><span>Client Revenue Report</span><span>GST Reports</span><span>Tax Reports</span></div></div>
+              <div class="stat-card orange tab-link" onclick="setAdminTab('revenue')"><div class="stat-label">Avg/Month</div><div class="stat-value orange">₹3.5L</div></div>
             </div>
           </div>
 
           <!-- PAYMENTS TAB -->
           <div id="admin-payments" style="display:none">
             <div class="section-title"><span class="dot"></span>Payment Management</div>
-            <div class="section-sub">Outgoing payments, salary, incentives, reimbursements, vendor payments, approvals, and audit compliance.</div>
             <div class="stat-grid">
-              <div class="stat-card blue tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Total Processed</div><div class="stat-value blue">₹18.6L</div></div>
-              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending Payments</div><div class="stat-value red">₹32K</div></div>
-              <div class="stat-card green tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Approved Payments</div><div class="stat-value green">₹2.4L</div></div>
-              <div class="stat-card orange tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Salary Pending</div><div class="stat-value orange">₹86K</div></div>
-              <div class="stat-card purple tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Incentive Pending</div><div class="stat-value purple">₹18K</div></div>
-              <div class="stat-card teal tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Vendor Pending</div><div class="stat-value teal">₹54K</div></div>
               <div class="stat-card green tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Paid This Month</div><div class="stat-value green">₹2.1L</div></div>
               <div class="stat-card orange tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Processing</div><div class="stat-value orange">₹48K</div></div>
-            </div>
-            <div class="module-toolbar"><input placeholder="Search beneficiary, UPI, bank, request"><select><option>All Beneficiaries</option><option>Worker</option><option>Auditor</option><option>Surveyor</option><option>Mystery Shopper</option><option>Team Leader</option><option>Employee</option><option>Vendor</option><option>Agency</option></select><select><option>All Categories</option><option>Task Payments</option><option>Survey Payments</option><option>Audit Payments</option><option>Salary</option><option>Incentive</option><option>Vendor</option><option>Reimbursements</option></select><button>Create Request</button><button>Approve</button><button>Export</button></div>
-            <div class="module-grid">
-              <div class="module-card"><div class="module-title">Payment Requests & Approval Levels</div><div class="approval-row"><span>Team Leader Approval</span><b>18</b><button>Review</button></div><div class="approval-row"><span>Manager Approval</span><b>11</b><button>Review</button></div><div class="approval-row"><span>Finance Approval</span><b>7</b><button>Approve</button></div><div class="approval-row"><span>Final Admin Approval</span><b>4</b><button>Process</button></div></div>
-              <div class="module-card"><div class="module-title">Worker Earnings</div><div class="ops-grid"><div><b>₹84K</b><span>Total Earnings</span></div><div><b>₹26K</b><span>Task Earnings</span></div><div><b>₹12K</b><span>Incentives</span></div><div><b>₹6.2K</b><span>Pending</span></div></div></div>
-              <div class="module-card"><div class="module-title">Salary, Incentive & Reimbursement</div><div class="chip-row"><span>Salary Processing</span><span>Attendance Integration</span><span>Deduction</span><span>Performance Incentives</span><span>Referral Bonus</span><span>Travel</span><span>Fuel</span><span>Food</span><span>Accommodation</span></div></div>
-              <div class="module-card"><div class="module-title">Processing & Compliance</div><div class="chip-row"><span>Bank Transfer</span><span>UPI</span><span>NEFT</span><span>RTGS</span><span>IMPS</span><span>Cheque</span><span>PAN Verification</span><span>GST Verification</span><span>Bank Verification</span><span>Audit Logs</span></div></div>
+              <div class="stat-card red tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Pending</div><div class="stat-value red">₹32K</div></div>
+              <div class="stat-card blue tab-link" onclick="setAdminTab('payments')"><div class="stat-label">Total Processed</div><div class="stat-value blue">₹18.6L</div></div>
             </div>
             <div class="card">
               <div class="card-header"><div class="card-title">Transactions</div><span class="tag blue">Filter by Month</span></div>
@@ -2794,79 +2490,8 @@ function setAdminTab(tab, sourceIcon) {
   const section = document.getElementById('admin-' + tab);
   if (section) section.style.display = 'block';
   if (tab === 'leads') renderAdminAppliedTasks();
-  if (tab === 'workforce') renderAdminWorkforceProfile();
-  refreshAdminLinkedData();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-function showAdminToast(message) {
-  let toast = document.getElementById('adminActionToast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'adminActionToast';
-    toast.className = 'admin-action-toast';
-    document.body.appendChild(toast);
-  }
-  toast.textContent = message;
-  toast.style.display = 'block';
-  clearTimeout(window.adminActionToastTimer);
-  window.adminActionToastTimer = setTimeout(() => {
-    toast.style.display = 'none';
-  }, 2600);
-}
-
-function getAdminActionTarget(label) {
-  const text = (label || '').toLowerCase();
-  if (text.includes('worker') || text.includes('workforce') || text.includes('kyc') || text.includes('document')) return 'workforce';
-  if (text.includes('payment') || text.includes('salary') || text.includes('incentive') || text.includes('beneficiary') || text.includes('receipt')) return 'payments';
-  if (text.includes('invoice') || text.includes('collection') || text.includes('gst') || text.includes('revenue')) return 'revenue';
-  if (text.includes('project') || text.includes('client') || text.includes('milestone') || text.includes('gantt') || text.includes('profile')) return 'projects';
-  if (text.includes('task') || text.includes('submission') || text.includes('survey') || text.includes('audit') || text.includes('template') || text.includes('review')) return 'leads';
-  if (text.includes('report') || text.includes('performance')) return 'performance';
-  return 'dashboard';
-}
-
-function adminAction(label, targetTab) {
-  const target = targetTab || getAdminActionTarget(label);
-  if (target) setAdminTab(target);
-  const cleanLabel = (label || 'Action').trim();
-  showAdminToast(cleanLabel + ' opened successfully.');
-}
-
-function adminSearchDashboard() {
-  const input = document.getElementById('adminGlobalSearch');
-  const term = input ? input.value.trim() : '';
-  const target = term ? getAdminActionTarget(term) : 'dashboard';
-  adminAction(term ? 'Search result for "' + term + '"' : 'Global search', target);
-}
-
-function adminExportReport(label) {
-  const stamp = new Date().toISOString().slice(0, 10);
-  const rows = [
-    ['Section', 'Metric', 'Value'],
-    ['Projects', 'Active Projects', '18'],
-    ['Workforce', 'Registered Workers', '1842'],
-    ['Tasks', 'Pending Reviews', '57'],
-    ['Revenue', 'Monthly Revenue', '420000'],
-    ['Payments', 'Pending Payments', '32000']
-  ];
-  const csv = rows.map(row => row.map(value => '"' + String(value).replace(/"/g, '""') + '"').join(',')).join('\n');
-  downloadFile('mtss-admin-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + stamp + '.csv', csv, 'text/csv;charset=utf-8');
-  showAdminToast(label + ' downloaded successfully.');
-}
-
-document.addEventListener('click', function(event) {
-  const button = event.target.closest('button');
-  if (!button || !button.closest('#adminPanel')) return;
-  if (!button.closest('.approval-row') && !button.closest('.activity-row') && !button.closest('.quick-actions') && !button.closest('.module-toolbar')) return;
-  if (button.hasAttribute('data-admin-handled')) return;
-  const label = button.textContent.trim() || 'Dashboard action';
-  if (/export|report/i.test(label)) {
-    adminExportReport(label);
-  } else {
-    adminAction(label);
-  }
-});
 
 // â”€â”€ Workforce tab switching â”€â”€
 function wfTab(el, tab) {
@@ -2911,7 +2536,6 @@ function saveAppliedTaskState() {
   taskRenderVersion += 1;
   lastTaskRenderKey = '';
   updatePendingAuditCount();
-  refreshAdminLinkedData();
 }
 
 function updatePendingAuditCount() {
@@ -2920,28 +2544,6 @@ function updatePendingAuditCount() {
   const pendingApplications = Object.values(appliedTaskState).filter(state => state === 'pending').length;
   const pendingTasks = Object.values(TASKS || {}).filter(task => task.status === 'pending').length;
   el.textContent = String(pendingApplications + pendingTasks);
-  refreshAdminLinkedData();
-}
-
-function refreshAdminLinkedData() {
-  const counts = Object.values(appliedTaskState).reduce((total, state) => {
-    total[state] = (total[state] || 0) + 1;
-    return total;
-  }, {});
-  const pending = document.getElementById('adminPendingApplications');
-  const verified = document.getElementById('adminVerifiedApplications');
-  const rejected = document.getElementById('adminRejectedApplications');
-  const workerName = document.getElementById('adminLinkedWorkerName');
-  let linkedName = 'Linked';
-  try {
-    linkedName = profileState.name.split(' ')[0] || 'Linked';
-  } catch (error) {
-    linkedName = 'Linked';
-  }
-  if (pending) pending.textContent = String(counts.pending || 0);
-  if (verified) verified.textContent = String(counts.verified || 0);
-  if (rejected) rejected.textContent = String(counts.rejected || 0);
-  if (workerName) workerName.textContent = linkedName;
 }
 
 function waitForFirebaseServices(timeoutMs = 5000) {
@@ -3024,7 +2626,6 @@ function verifyAppliedTask(taskId, approved) {
 
 function renderAdminAppliedTasks() {
   const wrap = document.getElementById('adminAppliedTasks');
-  refreshAdminLinkedData();
   if (!wrap) return;
 
   const entries = Object.entries(appliedTaskState)
@@ -3482,8 +3083,6 @@ function authenticate() {
     const name = document.getElementById('authName').value.trim();
     if (name) {
       profileState.name = name;
-      saveProfileLocal();
-      saveProfileToFirebase();
       renderProfileDetails(false);
     }
   }
@@ -3521,35 +3120,6 @@ const profileState = {
   ifsc: 'DEMO0000001'
 };
 
-function saveProfileLocal() {
-  localStorage.setItem('mtssWorkforceProfile', JSON.stringify(getProfilePayload()));
-  refreshAdminLinkedData();
-  renderAdminWorkforceProfile();
-}
-
-function loadProfileLocal() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('mtssWorkforceProfile') || '{}');
-    if (saved && typeof saved === 'object') {
-      Object.assign(profileState, {
-        name: saved.name || profileState.name,
-        role: saved.role || profileState.role,
-        email: saved.email || profileState.email,
-        mobile: saved.mobile || profileState.mobile,
-        address: saved.address || profileState.address,
-        pin: saved.pin || profileState.pin,
-        bank: saved.bankAccount || saved.bank || profileState.bank,
-        bankName: saved.bankName || profileState.bankName,
-        ifsc: saved.ifsc || profileState.ifsc
-      });
-    }
-  } catch (error) {
-    console.warn('Saved workforce profile could not be loaded.', error);
-  }
-}
-
-loadProfileLocal();
-
 function applyPortalData(data) {
   if (!data || !data.workforceProfile) return;
   const profile = data.workforceProfile;
@@ -3562,7 +3132,6 @@ function applyPortalData(data) {
   profileState.bank = profile.bankAccount || profile.bank || profileState.bank;
   profileState.bankName = profile.bankName || profileState.bankName;
   profileState.ifsc = profile.ifsc || profileState.ifsc;
-  saveProfileLocal();
   renderProfileDetails(false);
 }
 
@@ -3709,9 +3278,7 @@ function saveProfile() {
   profileState.bankName = document.getElementById('editBankName').value.trim() || profileState.bankName;
   profileState.ifsc = document.getElementById('editIfsc').value.trim() || profileState.ifsc;
   renderProfileDetails(false);
-  saveProfileLocal();
   saveProfileToFirebase();
-  showAdminToast('Workforce profile linked with admin portal.');
 }
 
 function renderAdminWorkforceProfile() {
@@ -4532,13 +4099,6 @@ function submitQuestionnaire(btn, sc) {
     .stat-grid {
       grid-template-columns:repeat(4,minmax(0,1fr)) !important;
     }
-    .admin-kpi-grid {
-      grid-template-columns:repeat(4,minmax(0,1fr));
-    }
-    .admin-filter-bar,
-    .module-toolbar {
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
     .task-detail-grid {
       grid-template-columns:repeat(3,minmax(0,1fr)) !important;
     }
@@ -4569,16 +4129,6 @@ function submitQuestionnaire(btn, sc) {
     .home-stats,
     .stat-grid {
       grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    }
-    .admin-kpi-grid,
-    .admin-dashboard-grid,
-    .admin-filter-bar,
-    .module-grid,
-    .module-toolbar {
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    .ops-grid {
-      grid-template-columns:repeat(2,minmax(0,1fr));
     }
     .task-detail-grid {
       grid-template-columns:repeat(2,minmax(0,1fr)) !important;
@@ -4683,18 +4233,9 @@ function submitQuestionnaire(btn, sc) {
     .stat-grid,
     .profile-form,
     .export-card-grid,
-    .task-status-grid,
-    .admin-kpi-grid,
-    .admin-dashboard-grid,
-    .admin-filter-bar,
-    .module-grid,
-    .module-toolbar {
+    .task-status-grid {
       grid-template-columns:1fr 1fr !important;
       gap:10px;
-    }
-    .ops-grid,
-    .project-row {
-      grid-template-columns:1fr;
     }
     .card,
     .profile-card,
@@ -4788,19 +4329,8 @@ function submitQuestionnaire(btn, sc) {
     .stat-grid,
     .profile-form,
     .export-card-grid,
-    .task-status-grid,
-    .admin-kpi-grid,
-    .admin-dashboard-grid,
-    .admin-filter-bar,
-    .module-grid,
-    .module-toolbar,
-    .quick-actions {
+    .task-status-grid {
       grid-template-columns:1fr !important;
-    }
-    .ops-grid,
-    .approval-row,
-    .activity-row {
-      grid-template-columns:1fr;
     }
     .hs-card,
     .stat-card,
