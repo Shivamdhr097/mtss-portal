@@ -660,6 +660,22 @@
     cursor:pointer;
     white-space:nowrap;
   }
+  .search-filter-btn {
+    height:38px;
+    padding:0 18px;
+    border-radius:8px;
+    border:1px solid rgba(0,195,122,0.4);
+    background:linear-gradient(135deg,var(--green),var(--teal));
+    color:white;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .search-filter-btn:hover {
+    box-shadow:0 5px 14px rgba(0,195,122,0.22);
+    transform:translateY(-1px);
+  }
   .clear-filter-btn:hover {
     border-color:#1570ef;
     background:#d1e9ff;
@@ -2116,6 +2132,7 @@
               <input id="oppCityFilter" type="search" placeholder="City" aria-label="City" oninput="renderOpportunityList()">
               <input id="oppStateFilter" type="search" placeholder="State" aria-label="State" oninput="renderOpportunityList()">
               <input id="oppDateFilter" type="date" aria-label="Date" onchange="renderOpportunityList()">
+              <button class="search-filter-btn" type="button" onclick="renderOpportunityList()">Search</button>
               <button class="clear-filter-btn" type="button" onclick="clearOpportunityFilters()">Clear Filter</button>
             </div>
             <div id="wfOpportunityList"></div>
@@ -3833,6 +3850,9 @@ function submitQuestionnaire(btn, sc) {
     .clear-filter-btn {
       width:100%;
     }
+    .search-filter-btn {
+      flex:1;
+    }
     .task-action-stack {
       grid-column:1 / -1;
       width:100%;
@@ -3916,6 +3936,11 @@ function submitQuestionnaire(btn, sc) {
       display:block;
     }
     .single-filter-bar input {
+      width:100%;
+      margin-bottom:8px;
+    }
+    .search-filter-btn,
+    .clear-filter-btn {
       width:100%;
       margin-bottom:8px;
     }
