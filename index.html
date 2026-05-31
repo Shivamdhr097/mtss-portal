@@ -618,40 +618,31 @@
     margin-bottom:12px;
   }
   .task-status-card {
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px;
+    display:block;
+    text-align:left;
+    padding:14px 16px;
     border:1px solid var(--border);
-    border-radius:10px;
-    background:rgba(255,255,255,0.04);
+    border-radius:14px;
+    background:var(--card);
     cursor:pointer;
     transition:all 0.2s;
+    position:relative;
+    overflow:hidden;
+  }
+  .task-status-card::before {
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:2px;
+    background:var(--status-color);
   }
   .task-status-card:hover,
   .task-status-card.active {
-    border-color:rgba(0,195,122,0.38);
-    background:rgba(0,195,122,0.08);
+    border-color:rgba(255,255,255,0.16);
+    box-shadow:0 8px 30px rgba(0,0,0,0.24);
     transform:translateY(-1px);
-  }
-  .task-status-icon {
-    width:34px;
-    height:34px;
-    border-radius:9px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    font-size:15px;
-    font-weight:800;
-    background:#fff !important;
-    color:#101828 !important;
-    border:1px solid #eaecf0;
-  }
-  .task-status-icon .nav-symbol {
-    width:22px;
-    height:22px;
-    color:currentColor;
   }
   .status-symbol {
     position:relative;
@@ -782,15 +773,19 @@
     transform:rotate(45deg);
   }
   .task-status-label {
-    font-size:11px;
-    font-weight:800;
-    color:var(--text);
+    display:block;
+    font-size:10px;
+    font-weight:700;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.8px;
   }
   .task-status-count {
     font-family:var(--font-head);
-    font-size:16px;
+    font-size:22px;
     font-weight:800;
-    margin-top:2px;
+    line-height:1;
+    margin-top:7px;
   }
   .export-card-grid {
     display:grid;
@@ -2815,15 +2810,15 @@ function renderWhatToDo(task) {
 }
 
 const TASK_STATUS_CARDS = [
-  { key: 'active', label: 'Active', icon: '<span class="nav-symbol nav-performance"></span>', color: 'var(--purple)', bg: 'rgba(124,77,255,0.14)' },
-  { key: 'pending', label: 'Pending', icon: '<span class="nav-symbol nav-clock"></span>', color: 'var(--orange)', bg: 'rgba(255,122,0,0.14)' },
-  { key: 'allocated', label: 'Allocated', icon: '<span class="nav-symbol nav-workforce"></span>', color: 'var(--blue)', bg: 'rgba(59,111,255,0.14)' },
-  { key: 'submitted', label: 'Submitted', icon: '<span class="nav-symbol nav-export"></span>', color: 'var(--teal)', bg: 'rgba(0,216,201,0.14)' },
-  { key: 'completed', label: 'Completed', icon: '<span class="nav-symbol nav-tasks"></span>', color: 'var(--green)', bg: 'rgba(0,195,122,0.14)' },
-  { key: 'rejected', label: 'Rejected', icon: '<span class="nav-symbol nav-rejected"></span>', color: 'var(--red)', bg: 'rgba(255,59,94,0.14)' },
-  { key: 'approved', label: 'Approved', icon: '<span class="nav-symbol nav-approved"></span>', color: 'var(--yellow)', bg: 'rgba(255,214,0,0.16)' },
-  { key: 'reschedule', label: 'Reschedule', icon: '<span class="nav-symbol nav-reschedule"></span>', color: 'var(--pink)', bg: 'rgba(255,45,146,0.14)' },
-  { key: 'expired', label: 'Expired', icon: '<span class="nav-symbol nav-expired"></span>', color: 'var(--muted)', bg: 'rgba(152,162,179,0.14)' }
+  { key: 'active', label: 'Active', color: 'var(--purple)' },
+  { key: 'pending', label: 'Pending', color: 'var(--orange)' },
+  { key: 'allocated', label: 'Allocated', color: 'var(--blue)' },
+  { key: 'submitted', label: 'Submitted', color: 'var(--teal)' },
+  { key: 'completed', label: 'Completed', color: 'var(--green)' },
+  { key: 'rejected', label: 'Rejected', color: 'var(--red)' },
+  { key: 'approved', label: 'Approved', color: 'var(--yellow)' },
+  { key: 'reschedule', label: 'Reschedule', color: 'var(--pink)' },
+  { key: 'expired', label: 'Expired', color: 'var(--muted)' }
 ];
 
 let currentTaskFilter = 'all';
@@ -2849,12 +2844,9 @@ function renderTaskStatusCards(activeFilter = currentTaskFilter) {
   wrap.innerHTML = TASK_STATUS_CARDS.map(card => {
     const count = getTaskEntriesForFilter(card.key).length;
     return `
-      <button class="task-status-card ${activeFilter === card.key ? 'active' : ''}" type="button" onclick="showTaskFilter('${card.key}')">
-        <span class="task-status-icon" style="background:${card.bg};color:${card.color}">${card.icon}</span>
-        <span>
-          <span class="task-status-label">${card.label}</span>
-          <span class="task-status-count" style="display:block;color:${card.color}">${count}</span>
-        </span>
+      <button class="task-status-card ${activeFilter === card.key ? 'active' : ''}" style="--status-color:${card.color}" type="button" onclick="showTaskFilter('${card.key}')">
+        <span class="task-status-label">${card.label}</span>
+        <span class="task-status-count" style="display:block;color:${card.color}">${count}</span>
       </button>
     `;
   }).join('');
