@@ -691,6 +691,28 @@
     text-transform:uppercase;
     letter-spacing:0.5px;
   }
+  .upcoming-task-layout {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .upcoming-task-main {
+    flex:1;
+    min-width:0;
+  }
+  .upcoming-task-title {
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:4px;
+    color:#101828;
+  }
+  .upcoming-task-meta {
+    font-size:11px;
+    color:var(--muted);
+    margin-top:2px;
+    line-height:1.45;
+  }
   .apply-btn {
     padding:4px 12px; border-radius:20px;
     font-size:10px; font-weight:700; letter-spacing:0.5px;
@@ -2809,13 +2831,13 @@ function renderDashboardTaskSummary() {
   if (upcoming && task) {
     const assignor = task.contactName.split('(')[0].trim();
     upcoming.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-        <div style="flex:1">
-          <div style="font-size:13px;font-weight:600;margin-bottom:4px">${task.title}</div>
-          <div style="font-size:11px;color:var(--muted)">Address: ${task.address}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px">Submission: ${task.dueDate} &bull; ${task.startTime} - ${task.endTime}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px">Assigned by: ${assignor} &bull; ${task.contactPhone}</div>
-          <div class="task-detail-grid" style="max-width:520px">
+      <div class="upcoming-task-layout">
+        <div class="upcoming-task-main">
+          <div class="upcoming-task-title">${task.title}</div>
+          <div class="upcoming-task-meta">Address: ${task.address}</div>
+          <div class="upcoming-task-meta">Submission: ${task.dueDate} &bull; ${task.startTime} - ${task.endTime}</div>
+          <div class="upcoming-task-meta">Assigned by: ${assignor} &bull; ${task.contactPhone}</div>
+          <div class="task-detail-grid">
             <div class="task-detail"><div class="task-detail-label">Assigned Date</div><div class="task-detail-value task-date-value">${task.assignedDate}</div></div>
             <div class="task-detail"><div class="task-detail-label">Base Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).base)}</div></div>
             <div class="task-detail"><div class="task-detail-label">Special Expense</div><div class="task-detail-value">${formatAmount(getPayoutBreakdown(task).special)} &bull; ${task.payment.statusLabel}</div></div>
@@ -3184,6 +3206,12 @@ function submitQuestionnaire(btn, sc) {
       padding-left:54px;
       align-items:stretch;
     }
+    .upcoming-task-layout {
+      flex-wrap:wrap;
+    }
+    .upcoming-task-layout .task-action-stack {
+      padding-left:0;
+    }
     .task-payout {
       width:100%;
       text-align:left;
@@ -3285,6 +3313,13 @@ function submitQuestionnaire(btn, sc) {
       padding-left:0;
       align-items:stretch;
     }
+    .upcoming-task-layout {
+      display:block;
+    }
+    .upcoming-task-layout .task-action-stack {
+      margin-top:12px;
+      padding-left:0;
+    }
     .task-payout {
       width:100%;
       text-align:left;
@@ -3348,6 +3383,14 @@ function submitQuestionnaire(btn, sc) {
     }
     .area-task {
       grid-template-columns:1fr;
+    }
+    .upcoming-task-title {
+      font-size:14px;
+      line-height:1.35;
+    }
+    .upcoming-task-meta {
+      font-size:12px;
+      overflow-wrap:anywhere;
     }
     .area-task-icon {
       width:36px;
