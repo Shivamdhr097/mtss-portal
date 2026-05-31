@@ -2235,7 +2235,7 @@
         </div>
 
         <!-- Content -->
-        <div class="content wf" id="wfContent" style="position:relative;transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);">
+        <div class="content wf" id="wfContent" style="position:relative;">
 
           <!-- HOME TAB -->
           <div id="wf-home">
@@ -3994,6 +3994,36 @@ function submitQuestionnaire(btn, sc) {
 
 <!-- TASK DETAIL TRIGGER STYLES -->
 <style>
+  .orb,
+  .stat-card,
+  .card,
+  .hs-card,
+  .bar,
+  .progress-fill {
+    animation:none !important;
+  }
+  .stat-card,
+  .card,
+  .hs-card,
+  .area-task,
+  .lead-card,
+  .task-status-card,
+  .apply-btn,
+  .sidebar-icon,
+  .tab-link,
+  .task-clickable {
+    transition:border-color 0.08s linear, background-color 0.08s linear, color 0.08s linear !important;
+  }
+  .stat-card:hover,
+  .hs-card:hover,
+  .area-task:hover,
+  .lead-card:hover,
+  .task-status-card:hover,
+  .task-status-card.active,
+  .search-filter-btn:hover {
+    transform:none !important;
+    box-shadow:none !important;
+  }
   .task-clickable { cursor:pointer; transition:all 0.2s; }
   .task-clickable:hover { background:rgba(255,255,255,0.06) !important; border-color:rgba(255,255,255,0.18) !important; }
   .task-clickable td { cursor:pointer; }
@@ -4010,7 +4040,7 @@ function submitQuestionnaire(btn, sc) {
     background:#fff;
     border-left:1px solid var(--border);
     transform:translateX(100%);
-    transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);
+    transition:transform 0.12s linear;
     display:flex; flex-direction:column;
     overflow:hidden;
     box-shadow:-12px 0 30px rgba(16,24,40,0.12);
