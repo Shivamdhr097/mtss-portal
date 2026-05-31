@@ -4039,13 +4039,14 @@ function submitQuestionnaire(btn, sc) {
     z-index:220;
     background:#fff;
     border-left:1px solid var(--border);
-    transform:translateX(100%);
-    transition:transform 0.12s linear;
+    display:none;
+    transform:none;
+    transition:none;
     display:flex; flex-direction:column;
     overflow:hidden;
     box-shadow:-12px 0 30px rgba(16,24,40,0.12);
   }
-  #wfSlidePanel.open { transform:translateX(0); }
+  #wfSlidePanel.open { display:flex; transform:none; }
   #wfContent.pushed { transform:none; pointer-events:none; }
   .slide-header {
     padding:14px 18px 12px;
